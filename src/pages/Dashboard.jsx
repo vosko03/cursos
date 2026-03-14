@@ -83,154 +83,157 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 p-4 md:p-6 lg:p-8 font-sans selection:bg-indigo-200">
-      <div className="max-w-6xl mx-auto mb-6">
-        <Link to="/" className="inline-flex items-center text-indigo-600 font-semibold hover:text-indigo-800 transition-colors text-sm md:text-base">
-          <ArrowLeft size={16} className="mr-2" /> Tornar a l'inici
-        </Link>
-      </div>
-      
-      {/* Header */}
-      <header className="max-w-6xl mx-auto mb-6 md:mb-8 text-center md:text-left">
-        <div className="inline-flex items-center justify-center space-x-2 bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full text-[10px] md:text-xs font-bold mb-2 md:mb-3">
-          <Sparkles size={14} />
-          <span>Mapa Estratègic Interactiu</span>
+    <>
+      <div className="min-h-screen bg-slate-50 p-4 md:p-6 lg:p-8 font-sans selection:bg-indigo-200">
+        <div className="max-w-6xl mx-auto mb-6">
+          <Link to="/" className="inline-flex items-center text-indigo-600 font-semibold hover:text-indigo-800 transition-colors text-sm md:text-base">
+            <ArrowLeft size={16} className="mr-2" /> Tornar a l'inici
+          </Link>
         </div>
-        <h1 className="text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight">
-          Visió <span className="text-indigo-600">cursos.cat</span>
-        </h1>
-        <p className="text-slate-500 text-sm md:text-base mt-2 max-w-2xl">
-          La primera plataforma d'integració lingüística i professional de Catalunya impulsada 100% per IA.
-        </p>
-      </header>
-
-      {/* Main Layout: Left Sidebar (Small) & Right Detail Panel (Large) */}
-      <div className="max-w-6xl mx-auto flex flex-col lg:flex-row gap-6 lg:gap-8 relative items-start">
         
-        {/* COLUMNA ESQUERRA: Menú de Nodes Compacte (w-72) */}
-        <div className="w-full lg:w-72 xl:w-80 flex flex-col sm:flex-row lg:flex-col gap-4 shrink-0">
+        {/* Header */}
+        <header className="max-w-6xl mx-auto mb-6 md:mb-8 text-center md:text-left">
+          <div className="inline-flex items-center justify-center space-x-2 bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full text-[10px] md:text-xs font-bold mb-2 md:mb-3">
+            <Sparkles size={14} />
+            <span>Mapa Estratègic Interactiu</span>
+          </div>
+          <h1 className="text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight">
+            Visió <span className="text-indigo-600">cursos.cat</span>
+          </h1>
+          <p className="text-slate-500 text-sm md:text-base mt-2 max-w-2xl">
+            La primera plataforma d'integració lingüística i professional de Catalunya impulsada 100% per IA.
+          </p>
+        </header>
+
+        {/* Main Layout: Left Sidebar (Small) & Right Detail Panel (Large) */}
+        <div className="max-w-6xl mx-auto flex flex-col lg:flex-row gap-6 lg:gap-8 relative items-start">
           
-          {/* Adquisició */}
-          <div className="bg-white p-3 rounded-xl shadow-sm border border-slate-200 flex-1">
-            <div className="flex items-center gap-1.5 mb-2.5">
-              <Layers size={14} className="text-slate-400"/>
-              <h2 className="text-[11px] font-bold text-slate-600 uppercase tracking-wider">1. Adquisició</h2>
-            </div>
-            <div className="flex flex-col gap-1.5">
-              <StrategyNode {...nodes.seo} active={selectedNode === 'seo'} onClick={() => handleNodeSelect('seo')} />
-              <StrategyNode {...nodes.videos} active={selectedNode === 'videos'} onClick={() => handleNodeSelect('videos')} />
-              <StrategyNode {...nodes.inmigrantes} active={selectedNode === 'inmigrantes'} onClick={() => handleNodeSelect('inmigrantes')} />
-            </div>
-          </div>
-
-          {/* Producte Principal */}
-          <div className="bg-gradient-to-br from-indigo-50/50 to-white p-3 rounded-xl shadow-sm border border-indigo-100 flex-1 relative overflow-hidden">
-            <div className="absolute -right-8 -top-8 w-24 h-24 bg-indigo-100 rounded-full blur-2xl opacity-60 pointer-events-none"></div>
-            <div className="flex items-center gap-1.5 mb-2.5 relative z-10">
-              <Cpu size={14} className="text-indigo-500"/>
-              <h2 className="text-[11px] font-bold text-indigo-800 uppercase tracking-wider">2. Producte Principal</h2>
-            </div>
-            <div className="flex flex-col gap-1.5 relative z-10">
-              <StrategyNode {...nodes.central} active={selectedNode === 'central'} onClick={() => handleNodeSelect('central')} />
-              <StrategyNode {...nodes.tutor} active={selectedNode === 'tutor'} onClick={() => handleNodeSelect('tutor')} />
-              <StrategyNode {...nodes.comunidad} active={selectedNode === 'comunidad'} onClick={() => handleNodeSelect('comunidad')} />
-            </div>
-          </div>
-
-          {/* Monetització */}
-          <div className="bg-white p-3 rounded-xl shadow-sm border border-slate-200 flex-1">
-            <div className="flex items-center gap-1.5 mb-2.5">
-              <TrendingUp size={14} className="text-slate-400"/>
-              <h2 className="text-[11px] font-bold text-slate-600 uppercase tracking-wider">3. Monetització</h2>
-            </div>
-            <div className="flex flex-col gap-1.5">
-              <StrategyNode {...nodes.b2b} active={selectedNode === 'b2b'} onClick={() => handleNodeSelect('b2b')} />
-              <StrategyNode {...nodes.certificacion} active={selectedNode === 'certificacion'} onClick={() => handleNodeSelect('certificacion')} />
-              <StrategyNode {...nodes.afiliacion} active={selectedNode === 'afiliacion'} onClick={() => handleNodeSelect('afiliacion')} />
-            </div>
-          </div>
-
-        </div>
-
-        {/* COLUMNA DRETA: Panell de Detall Ampli (Sticky en Desktop) */}
-        <div className="w-full lg:flex-1" ref={detailRef}>
-          <div className="sticky top-6">
-            <div className={`bg-white p-5 md:p-8 rounded-2xl shadow-xl border-t-4 transition-colors duration-500 min-h-[450px] ${
-              nodes[selectedNode].color.includes('indigo') ? 'border-t-indigo-500' :
-              nodes[selectedNode].color.includes('blue') ? 'border-t-blue-500' :
-              nodes[selectedNode].color.includes('amber') ? 'border-t-amber-500' :
-              nodes[selectedNode].color.includes('rose') ? 'border-t-rose-500' :
-              nodes[selectedNode].color.includes('teal') ? 'border-t-teal-500' :
-              nodes[selectedNode].color.includes('emerald') ? 'border-t-emerald-500' :
-              nodes[selectedNode].color.includes('pink') ? 'border-t-pink-500' :
-              'border-t-orange-500'
-            }`}>
-              
-              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-6 border-b pb-5">
-                <div className={`p-3.5 rounded-xl ${nodes[selectedNode].color.replace('text-', 'bg-')} text-white shadow-md shrink-0`}>
-                  {React.createElement(nodes[selectedNode].icon, { size: 32, strokeWidth: 1.5 })}
-                </div>
-                <div>
-                  <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-0.5">Anàlisi del Mòdul</p>
-                  <h2 className="text-xl md:text-2xl font-extrabold text-slate-800 tracking-tight leading-tight">
-                    {nodes[selectedNode].title}
-                  </h2>
-                  <p className={`text-sm md:text-base font-semibold mt-0.5 ${nodes[selectedNode].color.replace('bg-', 'text-').replace('-500', '-600')}`}>
-                    {nodes[selectedNode].subtitle}
-                  </p>
-                </div>
+          {/* COLUMNA ESQUERRA: Menú de Nodes Compacte (w-72) */}
+          <div className="w-full lg:w-72 xl:w-80 flex flex-col sm:flex-row lg:flex-col gap-4 shrink-0">
+            
+            {/* Adquisició */}
+            <div className="bg-white p-3 rounded-xl shadow-sm border border-slate-200 flex-1">
+              <div className="flex items-center gap-1.5 mb-2.5">
+                <Layers size={14} className="text-slate-400"/>
+                <h2 className="text-[11px] font-bold text-slate-600 uppercase tracking-wider">1. Adquisició</h2>
               </div>
-              
-              <div className="space-y-6">
-                {/* Main Description */}
-                <div>
-                  <h4 className="font-bold text-slate-800 text-sm flex items-center gap-1.5 mb-2">
-                    <Sparkles size={14} className="text-amber-500" />
-                    Visió del Mòdul
-                  </h4>
-                  <p className="text-slate-600 leading-relaxed text-sm md:text-base">
-                    {nodes[selectedNode].content.descripció}
-                  </p>
+              <div className="flex flex-col gap-1.5">
+                <StrategyNode {...nodes.seo} active={selectedNode === 'seo'} onClick={() => handleNodeSelect('seo')} />
+                <StrategyNode {...nodes.videos} active={selectedNode === 'videos'} onClick={() => handleNodeSelect('videos')} />
+                <StrategyNode {...nodes.inmigrantes} active={selectedNode === 'inmigrantes'} onClick={() => handleNodeSelect('inmigrantes')} />
+              </div>
+            </div>
+
+            {/* Producte Principal */}
+            <div className="bg-gradient-to-br from-indigo-50/50 to-white p-3 rounded-xl shadow-sm border border-indigo-100 flex-1 relative overflow-hidden">
+              <div className="absolute -right-8 -top-8 w-24 h-24 bg-indigo-100 rounded-full blur-2xl opacity-60 pointer-events-none"></div>
+              <div className="flex items-center gap-1.5 mb-2.5 relative z-10">
+                <Cpu size={14} className="text-indigo-500"/>
+                <h2 className="text-[11px] font-bold text-indigo-800 uppercase tracking-wider">2. Producte Principal</h2>
+              </div>
+              <div className="flex flex-col gap-1.5 relative z-10">
+                <StrategyNode {...nodes.central} active={selectedNode === 'central'} onClick={() => handleNodeSelect('central')} />
+                <StrategyNode {...nodes.tutor} active={selectedNode === 'tutor'} onClick={() => handleNodeSelect('tutor')} />
+                <StrategyNode {...nodes.comunidad} active={selectedNode === 'comunidad'} onClick={() => handleNodeSelect('comunidad')} />
+              </div>
+            </div>
+
+            {/* Monetització */}
+            <div className="bg-white p-3 rounded-xl shadow-sm border border-slate-200 flex-1">
+              <div className="flex items-center gap-1.5 mb-2.5">
+                <TrendingUp size={14} className="text-slate-400"/>
+                <h2 className="text-[11px] font-bold text-slate-600 uppercase tracking-wider">3. Monetització</h2>
+              </div>
+              <div className="flex flex-col gap-1.5">
+                <StrategyNode {...nodes.b2b} active={selectedNode === 'b2b'} onClick={() => handleNodeSelect('b2b')} />
+                <StrategyNode {...nodes.certificacion} active={selectedNode === 'certificacion'} onClick={() => handleNodeSelect('certificacion')} />
+                <StrategyNode {...nodes.afiliacion} active={selectedNode === 'afiliacion'} onClick={() => handleNodeSelect('afiliacion')} />
+              </div>
+            </div>
+
+          </div>
+
+          {/* COLUMNA DRETA: Panell de Detall Ampli (Sticky en Desktop) */}
+          <div className="w-full lg:flex-1" ref={detailRef}>
+            <div className="sticky top-6">
+              <div className={`bg-white p-5 md:p-8 rounded-2xl shadow-xl border-t-4 transition-colors duration-500 min-h-[450px] ${
+                nodes[selectedNode].color.includes('indigo') ? 'border-t-indigo-500' :
+                nodes[selectedNode].color.includes('blue') ? 'border-t-blue-500' :
+                nodes[selectedNode].color.includes('amber') ? 'border-t-amber-500' :
+                nodes[selectedNode].color.includes('rose') ? 'border-t-rose-500' :
+                nodes[selectedNode].color.includes('teal') ? 'border-t-teal-500' :
+                nodes[selectedNode].color.includes('emerald') ? 'border-t-emerald-500' :
+                nodes[selectedNode].color.includes('pink') ? 'border-t-pink-500' :
+                'border-t-orange-500'
+              }`}>
+                
+                <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-6 border-b pb-5">
+                  <div className={`p-3.5 rounded-xl ${nodes[selectedNode].color.replace('text-', 'bg-')} text-white shadow-md shrink-0`}>
+                    {React.createElement(nodes[selectedNode].icon, { size: 32, strokeWidth: 1.5 })}
+                  </div>
+                  <div>
+                    <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-0.5">Anàlisi del Mòdul</p>
+                    <h2 className="text-xl md:text-2xl font-extrabold text-slate-800 tracking-tight leading-tight">
+                      {nodes[selectedNode].title}
+                    </h2>
+                    <p className={`text-sm md:text-base font-semibold mt-0.5 ${nodes[selectedNode].color.replace('bg-', 'text-').replace('-500', '-600')}`}>
+                      {nodes[selectedNode].subtitle}
+                    </p>
+                  </div>
                 </div>
                 
-                {/* Tech / Automation Details */}
-                <div className="bg-slate-50 p-4 md:p-5 rounded-xl border border-slate-100">
-                  <h4 className="font-bold text-slate-800 text-sm mb-3 border-b border-slate-200 pb-2">Claus d'Execució</h4>
-                  <ul className="space-y-3">
-                    {Object.entries(nodes[selectedNode].content).map(([key, value]) => {
-                      if (key.toLowerCase() === 'descripció') return null;
-                      
-                      return (
-                        <li key={key} className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-3">
-                          <span className="capitalize font-bold text-slate-700 text-xs sm:w-32 shrink-0">
-                            {key.replace(/_/g, ' ')}:
-                          </span> 
-                          <span className="text-slate-600 font-medium text-xs md:text-sm">
-                            {Array.isArray(value) 
-                              ? <div className="flex flex-wrap gap-1.5">
-                                  {value.map(tag => (
-                                    <span key={tag} className="bg-white border border-slate-200 px-2 py-0.5 rounded text-[10px] md:text-xs font-bold text-slate-700 shadow-sm">{tag}</span>
-                                  ))}
-                                </div>
-                              : value}
-                          </span>
-                        </li>
-                      );
-                    })}
-                  </ul>
+                <div className="space-y-6">
+                  {/* Main Description */}
+                  <div>
+                    <h4 className="font-bold text-slate-800 text-sm flex items-center gap-1.5 mb-2">
+                      <Sparkles size={14} className="text-amber-500" />
+                      Visió del Mòdul
+                    </h4>
+                    <p className="text-slate-600 leading-relaxed text-sm md:text-base">
+                      {nodes[selectedNode].content.descripció}
+                    </p>
+                  </div>
+                  
+                  {/* Tech / Automation Details */}
+                  <div className="bg-slate-50 p-4 md:p-5 rounded-xl border border-slate-100">
+                    <h4 className="font-bold text-slate-800 text-sm mb-3 border-b border-slate-200 pb-2">Claus d'Execució</h4>
+                    <ul className="space-y-3">
+                      {Object.entries(nodes[selectedNode].content).map(([key, value]) => {
+                        if (key.toLowerCase() === 'descripció') return null;
+                        
+                        return (
+                          <li key={key} className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-3">
+                            <span className="capitalize font-bold text-slate-700 text-xs sm:w-32 shrink-0">
+                              {key.replace(/_/g, ' ')}:
+                            </span> 
+                            <span className="text-slate-600 font-medium text-xs md:text-sm">
+                              {Array.isArray(value) 
+                                ? <div className="flex flex-wrap gap-1.5">
+                                    {value.map(tag => (
+                                      <span key={tag} className="bg-white border border-slate-200 px-2 py-0.5 rounded text-[10px] md:text-xs font-bold text-slate-700 shadow-sm">{tag}</span>
+                                    ))}
+                                  </div>
+                                : value}
+                            </span>
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  </div>
                 </div>
+                
               </div>
-              
             </div>
           </div>
-        </div>
 
+        </div>
+        
+        <footer className="max-w-6xl mx-auto mt-10 text-center text-slate-400 text-xs font-medium pb-4">
+          Prem qualsevol mòdul per aprofundir | Projecte Estratègic cursos.cat
+        </footer>
       </div>
-      
-      <footer className="max-w-6xl mx-auto mt-10 text-center text-slate-400 text-xs font-medium pb-4">
-        Prem qualsevol mòdul per aprofundir | Projecte Estratègic cursos.cat
-      </footer>
-    </div>
+      <Analytics />
+    </>
   );
 };
 
