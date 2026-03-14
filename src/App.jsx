@@ -11,30 +11,26 @@ import {
   Cpu,
   Layers,
   Globe,
-  ArrowRight,
   Sparkles
 } from 'lucide-react';
 
-// Componente para cada nodo/tarjeta de la estrategia
+// Componente para cada nodo (ahora más pequeño y en formato horizontal)
 const StrategyNode = ({ title, subtitle, icon: Icon, color, active, onClick }) => (
   <div 
     onClick={onClick}
     className={`cursor-pointer transition-all duration-300 transform 
       ${active 
-        ? 'scale-105 ring-2 ring-offset-2 ring-indigo-500 bg-white shadow-md' 
-        : 'hover:scale-102 bg-slate-50 hover:bg-white shadow-sm hover:shadow'
+        ? 'ring-2 ring-indigo-500 bg-white shadow-md scale-[1.02] z-10' 
+        : 'hover:scale-[1.02] bg-slate-50 hover:bg-white shadow-sm hover:shadow'
       } 
-      border border-gray-100 rounded-2xl p-5 flex flex-col items-center text-center space-y-3 group relative overflow-hidden`}
+      border border-gray-100 rounded-xl p-3 flex items-center gap-3 group relative overflow-hidden w-full`}
   >
-    {/* Decoración de fondo */}
-    <div className={`absolute -right-4 -top-4 w-16 h-16 rounded-full opacity-10 ${color.replace('text-', 'bg-')}`}></div>
-    
-    <div className={`p-4 rounded-full ${color.replace('text-', 'bg-')} text-white shadow-inner group-hover:scale-110 transition-transform duration-300`}>
-      <Icon size={28} strokeWidth={2} />
+    <div className={`p-2.5 rounded-lg ${color.replace('text-', 'bg-')} text-white shadow-inner group-hover:scale-110 transition-transform duration-300 shrink-0`}>
+      <Icon size={20} strokeWidth={2} />
     </div>
-    <div className="space-y-1">
-      <h3 className="font-extrabold text-gray-800 text-sm md:text-base leading-tight">{title}</h3>
-      <p className="text-xs font-medium text-gray-500">{subtitle}</p>
+    <div className="space-y-0.5 text-left overflow-hidden">
+      <h3 className="font-bold text-gray-800 text-sm leading-tight truncate">{title}</h3>
+      <p className="text-xs font-medium text-gray-500 truncate">{subtitle}</p>
     </div>
   </div>
 );
@@ -155,157 +151,148 @@ const App = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-100 p-4 md:p-8 font-sans selection:bg-indigo-200">
+    <div className="min-h-screen bg-slate-50 p-4 md:p-6 lg:p-8 font-sans selection:bg-indigo-200">
       
       {/* Header */}
-      <header className="max-w-6xl mx-auto mb-10 text-center space-y-3">
-        <div className="inline-flex items-center justify-center space-x-2 bg-indigo-100 text-indigo-800 px-4 py-1.5 rounded-full text-sm font-bold mb-2">
-          <Sparkles size={16} />
-          <span>Mapa Estratègic Interactiu</span>
+      <header className="max-w-7xl mx-auto mb-8 text-center md:text-left flex flex-col md:flex-row md:items-end justify-between gap-4">
+        <div>
+          <div className="inline-flex items-center justify-center space-x-2 bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full text-xs font-bold mb-3">
+            <Sparkles size={14} />
+            <span>Dashboard Estratègic</span>
+          </div>
+          <h1 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">
+            Visió <span className="text-indigo-600">cursos.cat</span>
+          </h1>
+          <p className="text-slate-500 max-w-xl text-sm md:text-base mt-1">
+            La primera plataforma d'integració lingüística i professional de Catalunya impulsada 100% per IA.
+          </p>
         </div>
-        <h1 className="text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight">
-          Visió <span className="text-indigo-600">cursos.cat</span>
-        </h1>
-        <p className="text-slate-600 max-w-2xl mx-auto text-lg">
-          La primera plataforma d'integració lingüística i professional de Catalunya impulsada 100% per IA.
-        </p>
       </header>
 
-      {/* Grid Central */}
-      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-10">
+      {/* Main Layout: Left Menu & Right Detail Panel */}
+      <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-6 lg:gap-8 relative">
         
-        {/* Columna Izquierda: Tráfico y Adquisición */}
-        <div className="space-y-4">
-          <div className="flex items-center gap-2 mb-6 border-b-2 border-slate-200 pb-2">
-            <div className="p-2 bg-slate-200 rounded-lg text-slate-700">
-              <Layers size={24}/>
-            </div>
-            <div>
-              <h2 className="text-xl font-bold text-slate-800">1. Motor d'Adquisició</h2>
-              <p className="text-xs text-slate-500 uppercase font-semibold tracking-wider">Trànsit automatitzat</p>
-            </div>
-          </div>
-          <StrategyNode {...nodes.seo} active={selectedNode === 'seo'} onClick={() => setSelectedNode('seo')} />
-          <StrategyNode {...nodes.videos} active={selectedNode === 'videos'} onClick={() => setSelectedNode('videos')} />
-          <div className="flex justify-center py-2 opacity-50">
-            <ArrowRight size={24} className="transform rotate-90 lg:rotate-0 text-slate-400" />
-          </div>
-          <StrategyNode {...nodes.inmigrantes} active={selectedNode === 'inmigrantes'} onClick={() => setSelectedNode('inmigrantes')} />
-        </div>
-
-        {/* Columna Central: Producto Core */}
-        <div className="space-y-4 lg:pt-0 pt-8">
-          <div className="flex items-center gap-2 mb-6 border-b-2 border-indigo-200 pb-2">
-            <div className="p-2 bg-indigo-100 rounded-lg text-indigo-700">
-              <Cpu size={24}/>
-            </div>
-            <div>
-              <h2 className="text-xl font-bold text-indigo-900">2. Producte Principal</h2>
-              <p className="text-xs text-indigo-500 uppercase font-semibold tracking-wider">Retenció i Valor</p>
-            </div>
-          </div>
+        {/* COLUMNA IZQUIERDA: Menú de Nodos (Sección scrolleable o apilada en mobile) */}
+        <div className="w-full lg:w-1/3 flex flex-col gap-5 shrink-0">
           
-          <div className="bg-gradient-to-b from-indigo-50 to-white p-2 rounded-3xl border border-indigo-100 shadow-xl relative">
-            {/* Resplandor detrás del central */}
-            <div className="absolute inset-0 bg-indigo-400 blur-3xl opacity-10 rounded-full"></div>
-            
-            <StrategyNode {...nodes.central} active={selectedNode === 'central'} onClick={() => setSelectedNode('central')} />
-            <div className="grid grid-cols-2 gap-2 mt-2">
+          {/* Adquisición */}
+          <div className="bg-white p-4 rounded-2xl shadow-sm border border-slate-100">
+            <div className="flex items-center gap-2 mb-3 border-b border-slate-100 pb-2">
+              <Layers size={18} className="text-slate-400"/>
+              <h2 className="text-sm font-bold text-slate-700 uppercase tracking-wider">1. Adquisició</h2>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-2.5">
+              <StrategyNode {...nodes.seo} active={selectedNode === 'seo'} onClick={() => setSelectedNode('seo')} />
+              <StrategyNode {...nodes.videos} active={selectedNode === 'videos'} onClick={() => setSelectedNode('videos')} />
+              <StrategyNode {...nodes.inmigrantes} active={selectedNode === 'inmigrantes'} onClick={() => setSelectedNode('inmigrantes')} />
+            </div>
+          </div>
+
+          {/* Producto Core */}
+          <div className="bg-gradient-to-br from-indigo-50 to-white p-4 rounded-2xl shadow-sm border border-indigo-100 relative overflow-hidden">
+            <div className="absolute -right-10 -top-10 w-32 h-32 bg-indigo-100 rounded-full blur-3xl opacity-50 pointer-events-none"></div>
+            <div className="flex items-center gap-2 mb-3 border-b border-indigo-100 pb-2 relative z-10">
+              <Cpu size={18} className="text-indigo-500"/>
+              <h2 className="text-sm font-bold text-indigo-900 uppercase tracking-wider">2. Producte Principal</h2>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-2.5 relative z-10">
+              <StrategyNode {...nodes.central} active={selectedNode === 'central'} onClick={() => setSelectedNode('central')} />
               <StrategyNode {...nodes.tutor} active={selectedNode === 'tutor'} onClick={() => setSelectedNode('tutor')} />
               <StrategyNode {...nodes.comunidad} active={selectedNode === 'comunidad'} onClick={() => setSelectedNode('comunidad')} />
             </div>
           </div>
+
+          {/* Monetización */}
+          <div className="bg-white p-4 rounded-2xl shadow-sm border border-slate-100">
+            <div className="flex items-center gap-2 mb-3 border-b border-slate-100 pb-2">
+              <TrendingUp size={18} className="text-slate-400"/>
+              <h2 className="text-sm font-bold text-slate-700 uppercase tracking-wider">3. Monetització</h2>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-2.5">
+              <StrategyNode {...nodes.b2b} active={selectedNode === 'b2b'} onClick={() => setSelectedNode('b2b')} />
+              <StrategyNode {...nodes.certificacion} active={selectedNode === 'certificacion'} onClick={() => setSelectedNode('certificacion')} />
+              <StrategyNode {...nodes.afiliacion} active={selectedNode === 'afiliacion'} onClick={() => setSelectedNode('afiliacion')} />
+            </div>
+          </div>
+
         </div>
 
-        {/* Columna Derecha: Monetización */}
-        <div className="space-y-4 lg:pt-0 pt-8">
-          <div className="flex items-center gap-2 mb-6 border-b-2 border-slate-200 pb-2">
-            <div className="p-2 bg-slate-200 rounded-lg text-slate-700">
-              <TrendingUp size={24}/>
-            </div>
-            <div>
-              <h2 className="text-xl font-bold text-slate-800">3. Monetització</h2>
-              <p className="text-xs text-slate-500 uppercase font-semibold tracking-wider">Fluxos d'Ingressos</p>
+        {/* COLUMNA DERECHA: Panel de Detalle (Sticky en Desktop) */}
+        <div className="w-full lg:w-2/3">
+          <div className="sticky top-6">
+            <div className={`bg-white p-6 md:p-8 rounded-3xl shadow-xl border-t-4 transition-colors duration-500 min-h-[500px] ${
+              nodes[selectedNode].color.includes('indigo') ? 'border-t-indigo-500' :
+              nodes[selectedNode].color.includes('blue') ? 'border-t-blue-500' :
+              nodes[selectedNode].color.includes('amber') ? 'border-t-amber-500' :
+              nodes[selectedNode].color.includes('rose') ? 'border-t-rose-500' :
+              nodes[selectedNode].color.includes('teal') ? 'border-t-teal-500' :
+              nodes[selectedNode].color.includes('emerald') ? 'border-t-emerald-500' :
+              nodes[selectedNode].color.includes('pink') ? 'border-t-pink-500' :
+              'border-t-orange-500'
+            }`}>
+              
+              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-5 mb-8 border-b pb-6">
+                <div className={`p-4 rounded-2xl ${nodes[selectedNode].color.replace('text-', 'bg-')} text-white shadow-md shrink-0`}>
+                  {React.createElement(nodes[selectedNode].icon, { size: 36, strokeWidth: 1.5 })}
+                </div>
+                <div>
+                  <p className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">Anàlisi del Mòdul</p>
+                  <h2 className="text-2xl md:text-3xl font-extrabold text-slate-800 tracking-tight leading-tight">
+                    {nodes[selectedNode].title}
+                  </h2>
+                  <p className={`text-base md:text-lg font-medium mt-1 ${nodes[selectedNode].color.replace('bg-', 'text-').replace('-500', '-600')}`}>
+                    {nodes[selectedNode].subtitle}
+                  </p>
+                </div>
+              </div>
+              
+              <div className="grid md:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 gap-8">
+                {/* Main Description */}
+                <div className="space-y-4">
+                  <h4 className="font-bold text-slate-800 text-base flex items-center gap-2">
+                    <Sparkles size={16} className="text-amber-500" />
+                    Visió del Mòdul
+                  </h4>
+                  <p className="text-slate-600 leading-relaxed text-base md:text-lg">
+                    {nodes[selectedNode].content.descripció}
+                  </p>
+                </div>
+                
+                {/* Tech / Automation Details */}
+                <div className="bg-slate-50 p-5 md:p-6 rounded-2xl border border-slate-100">
+                  <h4 className="font-bold text-slate-800 text-base mb-4 border-b border-slate-200 pb-2">Claus d'Execució</h4>
+                  <ul className="space-y-3.5">
+                    {Object.entries(nodes[selectedNode].content).map(([key, value]) => {
+                      if (key.toLowerCase() === 'descripció') return null;
+                      
+                      return (
+                        <li key={key} className="flex flex-col gap-1">
+                          <span className="capitalize font-bold text-slate-700 text-sm">
+                            {key.replace(/_/g, ' ')}:
+                          </span> 
+                          <span className="text-slate-600 font-medium text-sm">
+                            {Array.isArray(value) 
+                              ? <div className="flex flex-wrap gap-1.5 mt-1">
+                                  {value.map(tag => (
+                                    <span key={tag} className="bg-white border border-slate-200 px-2 py-0.5 rounded text-xs font-bold text-slate-700 shadow-sm">{tag}</span>
+                                  ))}
+                                </div>
+                              : value}
+                          </span>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </div>
+              </div>
+              
             </div>
           </div>
-          <StrategyNode {...nodes.b2b} active={selectedNode === 'b2b'} onClick={() => setSelectedNode('b2b')} />
-          <StrategyNode {...nodes.certificacion} active={selectedNode === 'certificacion'} onClick={() => setSelectedNode('certificacion')} />
-          <StrategyNode {...nodes.afiliacion} active={selectedNode === 'afiliacion'} onClick={() => setSelectedNode('afiliacion')} />
         </div>
-      </div>
 
-      {/* Panel de Detalle Inferior (Dashboard View) */}
-      <div className="max-w-7xl mx-auto mt-12 mb-8">
-        <div className={`bg-white p-6 md:p-8 rounded-3xl shadow-2xl border-t-4 transition-colors duration-500 ${
-          nodes[selectedNode].color.includes('indigo') ? 'border-t-indigo-500' :
-          nodes[selectedNode].color.includes('blue') ? 'border-t-blue-500' :
-          nodes[selectedNode].color.includes('amber') ? 'border-t-amber-500' :
-          nodes[selectedNode].color.includes('rose') ? 'border-t-rose-500' :
-          nodes[selectedNode].color.includes('teal') ? 'border-t-teal-500' :
-          nodes[selectedNode].color.includes('emerald') ? 'border-t-emerald-500' :
-          nodes[selectedNode].color.includes('pink') ? 'border-t-pink-500' :
-          'border-t-orange-500'
-        }`}>
-          
-          <div className="flex flex-col md:flex-row items-start md:items-center gap-6 mb-8 border-b pb-6">
-            <div className={`p-5 rounded-2xl ${nodes[selectedNode].color.replace('text-', 'bg-')} text-white shadow-lg`}>
-              {React.createElement(nodes[selectedNode].icon, { size: 40, strokeWidth: 1.5 })}
-            </div>
-            <div>
-              <p className="text-sm font-bold text-slate-400 uppercase tracking-wider mb-1">Mòdul Seleccionat</p>
-              <h2 className="text-3xl font-extrabold text-slate-800 tracking-tight">
-                {nodes[selectedNode].title}
-              </h2>
-              <p className={`text-lg font-medium mt-1 ${nodes[selectedNode].color.replace('bg-', 'text-').replace('-500', '-600')}`}>
-                {nodes[selectedNode].subtitle}
-              </p>
-            </div>
-          </div>
-          
-          <div className="grid md:grid-cols-5 gap-8">
-            {/* Main Description */}
-            <div className="md:col-span-2 space-y-4">
-              <h4 className="font-bold text-slate-800 text-lg flex items-center gap-2">
-                <Sparkles size={18} className="text-amber-500" />
-                Visió del Mòdul
-              </h4>
-              <p className="text-slate-600 leading-relaxed text-lg">
-                {nodes[selectedNode].content.descripció}
-              </p>
-            </div>
-            
-            {/* Tech / Automation Details */}
-            <div className="md:col-span-3 bg-slate-50 p-6 rounded-2xl border border-slate-100">
-              <h4 className="font-bold text-slate-800 text-lg mb-4">Claus d'Execució</h4>
-              <ul className="space-y-4">
-                {Object.entries(nodes[selectedNode].content).map(([key, value]) => {
-                  if (key.toLowerCase() === 'descripció') return null;
-                  
-                  return (
-                    <li key={key} className="flex flex-col sm:flex-row gap-2 sm:gap-4 border-b border-slate-200 pb-3 last:border-0 last:pb-0">
-                      <span className="capitalize font-bold text-slate-700 min-w-[140px] text-sm mt-0.5">
-                        {key.replace(/_/g, ' ')}:
-                      </span> 
-                      <span className="text-slate-600 font-medium">
-                        {Array.isArray(value) 
-                          ? <div className="flex flex-wrap gap-2">
-                              {value.map(tag => (
-                                <span key={tag} className="bg-white border border-slate-200 px-2 py-1 rounded-md text-xs font-bold text-slate-700 shadow-sm">{tag}</span>
-                              ))}
-                            </div>
-                          : value}
-                      </span>
-                    </li>
-                  );
-                })}
-              </ul>
-            </div>
-          </div>
-          
-        </div>
       </div>
       
-      <footer className="text-center text-slate-400 text-sm font-medium pb-8">
+      <footer className="max-w-7xl mx-auto mt-12 text-center text-slate-400 text-xs md:text-sm font-medium pb-4">
         Prem qualsevol mòdul per aprofundir | Projecte Estratègic cursos.cat
       </footer>
     </div>
