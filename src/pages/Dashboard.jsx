@@ -5,7 +5,7 @@ import {
   MessageSquare, TrendingUp, Cpu, Layers, Globe, 
   ArrowRight, Sparkles, ArrowLeft
 } from 'lucide-react';
-import { Analytics } from "@vercel/analytics/next";
+import { Analytics } from "@vercel/analytics/react";
 
 // Component per a cada node (disseny molt més petit i compacte)
 const StrategyNode = ({ title, subtitle, icon: Icon, color, active, onClick }) => (
