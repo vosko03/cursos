@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
+import { Analytics } from "@vercel/analytics/next";
 
 const BlogIndex = () => {
   return (

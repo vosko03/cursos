@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Analytics } from "@vercel/analytics/next";
 
 // Importamos todas nuestras páginas separadas
 import Home from './pages/Home';
