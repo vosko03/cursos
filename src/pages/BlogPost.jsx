@@ -27,7 +27,7 @@ const BlogPost = () => {
 
       <figure className="mb-10 rounded-2xl overflow-hidden shadow-xl border border-slate-100">
         <img 
-          src="https://images.unsplash.com/photo-1590123654443-41a45778844f?auto=format&fit=crop&q=80&w=1200" 
+          src="https://images.unsplash.com/photo-1657983060174-ce54947f9001?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
           alt="Cases de l'Onyar a Girona, reflexades a l'aigua" 
           className="w-full h-[400px] object-cover hover:scale-105 transition-transform duration-700"
         />
