@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { 
   Users, 
   Bot, 
@@ -14,29 +14,30 @@ import {
   Sparkles
 } from 'lucide-react';
 
-// Componente para cada nodo (ahora más pequeño y en formato horizontal)
+// Componente para cada nodo (diseño mucho más pequeño y compacto)
 const StrategyNode = ({ title, subtitle, icon: Icon, color, active, onClick }) => (
   <div 
     onClick={onClick}
-    className={`cursor-pointer transition-all duration-300 transform 
+    className={`cursor-pointer transition-all duration-200 
       ${active 
-        ? 'ring-2 ring-indigo-500 bg-white shadow-md scale-[1.02] z-10' 
-        : 'hover:scale-[1.02] bg-slate-50 hover:bg-white shadow-sm hover:shadow'
+        ? 'ring-1 ring-indigo-500 bg-indigo-50/40 shadow-sm scale-[1.02] z-10 border-indigo-200' 
+        : 'hover:bg-slate-100 border-transparent opacity-80 hover:opacity-100'
       } 
-      border border-gray-100 rounded-xl p-3 flex items-center gap-3 group relative overflow-hidden w-full`}
+      border rounded-lg p-2 flex items-center gap-2.5 w-full`}
   >
-    <div className={`p-2.5 rounded-lg ${color.replace('text-', 'bg-')} text-white shadow-inner group-hover:scale-110 transition-transform duration-300 shrink-0`}>
-      <Icon size={20} strokeWidth={2} />
+    <div className={`p-1.5 rounded-md ${color.replace('text-', 'bg-')} text-white shrink-0`}>
+      <Icon size={16} strokeWidth={2.5} />
     </div>
-    <div className="space-y-0.5 text-left overflow-hidden">
-      <h3 className="font-bold text-gray-800 text-sm leading-tight truncate">{title}</h3>
-      <p className="text-xs font-medium text-gray-500 truncate">{subtitle}</p>
+    <div className="text-left overflow-hidden">
+      <h3 className={`font-bold text-xs leading-none truncate ${active ? 'text-indigo-900' : 'text-slate-700'}`}>{title}</h3>
+      <p className="text-[10px] font-medium text-slate-500 truncate mt-0.5">{subtitle}</p>
     </div>
   </div>
 );
 
 const App = () => {
   const [selectedNode, setSelectedNode] = useState('central');
+  const detailRef = useRef(null);
 
   // Dades extretes de l'estratègia mestra de cursos.cat
   const nodes = {
@@ -150,77 +151,83 @@ const App = () => {
     }
   };
 
+  // Lógica para manejar la selección y hacer scroll automático en móviles
+  const handleNodeSelect = (key) => {
+    setSelectedNode(key);
+    // Solo hace auto-scroll si estamos en una pantalla móvil (menor a 1024px)
+    if (window.innerWidth < 1024 && detailRef.current) {
+      setTimeout(() => {
+        detailRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 50);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-slate-50 p-4 md:p-6 lg:p-8 font-sans selection:bg-indigo-200">
       
       {/* Header */}
-      <header className="max-w-7xl mx-auto mb-8 text-center md:text-left flex flex-col md:flex-row md:items-end justify-between gap-4">
-        <div>
-          <div className="inline-flex items-center justify-center space-x-2 bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full text-xs font-bold mb-3">
-            <Sparkles size={14} />
-            <span>Dashboard Estratègic</span>
-          </div>
-          <h1 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">
-            Visió <span className="text-indigo-600">cursos.cat</span>
-          </h1>
-          <p className="text-slate-500 max-w-xl text-sm md:text-base mt-1">
-            La primera plataforma d'integració lingüística i professional de Catalunya impulsada 100% per IA.
-          </p>
+      <header className="max-w-6xl mx-auto mb-6 md:mb-8 text-center md:text-left">
+        <div className="inline-flex items-center justify-center space-x-2 bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full text-[10px] md:text-xs font-bold mb-2 md:mb-3">
+          <Sparkles size={14} />
+          <span>Dashboard Estratègic</span>
         </div>
+        <h1 className="text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight">
+          Visió <span className="text-indigo-600">cursos.cat</span>
+        </h1>
       </header>
 
-      {/* Main Layout: Left Menu & Right Detail Panel */}
-      <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-6 lg:gap-8 relative">
+      {/* Main Layout: Left Sidebar (Small) & Right Detail Panel (Large) */}
+      <div className="max-w-6xl mx-auto flex flex-col lg:flex-row gap-6 lg:gap-8 relative items-start">
         
-        {/* COLUMNA IZQUIERDA: Menú de Nodos (Sección scrolleable o apilada en mobile) */}
-        <div className="w-full lg:w-1/3 flex flex-col gap-5 shrink-0">
+        {/* COLUMNA IZQUIERDA: Menú de Nodos Compacto (w-72) */}
+        <div className="w-full lg:w-72 xl:w-80 flex flex-col sm:flex-row lg:flex-col gap-4 shrink-0">
           
           {/* Adquisición */}
-          <div className="bg-white p-4 rounded-2xl shadow-sm border border-slate-100">
-            <div className="flex items-center gap-2 mb-3 border-b border-slate-100 pb-2">
-              <Layers size={18} className="text-slate-400"/>
-              <h2 className="text-sm font-bold text-slate-700 uppercase tracking-wider">1. Adquisició</h2>
+          <div className="bg-white p-3 rounded-xl shadow-sm border border-slate-200 flex-1">
+            <div className="flex items-center gap-1.5 mb-2.5">
+              <Layers size={14} className="text-slate-400"/>
+              <h2 className="text-[11px] font-bold text-slate-600 uppercase tracking-wider">1. Adquisició</h2>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-2.5">
-              <StrategyNode {...nodes.seo} active={selectedNode === 'seo'} onClick={() => setSelectedNode('seo')} />
-              <StrategyNode {...nodes.videos} active={selectedNode === 'videos'} onClick={() => setSelectedNode('videos')} />
-              <StrategyNode {...nodes.inmigrantes} active={selectedNode === 'inmigrantes'} onClick={() => setSelectedNode('inmigrantes')} />
+            <div className="flex flex-col gap-1.5">
+              <StrategyNode {...nodes.seo} active={selectedNode === 'seo'} onClick={() => handleNodeSelect('seo')} />
+              <StrategyNode {...nodes.videos} active={selectedNode === 'videos'} onClick={() => handleNodeSelect('videos')} />
+              <StrategyNode {...nodes.inmigrantes} active={selectedNode === 'inmigrantes'} onClick={() => handleNodeSelect('inmigrantes')} />
             </div>
           </div>
 
           {/* Producto Core */}
-          <div className="bg-gradient-to-br from-indigo-50 to-white p-4 rounded-2xl shadow-sm border border-indigo-100 relative overflow-hidden">
-            <div className="absolute -right-10 -top-10 w-32 h-32 bg-indigo-100 rounded-full blur-3xl opacity-50 pointer-events-none"></div>
-            <div className="flex items-center gap-2 mb-3 border-b border-indigo-100 pb-2 relative z-10">
-              <Cpu size={18} className="text-indigo-500"/>
-              <h2 className="text-sm font-bold text-indigo-900 uppercase tracking-wider">2. Producte Principal</h2>
+          <div className="bg-gradient-to-br from-indigo-50/50 to-white p-3 rounded-xl shadow-sm border border-indigo-100 flex-1 relative overflow-hidden">
+            <div className="absolute -right-8 -top-8 w-24 h-24 bg-indigo-100 rounded-full blur-2xl opacity-60 pointer-events-none"></div>
+            <div className="flex items-center gap-1.5 mb-2.5 relative z-10">
+              <Cpu size={14} className="text-indigo-500"/>
+              <h2 className="text-[11px] font-bold text-indigo-800 uppercase tracking-wider">2. Producte Principal</h2>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-2.5 relative z-10">
-              <StrategyNode {...nodes.central} active={selectedNode === 'central'} onClick={() => setSelectedNode('central')} />
-              <StrategyNode {...nodes.tutor} active={selectedNode === 'tutor'} onClick={() => setSelectedNode('tutor')} />
-              <StrategyNode {...nodes.comunidad} active={selectedNode === 'comunidad'} onClick={() => setSelectedNode('comunidad')} />
+            <div className="flex flex-col gap-1.5 relative z-10">
+              <StrategyNode {...nodes.central} active={selectedNode === 'central'} onClick={() => handleNodeSelect('central')} />
+              <StrategyNode {...nodes.tutor} active={selectedNode === 'tutor'} onClick={() => handleNodeSelect('tutor')} />
+              <StrategyNode {...nodes.comunidad} active={selectedNode === 'comunidad'} onClick={() => handleNodeSelect('comunidad')} />
             </div>
           </div>
 
           {/* Monetización */}
-          <div className="bg-white p-4 rounded-2xl shadow-sm border border-slate-100">
-            <div className="flex items-center gap-2 mb-3 border-b border-slate-100 pb-2">
-              <TrendingUp size={18} className="text-slate-400"/>
-              <h2 className="text-sm font-bold text-slate-700 uppercase tracking-wider">3. Monetització</h2>
+          <div className="bg-white p-3 rounded-xl shadow-sm border border-slate-200 flex-1">
+            <div className="flex items-center gap-1.5 mb-2.5">
+              <TrendingUp size={14} className="text-slate-400"/>
+              <h2 className="text-[11px] font-bold text-slate-600 uppercase tracking-wider">3. Monetització</h2>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-2.5">
-              <StrategyNode {...nodes.b2b} active={selectedNode === 'b2b'} onClick={() => setSelectedNode('b2b')} />
-              <StrategyNode {...nodes.certificacion} active={selectedNode === 'certificacion'} onClick={() => setSelectedNode('certificacion')} />
-              <StrategyNode {...nodes.afiliacion} active={selectedNode === 'afiliacion'} onClick={() => setSelectedNode('afiliacion')} />
+            <div className="flex flex-col gap-1.5">
+              <StrategyNode {...nodes.b2b} active={selectedNode === 'b2b'} onClick={() => handleNodeSelect('b2b')} />
+              <StrategyNode {...nodes.certificacion} active={selectedNode === 'certificacion'} onClick={() => handleNodeSelect('certificacion')} />
+              <StrategyNode {...nodes.afiliacion} active={selectedNode === 'afiliacion'} onClick={() => handleNodeSelect('afiliacion')} />
             </div>
           </div>
 
         </div>
 
-        {/* COLUMNA DERECHA: Panel de Detalle (Sticky en Desktop) */}
-        <div className="w-full lg:w-2/3">
+        {/* COLUMNA DERECHA: Panel de Detalle Amplio (Sticky en Desktop) */}
+        <div className="w-full lg:flex-1" ref={detailRef}>
           <div className="sticky top-6">
-            <div className={`bg-white p-6 md:p-8 rounded-3xl shadow-xl border-t-4 transition-colors duration-500 min-h-[500px] ${
+            <div className={`bg-white p-6 md:p-8 rounded-2xl shadow-xl border-t-4 transition-colors duration-500 min-h-[450px] ${
               nodes[selectedNode].color.includes('indigo') ? 'border-t-indigo-500' :
               nodes[selectedNode].color.includes('blue') ? 'border-t-blue-500' :
               nodes[selectedNode].color.includes('amber') ? 'border-t-amber-500' :
@@ -231,50 +238,50 @@ const App = () => {
               'border-t-orange-500'
             }`}>
               
-              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-5 mb-8 border-b pb-6">
-                <div className={`p-4 rounded-2xl ${nodes[selectedNode].color.replace('text-', 'bg-')} text-white shadow-md shrink-0`}>
-                  {React.createElement(nodes[selectedNode].icon, { size: 36, strokeWidth: 1.5 })}
+              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-6 border-b pb-5">
+                <div className={`p-3.5 rounded-xl ${nodes[selectedNode].color.replace('text-', 'bg-')} text-white shadow-md shrink-0`}>
+                  {React.createElement(nodes[selectedNode].icon, { size: 32, strokeWidth: 1.5 })}
                 </div>
                 <div>
-                  <p className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">Anàlisi del Mòdul</p>
-                  <h2 className="text-2xl md:text-3xl font-extrabold text-slate-800 tracking-tight leading-tight">
+                  <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-0.5">Anàlisi del Mòdul</p>
+                  <h2 className="text-xl md:text-2xl font-extrabold text-slate-800 tracking-tight leading-tight">
                     {nodes[selectedNode].title}
                   </h2>
-                  <p className={`text-base md:text-lg font-medium mt-1 ${nodes[selectedNode].color.replace('bg-', 'text-').replace('-500', '-600')}`}>
+                  <p className={`text-sm md:text-base font-semibold mt-0.5 ${nodes[selectedNode].color.replace('bg-', 'text-').replace('-500', '-600')}`}>
                     {nodes[selectedNode].subtitle}
                   </p>
                 </div>
               </div>
               
-              <div className="grid md:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 gap-8">
+              <div className="space-y-6">
                 {/* Main Description */}
-                <div className="space-y-4">
-                  <h4 className="font-bold text-slate-800 text-base flex items-center gap-2">
-                    <Sparkles size={16} className="text-amber-500" />
+                <div>
+                  <h4 className="font-bold text-slate-800 text-sm flex items-center gap-1.5 mb-2">
+                    <Sparkles size={14} className="text-amber-500" />
                     Visió del Mòdul
                   </h4>
-                  <p className="text-slate-600 leading-relaxed text-base md:text-lg">
+                  <p className="text-slate-600 leading-relaxed text-sm md:text-base">
                     {nodes[selectedNode].content.descripció}
                   </p>
                 </div>
                 
                 {/* Tech / Automation Details */}
-                <div className="bg-slate-50 p-5 md:p-6 rounded-2xl border border-slate-100">
-                  <h4 className="font-bold text-slate-800 text-base mb-4 border-b border-slate-200 pb-2">Claus d'Execució</h4>
-                  <ul className="space-y-3.5">
+                <div className="bg-slate-50 p-4 md:p-5 rounded-xl border border-slate-100">
+                  <h4 className="font-bold text-slate-800 text-sm mb-3 border-b border-slate-200 pb-2">Claus d'Execució</h4>
+                  <ul className="space-y-3">
                     {Object.entries(nodes[selectedNode].content).map(([key, value]) => {
                       if (key.toLowerCase() === 'descripció') return null;
                       
                       return (
-                        <li key={key} className="flex flex-col gap-1">
-                          <span className="capitalize font-bold text-slate-700 text-sm">
+                        <li key={key} className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-3">
+                          <span className="capitalize font-bold text-slate-700 text-xs sm:w-32 shrink-0">
                             {key.replace(/_/g, ' ')}:
                           </span> 
-                          <span className="text-slate-600 font-medium text-sm">
+                          <span className="text-slate-600 font-medium text-xs md:text-sm">
                             {Array.isArray(value) 
-                              ? <div className="flex flex-wrap gap-1.5 mt-1">
+                              ? <div className="flex flex-wrap gap-1.5">
                                   {value.map(tag => (
-                                    <span key={tag} className="bg-white border border-slate-200 px-2 py-0.5 rounded text-xs font-bold text-slate-700 shadow-sm">{tag}</span>
+                                    <span key={tag} className="bg-white border border-slate-200 px-2 py-0.5 rounded text-[10px] md:text-xs font-bold text-slate-700 shadow-sm">{tag}</span>
                                   ))}
                                 </div>
                               : value}
@@ -292,7 +299,7 @@ const App = () => {
 
       </div>
       
-      <footer className="max-w-7xl mx-auto mt-12 text-center text-slate-400 text-xs md:text-sm font-medium pb-4">
+      <footer className="max-w-6xl mx-auto mt-10 text-center text-slate-400 text-xs font-medium pb-4">
         Prem qualsevol mòdul per aprofundir | Projecte Estratègic cursos.cat
       </footer>
     </div>
