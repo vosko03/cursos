@@ -23,7 +23,7 @@ const BlogIndex = () => {
           <article className="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-shadow duration-300 border border-slate-100 flex flex-col md:flex-row">
             <div className="md:w-2/5">
               <img 
-                src="[https://images.unsplash.com/photo-1590123654443-41a45778844f?auto=format&fit=crop&q=80&w=600](https://images.unsplash.com/photo-1590123654443-41a45778844f?auto=format&fit=crop&q=80&w=600)" 
+                src="https://images.unsplash.com/photo-1590123654443-41a45778844f?auto=format&fit=crop&q=80&w=600" 
                 alt="Vista de Girona" 
                 className="h-full w-full object-cover min-h-[250px]"
               />
