@@ -54,11 +54,13 @@ const DetailPanel = ({ node, theme }) => {
       {/* Contenido principal */}
       <div className="space-y-6">
         <div>
-          <h4 className="font-bold text-slate-800 text-sm flex items-center gap-1.5 mb-2">
+          {/* TÍTULO REDUCIDO AQUÍ */}
+          <h4 className="font-bold text-slate-800 text-xs flex items-center gap-1.5 mb-3 uppercase tracking-wide">
             <Sparkles size={14} className="text-amber-500" />
             Visió i Justificació del Mòdul
           </h4>
-          <p className="text-slate-600 leading-relaxed text-sm md:text-base">
+          {/* TEXTO LIGERAMENTE REDUCIDO PARA ACOMPAÑAR */}
+          <p className="text-slate-600 leading-relaxed text-sm">
             {node.content.descripció}
           </p>
         </div>
