@@ -33,7 +33,7 @@ const DetailPanel = ({ node, theme }) => {
   if (!node) return null;
 
   return (
-    <div className={`bg-white p-5 md:p-6 rounded-2xl shadow-lg border-t-4 h-full overflow-y-auto transition-all duration-500 ${theme.borderTop}`}>
+    <div className={`bg-white p-5 md:p-6 rounded-2xl shadow-lg border-t-4 h-full overflow-y-auto transition-all duration-500 ${theme.borderTop} custom-scrollbar`}>
       
       {/* Header del Panel */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-6 border-b border-slate-100 pb-4">
@@ -131,40 +131,45 @@ const Dashboard = () => {
 
   const handleNodeSelect = (key) => {
     setSelectedNode(key);
+    
+    // Desplazamiento inteligente para móviles (considera la cabecera sticky de ~140px)
     if (window.innerWidth < 1024 && detailRef.current) {
       setTimeout(() => {
-        detailRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        const yPosition = detailRef.current.getBoundingClientRect().top + window.scrollY - 140;
+        window.scrollTo({ top: yPosition, behavior: 'smooth' });
       }, 50);
     }
   };
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] p-4 md:p-6 lg:p-8 font-sans text-slate-900 selection:bg-indigo-200">
+    <div className="min-h-screen bg-[#F8FAFC] font-sans text-slate-900 selection:bg-indigo-200 relative">
       
-      {/* Header Presentación */}
-      <header className="max-w-6xl mx-auto mb-8 bg-white p-5 rounded-2xl shadow-sm border border-slate-100">
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-          <div className="flex items-center gap-4">
-            <div className="inline-flex items-center gap-2 bg-slate-900 text-white px-4 py-2 rounded-lg text-sm font-bold shadow-md shrink-0">
-              <Home size={18} />
-              <span>cursos.cat</span>
+      {/* Cabecera STICKY (Siempre visible con efecto Glassmorphism) */}
+      <div className="sticky top-0 z-50 bg-[#F8FAFC]/85 backdrop-blur-md pt-4 pb-4 px-4 md:px-6 lg:px-8 border-b border-transparent shadow-[0_4px_30px_rgba(0,0,0,0.02)]">
+        <header className="max-w-6xl mx-auto bg-white p-4 md:p-5 rounded-2xl shadow-sm border border-slate-200/60">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div className="flex flex-col md:flex-row md:items-center gap-3 md:gap-4">
+              <div className="inline-flex items-center gap-2 bg-slate-900 text-white px-4 py-2 rounded-lg text-sm font-bold shadow-md shrink-0 self-start md:self-auto">
+                <Home size={18} />
+                <span>cursos.cat</span>
+              </div>
+              <div className="border-l-2 border-transparent md:border-slate-200 md:pl-4">
+                <h1 className="text-base md:text-xl font-bold text-slate-800 tracking-tight leading-tight">Estratègia i Model de Creixement</h1>
+                <p className="text-xs md:text-sm font-medium text-slate-500 mt-0.5">La primera plataforma d'integració lingüística i professional de Catalunya impulsada 100% per IA.</p>
+              </div>
             </div>
-            <div className="border-l-2 border-slate-200 pl-4">
-              <h1 className="text-lg md:text-xl font-bold text-slate-800 tracking-tight">Estratègia i Model de Creixement</h1>
-              <p className="text-sm font-medium text-slate-500 mt-0.5">La primera plataforma d'integració lingüística i professional de Catalunya impulsada 100% per IA.</p>
+            <div className="hidden md:inline-flex items-center gap-2 bg-indigo-50 text-indigo-700 px-3 py-2 rounded-lg text-sm font-bold uppercase tracking-wide border border-indigo-100 shadow-sm shrink-0">
+              <Map size={16} />
+              Mapa Estratègic
             </div>
           </div>
-          <div className="inline-flex items-center gap-2 bg-indigo-50 text-indigo-700 px-3 py-2 rounded-lg text-sm font-bold uppercase tracking-wide border border-indigo-100 self-start md:self-auto shadow-sm shrink-0">
-            <Map size={16} />
-            Mapa Estratègic
-          </div>
-        </div>
-      </header>
+        </header>
+      </div>
 
-      {/* Main Layout */}
-      <main className="max-w-6xl mx-auto flex flex-col lg:flex-row gap-6">
+      {/* Main Layout (Con padding superior reducido porque la cabecera ya aporta espacio) */}
+      <main className="max-w-6xl mx-auto flex flex-col lg:flex-row gap-6 px-4 md:px-6 lg:px-8 pt-6 pb-8">
         
-        {/* Sidebar Navigation - Nuevo Orden de Presentación */}
+        {/* Sidebar Navigation */}
         <aside className="w-full lg:w-80 xl:w-80 flex flex-col gap-6 shrink-0">
           
           {/* FASE 1: La Solución */}
@@ -209,27 +214,28 @@ const Dashboard = () => {
 
         </aside>
 
-        {/* Panel de Detalle */}
+        {/* Panel de Detalle (Ajustado a top-[140px] para que se quede debajo de la cabecera sticky) */}
         <section className="w-full lg:flex-1" ref={detailRef}>
-          <div className="sticky top-6 h-[calc(100vh-8rem)] min-h-[550px]">
+          <div className="sticky top-[140px] h-[calc(100vh-160px)] min-h-[550px]">
             <DetailPanel node={nodes[selectedNode]} theme={nodes[selectedNode].theme} />
           </div>
         </section>
 
       </main>
       
-      {/* Footer minimalista */}
-      <footer className="max-w-6xl mx-auto mt-12 mb-4 text-center">
+      {/* Footer sin año */}
+      <footer className="max-w-6xl mx-auto mt-8 mb-6 text-center px-4">
         <p className="text-slate-400 text-xs font-medium tracking-wide">
-          cursos.cat &copy; 2024 &bull; Selecciona un mòdul per explorar l'estratègia
+          cursos.cat &bull; Selecciona un mòdul per explorar l'estratègia
         </p>
       </footer>
 
+      {/* Estilos CSS Inline para scrollbars */}
       <style dangerouslySetInnerHTML={{__html: `
-        .overflow-y-auto::-webkit-scrollbar { width: 6px; }
-        .overflow-y-auto::-webkit-scrollbar-track { background: transparent; }
-        .overflow-y-auto::-webkit-scrollbar-thumb { background-color: #cbd5e1; border-radius: 20px; }
-        .overflow-y-auto::-webkit-scrollbar-thumb:hover { background-color: #94a3b8; }
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background-color: #cbd5e1; border-radius: 20px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background-color: #94a3b8; }
       `}} />
 
       <Analytics />
