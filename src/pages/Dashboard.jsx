@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   Users, Bot, Search, Video, Briefcase, Award, 
   MessageSquare, TrendingUp, Cpu, Layers, Globe, 
@@ -68,7 +68,6 @@ const DetailPanel = ({ node }) => {
           </h4>
           <ul className="space-y-5">
             {Object.entries(node.content).map(([key, value]) => {
-              // Saltem la descripció perquè ja es mostra a dalt
               if (key === 'Descripció') return null;
               
               return (
@@ -119,16 +118,19 @@ const Dashboard = () => {
   const [selectedNode, setSelectedNode] = useState('central');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
+  // Actualitzar el títol de la pestanya del navegador
+  useEffect(() => {
+    document.title = "Cursos.cat: la primera plataforma d'integració lingüística de Catalunya impulsada 100% per IA.";
+  }, []);
+
   const handleNodeSelect = (key) => {
     setSelectedNode(key);
-    // Tancar el menú automàticament en mòbil
     if (window.innerWidth < 1024) {
       setIsMobileMenuOpen(false);
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
 
-  // Contingut del menú lateral
   const SidebarContent = () => (
     <div className="flex flex-col gap-8">
       <section className="space-y-3">
@@ -176,7 +178,6 @@ const Dashboard = () => {
       <div className="sticky top-0 z-40 bg-[#FAFAFA]/80 backdrop-blur-lg pt-4 pb-4 px-4 md:px-6 lg:px-8 border-b border-zinc-200/60">
         <header className="max-w-6xl mx-auto flex items-center justify-between gap-4">
           
-          {/* Esquerra: Logo i Títols Desktop */}
           <div className="flex items-center gap-3 md:gap-4">
             <div className="inline-flex items-center gap-2 bg-zinc-900 text-white px-3.5 py-2 rounded-md text-sm font-medium shrink-0">
               <Home size={16} />
@@ -184,19 +185,18 @@ const Dashboard = () => {
             </div>
             
             <div className="border-l border-zinc-300 pl-4 hidden md:block">
-              <h1 className="text-base font-semibold text-zinc-900 tracking-tight leading-tight">Estratègia i Model de Creixement</h1>
-              <p className="text-sm text-zinc-500 mt-0.5">La primera plataforma d'integració lingüística de Catalunya impulsada 100% per IA.</p>
+              {/* Títol Visual Actualitzat per reflectir el demanat */}
+              <h1 className="text-base font-semibold text-zinc-900 tracking-tight leading-tight">Cursos.cat: la primera plataforma d'integració lingüística de Catalunya impulsada 100% per IA.</h1>
+              <p className="text-sm text-zinc-500 mt-0.5">Estratègia i Model de Creixement</p>
             </div>
           </div>
           
-          {/* Dreta: Botó Mòbil i Badge Desktop */}
           <div className="flex items-center gap-3">
             <div className="hidden md:inline-flex items-center gap-2 bg-zinc-100 text-zinc-600 px-3 py-1.5 rounded-md text-xs font-semibold uppercase tracking-wider border border-zinc-200 shrink-0">
               <Map size={14} />
               <span>Mapa Estratègic</span>
             </div>
 
-            {/* Botó Menú Mòbil (Dreta) */}
             <button 
               className="lg:hidden p-2 -mr-2 text-zinc-600 hover:bg-zinc-200/50 rounded-md transition-colors"
               onClick={() => setIsMobileMenuOpen(true)}
@@ -208,13 +208,11 @@ const Dashboard = () => {
         </header>
       </div>
 
-      {/* Overlay fosc per al menú mòbil */}
       <div 
         className={`fixed inset-0 bg-zinc-900/20 backdrop-blur-sm z-50 lg:hidden transition-opacity duration-300 ${isMobileMenuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`} 
         onClick={() => setIsMobileMenuOpen(false)} 
       />
 
-      {/* Menú Lateral Mòbil (Drawer) */}
       <aside className={`fixed inset-y-0 right-0 w-[280px] sm:w-[320px] bg-[#FAFAFA] z-50 p-6 border-l border-zinc-200 shadow-2xl transform transition-transform duration-300 ease-in-out lg:hidden flex flex-col overflow-y-auto ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
         <div className="flex justify-between items-center mb-8 border-b border-zinc-200 pb-4">
           <span className="font-semibold text-zinc-900 text-sm uppercase tracking-wider">Navegació</span>
@@ -225,16 +223,13 @@ const Dashboard = () => {
         <SidebarContent />
       </aside>
 
-      {/* Main Layout */}
       <main className="w-full px-4 md:px-6 lg:px-8 pt-4 md:pt-5 pb-8">
         <div className="max-w-6xl mx-auto bg-white border border-zinc-200 shadow-sm rounded-2xl flex flex-col lg:flex-row overflow-hidden min-h-[600px]">
           
-          {/* Navegació Lateral Desktop */}
           <aside className="hidden lg:block w-[300px] bg-zinc-50/50 border-r border-zinc-200 p-6 shrink-0">
             <SidebarContent />
           </aside>
 
-          {/* Panell de Detall Central */}
           <section className="flex-1 p-6 md:p-8 lg:p-10 bg-white">
             <DetailPanel node={nodes[selectedNode]} />
           </section>
@@ -242,14 +237,12 @@ const Dashboard = () => {
         </div>
       </main>
       
-      {/* Footer Minimalista */}
       <footer className="max-w-6xl mx-auto mb-8 text-center px-4">
         <p className="text-zinc-400 text-sm font-medium">
           cursos.cat &bull; Selecciona un mòdul per explorar l'estratègia
         </p>
       </footer>
 
-      {/* CSS per a Transicions i Scrollbar */}
       <style dangerouslySetInnerHTML={{__html: `
         @keyframes fadeInUp {
           from { opacity: 0; transform: translateY(8px); }
