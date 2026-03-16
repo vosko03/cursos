@@ -218,9 +218,10 @@ const Dashboard = () => {
         <SidebarContent />
       </aside>
 
-      {/* Main Layout: Unified Card per eliminar espais */}
-      <main className="max-w-6xl mx-auto px-4 md:px-6 lg:px-8 py-6 md:py-8">
-        <div className="bg-white border border-zinc-200 shadow-sm rounded-2xl flex flex-col lg:flex-row overflow-hidden min-h-[600px]">
+      {/* Main Layout: Ajustado el padding superior a pt-4 md:pt-5 para pegarlo más a la cabecera */}
+      <main className="w-full px-4 md:px-6 lg:px-8 pt-4 md:pt-5 pb-8">
+        {/* Aquí es donde max-w-6xl mx-auto se aplica a la tarjeta para que coincida 100% con el header */}
+        <div className="max-w-6xl mx-auto bg-white border border-zinc-200 shadow-sm rounded-2xl flex flex-col lg:flex-row overflow-hidden min-h-[600px]">
           
           {/* Navegació Lateral Desktop (Integrada sense espais) */}
           <aside className="hidden lg:block w-[300px] bg-zinc-50/50 border-r border-zinc-200 p-6 shrink-0">
