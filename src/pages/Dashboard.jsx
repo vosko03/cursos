@@ -84,20 +84,27 @@ const Dashboard = () => {
     <>
       <div className="h-screen bg-slate-50 p-4 md:p-5 lg:p-6 font-sans selection:bg-indigo-200 flex flex-col overflow-hidden">
         {/* Header */}
-        <div className="max-w-6xl mx-auto w-full mb-3 flex items-center justify-between">
-          <Link to="/" className="inline-flex items-center text-indigo-600 font-semibold hover:text-indigo-800 transition-colors text-sm">
-            <ArrowLeft size={16} className="mr-1" /> Tornar
-          </Link>
-          
-          <div className="flex items-center gap-3">
-            <div className="inline-flex items-center space-x-1.5 bg-indigo-100 text-indigo-800 px-2 py-1 rounded-full text-xs font-bold">
-              <Sparkles size={14} />
-              <span>Mapa Estratègic</span>
+        <div className="max-w-6xl mx-auto w-full mb-3">
+          <div className="flex items-center justify-between mb-2">
+            <Link to="/" className="inline-flex items-center text-indigo-600 font-semibold hover:text-indigo-800 transition-colors text-sm">
+              <ArrowLeft size={16} className="mr-1" /> Tornar
+            </Link>
+            
+            <div className="flex items-center gap-3">
+              <div className="inline-flex items-center space-x-1.5 bg-indigo-100 text-indigo-800 px-2 py-1 rounded-full text-xs font-bold">
+                <Sparkles size={14} />
+                <span>Mapa Estratègic</span>
+              </div>
+              <h1 className="text-lg font-extrabold text-slate-900">
+                cursos.cat
+              </h1>
             </div>
-            <h1 className="text-lg font-extrabold text-slate-900">
-              cursos.cat
-            </h1>
           </div>
+          
+          {/* Título restaurado */}
+          <p className="text-slate-500 text-sm md:text-base mt-1 max-w-2xl whitespace-nowrap">
+            La primera plataforma d'integració lingüística i professional de Catalunya impulsada 100% per IA.
+          </p>
         </div>
 
         {/* Main Layout - SIN SCROLL EN MENÚ IZQUIERDO */}
