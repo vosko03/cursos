@@ -33,12 +33,11 @@ const DetailPanel = ({ node }) => {
 
   return (
     <div key={node.title} className="h-full animate-fade-in">
-      {/* Header del Panell */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-8">
-        <div className="p-3.5 rounded-xl bg-zinc-50 border border-zinc-200 text-zinc-900 shrink-0">
-          {React.createElement(node.icon, { size: 24, strokeWidth: 1.5 })}
-        </div>
-        <div>
+      {/* Header del Panell - Modificat per tenir la icona a la dreta */}
+      <div className="flex justify-between items-start gap-4 mb-8">
+        
+        {/* Títol i Subtítol (Esquerra) */}
+        <div className="pr-4">
           <p className="text-xs font-semibold text-zinc-400 uppercase tracking-widest mb-1.5">Pilar Estratègic</p>
           <h2 className="text-2xl font-semibold text-zinc-900 tracking-tight leading-tight">
             {node.title}
@@ -46,6 +45,11 @@ const DetailPanel = ({ node }) => {
           <p className="text-sm text-zinc-500 mt-1">
             {node.subtitle}
           </p>
+        </div>
+
+        {/* Icona Mòdul (Dreta Superior amb colors dinàmics) */}
+        <div className={`p-3.5 rounded-xl border shrink-0 shadow-sm ${node.colorTheme}`}>
+          {React.createElement(node.icon, { size: 26, strokeWidth: 1.5 })}
         </div>
       </div>
       
@@ -96,20 +100,56 @@ const DetailPanel = ({ node }) => {
   );
 };
 
-// --- DADES ---
+// --- DADES AMB COLORS ASSIGNATS ---
 
 const nodes = {
-  central: { title: "Plataforma Core", subtitle: "L'ecosistema immersiu", icon: Globe, content: { "Descripció": "El nucli tecnològic de cursos.cat. Consisteix en un entorn d'immersió sota demanda impulsat al 100% per Intel·ligència Artificial, dissenyat per superar les limitacions de l'ensenyament estàtic tradicional. Ofereix una experiència fluida, totalment gamificada i adaptada de forma dinàmica al ritme d'absorció i interessos de cada alumne.", "Innovació": "Motor d'aprenentatge hiperpersonalitzat que s'allunya de la rigidesa dels clàssics LMS com Moodle, generant contingut on-the-fly.", "Tecnologia base": ["Next.js", "Gemini Pro", "Matxa-TTS (Aina)", "Supabase", "Stripe"], "Escalabilitat": "Arquitectura 'serverless' i de microserveis preparada per suportar desenes de milers d'usuaris concurrents sense degradació de latència ni costos d'infraestructura innecessaris." } },
-  tutor: { title: "Tutor IA Contextual", subtitle: "Pràctica hiperrealista 24/7", icon: Bot, content: { "Descripció": "Motor d'IA conversacional avançat (per veu en temps real i text) que simula situacions reals i quotidianes amb les quals l'usuari es trobarà: des d'una visita al metge, fer tràmits a l'ajuntament, fins a atendre clients al sector serveis. Actua com un professor natiu infinitament pacient, eliminant l'ansietat o la vergonya de parlar en públic.", "Tecnologia vocal": "Integració de Matxa-TTS Catalan Multispeaker del Projecte Aina (Generalitat/BSC) per garantir accents naturals de les diferents variants del català.", "Diferenciador": "No es basa en ensenyar taules gramaticals de memòria, sinó que entrena habilitats lingüístiques pràctiques per sobreviure i integrar-se en el dia a dia.", "Mètriques d'èxit": "Garantir un augment del 300% en el temps efectiu de pràctica oral respecte a les classes grupals presencials on l'alumne a penes intervé." } },
-  comunidad: { title: "Comunitat i Tàndem", subtitle: "La xarxa social humana", icon: MessageSquare, content: { "Descripció": "L'aprenentatge aïllat té una taxa d'abandonament alta. Per solucionar-ho, fomentem la cohesió social i l'arrelament a través d'espais digitals segurs on la IA passa a un segon pla i el factor humà pren el relleu. Integrem la comunitat directament en el procés.", "Funcionament": "Sistema de matchmaking per crear tàndems lingüístics entre usuaris de nivells complementaris.", "Dinàmiques": "Implementació de lligues setmanals, 'leaderboards' i reptes col·lectius per mantenir la motivació intrínseca alta.", "Retenció": "La generació de sentit de pertinença és l'eina número u per reduir la taxa de 'churn' (usuaris que es donen de baixa)." } },
+  central: { 
+    title: "Plataforma Core", subtitle: "L'ecosistema immersiu", icon: Globe, 
+    colorTheme: "bg-blue-50 text-blue-600 border-blue-200", // Blau per tecnologia global
+    content: { "Descripció": "El nucli tecnològic de cursos.cat. Consisteix en un entorn d'immersió sota demanda impulsat al 100% per Intel·ligència Artificial, dissenyat per superar les limitacions de l'ensenyament estàtic tradicional. Ofereix una experiència fluida, totalment gamificada i adaptada de forma dinàmica al ritme d'absorció i interessos de cada alumne.", "Innovació": "Motor d'aprenentatge hiperpersonalitzat que s'allunya de la rigidesa dels clàssics LMS com Moodle, generant contingut on-the-fly.", "Tecnologia base": ["Next.js", "Gemini Pro", "Matxa-TTS (Aina)", "Supabase", "Stripe"], "Escalabilitat": "Arquitectura 'serverless' i de microserveis preparada per suportar desenes de milers d'usuaris concurrents sense degradació de latència ni costos d'infraestructura innecessaris." } 
+  },
+  tutor: { 
+    title: "Tutor IA Contextual", subtitle: "Pràctica hiperrealista 24/7", icon: Bot, 
+    colorTheme: "bg-teal-50 text-teal-600 border-teal-200", // Teal/Maragda per IA i assistència
+    content: { "Descripció": "Motor d'IA conversacional avançat (per veu en temps real i text) que simula situacions reals i quotidianes amb les quals l'usuari es trobarà: des d'una visita al metge, fer tràmits a l'ajuntament, fins a atendre clients al sector serveis. Actua com un professor natiu infinitament pacient, eliminant l'ansietat o la vergonya de parlar en públic.", "Tecnologia vocal": "Integració de Matxa-TTS Catalan Multispeaker del Projecte Aina (Generalitat/BSC) per garantir accents naturals de les diferents variants del català.", "Diferenciador": "No es basa en ensenyar taules gramaticals de memòria, sinó que entrena habilitats lingüístiques pràctiques per sobreviure i integrar-se en el dia a dia.", "Mètriques d'èxit": "Garantir un augment del 300% en el temps efectiu de pràctica oral respecte a les classes grupals presencials on l'alumne a penes intervé." } 
+  },
+  comunidad: { 
+    title: "Comunitat i Tàndem", subtitle: "La xarxa social humana", icon: MessageSquare, 
+    colorTheme: "bg-orange-50 text-orange-600 border-orange-200", // Taronja per calidesa i comunitat
+    content: { "Descripció": "L'aprenentatge aïllat té una taxa d'abandonament alta. Per solucionar-ho, fomentem la cohesió social i l'arrelament a través d'espais digitals segurs on la IA passa a un segon pla i el factor humà pren el relleu. Integrem la comunitat directament en el procés.", "Funcionament": "Sistema de matchmaking per crear tàndems lingüístics entre usuaris de nivells complementaris.", "Dinàmiques": "Implementació de lligues setmanals, 'leaderboards' i reptes col·lectius per mantenir la motivació intrínseca alta.", "Retenció": "La generació de sentit de pertinença és l'eina número u per reduir la taxa de 'churn' (usuaris que es donen de baixa)." } 
+  },
   
-  inmigrantes: { title: "Mercat: Nouvinguts", subtitle: "El gruix de l'adquisició B2C", icon: Users, content: { "Descripció": "El nostre segment objectiu de més volum: persones arribades recentment que necessiten el català com a eina urgent d'arrelament i ascensor sociolaboral. Volem oferir una barrera d'entrada gairebé inexistent per democratitzar l'accés a la llengua, atraient-los cap al nostre ecosistema des del primer minut.", "Estratègia de captació": "Product-Led Growth mitjançant un model Freemium molt atractiu (ex: 10 minuts al dia de conversa amb IA gratuïts).", "Fidelització": "Sistema de ratxes ('streaks') inspirat en aplicacions d'hàbits d'èxit com Duolingo per assegurar la recurrència diària.", "Impacte social": "Alineació total amb polítiques de foment del català, cohesió social i integració al mercat laboral local." } },
-  seo: { title: "SEO Programàtic IA", subtitle: "Captació orgànica passiva", icon: Search, content: { "Descripció": "El nostre motor d'adquisició més potent i rendible a mitjà termini. Consisteix en la generació i indexació massiva de pàgines web altament específiques dissenyades per interceptar cerques de nínxol (Long Tail) que l'usuari fa a Google abans o poc després d'arribar a Catalunya.", "Procés automatitzat": "Scripts en Python interactuant amb l'API de Gemini per crear milers d'estructures com: 'Vocabulari en català per a [Professió] a [Ciutat]'.", "Conversió": "Cada landing està optimitzada amb Copywriting persuasiu per capturar l'usuari (lead) en els primers 15 segons d'haver aterrat.", "Exemple real": "Si un usuari busca 'Aprender catalán para trabajar de camarero en Girona', som el primer resultat amb un mòdul gratuït exacte preparat per a ell." } },
-  videos: { title: "Viralitat 'Faceless'", subtitle: "Trànsit des de xarxes socials", icon: Video, content: { "Descripció": "Una autèntica màquina de contingut. Creació automatitzada i escalable de vídeos educatius de format curt (micro-learning) dissenyats específicament per a l'algoritme de TikTok, Instagram Reels i YouTube Shorts. Tot es genera mitjançant IA, sense dependre d'actors o càmeres.", "Flux de treball": "Extracció de notícies o modismes → Guió amb Gemini → Generació de vídeo → Veu amb Matxa-TTS → Publicació.", "Optimització contínua": "Anàlisi A/B automàtic de la retenció d'audiència (hooks) per iterar i millorar els guions en temps real.", "Call to action": "Tots els vídeos deriven l'audiència mitjançant un 'hook' clar: 'Practica aquesta conversa tu mateix gratis a cursos.cat'." } },
+  inmigrantes: { 
+    title: "Mercat: Nouvinguts", subtitle: "El gruix de l'adquisició B2C", icon: Users, 
+    colorTheme: "bg-indigo-50 text-indigo-600 border-indigo-200", // Índigo per usuaris i xarxa
+    content: { "Descripció": "El nostre segment objectiu de més volum: persones arribades recentment que necessiten el català com a eina urgent d'arrelament i ascensor sociolaboral. Volem oferir una barrera d'entrada gairebé inexistent per democratitzar l'accés a la llengua, atraient-los cap al nostre ecosistema des del primer minut.", "Estratègia de captació": "Product-Led Growth mitjançant un model Freemium molt atractiu (ex: 10 minuts al dia de conversa amb IA gratuïts).", "Fidelització": "Sistema de ratxes ('streaks') inspirat en aplicacions d'hàbits d'èxit com Duolingo per assegurar la recurrència diària.", "Impacte social": "Alineació total amb polítiques de foment del català, cohesió social i integració al mercat laboral local." } 
+  },
+  seo: { 
+    title: "SEO Programàtic IA", subtitle: "Captació orgànica passiva", icon: Search, 
+    colorTheme: "bg-emerald-50 text-emerald-600 border-emerald-200", // Verd per creixement orgànic (SEO)
+    content: { "Descripció": "El nostre motor d'adquisició més potent i rendible a mitjà termini. Consisteix en la generació i indexació massiva de pàgines web altament específiques dissenyades per interceptar cerques de nínxol (Long Tail) que l'usuari fa a Google abans o poc després d'arribar a Catalunya.", "Procés automatitzat": "Scripts en Python interactuant amb l'API de Gemini per crear milers d'estructures com: 'Vocabulari en català per a [Professió] a [Ciutat]'.", "Conversió": "Cada landing està optimitzada amb Copywriting persuasiu per capturar l'usuari (lead) en els primers 15 segons d'haver aterrat.", "Exemple real": "Si un usuari busca 'Aprender catalán para trabajar de camarero en Girona', som el primer resultat amb un mòdul gratuït exacte preparat per a ell." } 
+  },
+  videos: { 
+    title: "Viralitat 'Faceless'", subtitle: "Trànsit des de xarxes socials", icon: Video, 
+    colorTheme: "bg-rose-50 text-rose-600 border-rose-200", // Rosa/Vermell representant xarxes (TikTok/YouTube)
+    content: { "Descripció": "Una autèntica màquina de contingut. Creació automatitzada i escalable de vídeos educatius de format curt (micro-learning) dissenyats específicament per a l'algoritme de TikTok, Instagram Reels i YouTube Shorts. Tot es genera mitjançant IA, sense dependre d'actors o càmeres.", "Flux de treball": "Extracció de notícies o modismes → Guió amb Gemini → Generació de vídeo → Veu amb Matxa-TTS → Publicació.", "Optimització contínua": "Anàlisi A/B automàtic de la retenció d'audiència (hooks) per iterar i millorar els guions en temps real.", "Call to action": "Tots els vídeos deriven l'audiència mitjançant un 'hook' clar: 'Practica aquesta conversa tu mateix gratis a cursos.cat'." } 
+  },
   
-  b2b: { title: "B2B per a Empreses", subtitle: "Alt valor i ingressos recurrents", icon: Briefcase, content: { "Descripció": "L'escala de monetització principal. Una solució 'SaaS (Software as a Service) Educatiu' dissenyada exclusivament per a departaments de Recursos Humans. Està enfocada a sectors on l'atenció al client en català és crucial (sanitat, hostaleria, 'retail') però on hi ha molta rotació de personal castellanoparlant o estranger.", "Model de negoci": "Contractes corporatius de llicències per volum (ex: tarifa plana de 200€/mes per formar fins a 50 empleats simultàniament).", "Proposta de valor": "Garanteix el compliment normatiu de drets lingüístics, millora les ràtios d'atenció al client i potencia la RSC corporativa.", "Onboarding senzill": "Desplegament ràpid mitjançant enllaços d'invitació al correu corporatiu i un panell de control HR per veure el progrés en temps real de la plantilla." } },
-  certificacion: { title: "Certificació IA", subtitle: "L'estàndard pràctic del mercat", icon: Award, content: { "Descripció": "Creació d'un nou estàndard d'avaluació al sector. Emissió d'un 'Certificat de Fluïdesa Pràctica' completament examinat i qualificat per models de llenguatge avançats. Supera la burocràcia dels exàmens oficials i ofereix a empreses i usuaris una prova de nivell oral instantània, objectiva i accessible des de qualsevol lloc.", "Avaluació digital": "Examen oral de 15 minuts interactuant amb l'avatar IA, on s'avalua fonètica, fluïdesa, vocabulari i temps de resposta.", "El producte": "Diploma digital verificat (PDF/Blockchain) preparat per integrar-se a un sol clic al perfil de LinkedIn de l'usuari.", "Validesa al mercat": "L'estratègia inclou forjar aliances ràpides amb portals de feina (InfoJobs) i ETTs locals perquè reconeguin aquesta certificació com un filtre vàlid de contractació." } },
-  afiliacion: { title: "Afiliació Estratègica", subtitle: "Monetització indirecta", icon: TrendingUp, content: { "Descripció": "No tots els usuaris tindran capacitat per pagar una subscripció (especialment els nouvinguts). Aquest mòdul assegura que el 100% del trànsit generi ingressos passius i no intrusius, oferint serveis de valor afegit just en el moment que l'usuari els necessita per assentar-se al país.", "Escalat contextual": "Si l'usuari demana a la IA vocabulari per llogar un pis, la plataforma mostrarà anuncis o links d'afiliats de portals immobiliaris de forma dinàmica i natural.", "Publicitat": "Integració d'anuncis d'alta qualitat (Google AdSense / programàtica) únicament a la versió gratuïta per incentivar el pas a Premium.", "Rendibilitat": "Permet absorbir els costos de l'API de Gemini (tokens) generats pels usuaris Freemium, fent que el creixement sigui sostenible econòmicament des del dia 1." } }
+  b2b: { 
+    title: "B2B per a Empreses", subtitle: "Alt valor i ingressos recurrents", icon: Briefcase, 
+    colorTheme: "bg-slate-100 text-slate-700 border-slate-300", // Gris pissarra per entorn corporatiu
+    content: { "Descripció": "L'escala de monetització principal. Una solució 'SaaS (Software as a Service) Educatiu' dissenyada exclusivament per a departaments de Recursos Humans. Està enfocada a sectors on l'atenció al client en català és crucial (sanitat, hostaleria, 'retail') però on hi ha molta rotació de personal castellanoparlant o estranger.", "Model de negoci": "Contractes corporatius de llicències per volum (ex: tarifa plana de 200€/mes per formar fins a 50 empleats simultàniament).", "Proposta de valor": "Garanteix el compliment normatiu de drets lingüístics, millora les ràtios d'atenció al client i potencia la RSC corporativa.", "Onboarding senzill": "Desplegament ràpid mitjançant enllaços d'invitació al correu corporatiu i un panell de control HR per veure el progrés en temps real de la plantilla." } 
+  },
+  certificacion: { 
+    title: "Certificació IA", subtitle: "L'estàndard pràctic del mercat", icon: Award, 
+    colorTheme: "bg-amber-50 text-amber-600 border-amber-200", // Groc/Or per premis i diplomes
+    content: { "Descripció": "Creació d'un nou estàndard d'avaluació al sector. Emissió d'un 'Certificat de Fluïdesa Pràctica' completament examinat i qualificat per models de llenguatge avançats. Supera la burocràcia dels exàmens oficials i ofereix a empreses i usuaris una prova de nivell oral instantània, objectiva i accessible des de qualsevol lloc.", "Avaluació digital": "Examen oral de 15 minuts interactuant amb l'avatar IA, on s'avalua fonètica, fluïdesa, vocabulari i temps de resposta.", "El producte": "Diploma digital verificat (PDF/Blockchain) preparat per integrar-se a un sol clic al perfil de LinkedIn de l'usuari.", "Validesa al mercat": "L'estratègia inclou forjar aliances ràpides amb portals de feina (InfoJobs) i ETTs locals perquè reconeguin aquesta certificació com un filtre vàlid de contractació." } 
+  },
+  afiliacion: { 
+    title: "Afiliació Estratègica", subtitle: "Monetització indirecta", icon: TrendingUp, 
+    colorTheme: "bg-purple-50 text-purple-600 border-purple-200", // Púrpura per estratègia i ingressos extres
+    content: { "Descripció": "No tots els usuaris tindran capacitat per pagar una subscripció (especialment els nouvinguts). Aquest mòdul assegura que el 100% del trànsit generi ingressos passius i no intrusius, oferint serveis de valor afegit just en el moment que l'usuari els necessita per assentar-se al país.", "Escalat contextual": "Si l'usuari demana a la IA vocabulari per llogar un pis, la plataforma mostrarà anuncis o links d'afiliats de portals immobiliaris de forma dinàmica i natural.", "Publicitat": "Integració d'anuncis d'alta qualitat (Google AdSense / programàtica) únicament a la versió gratuïta per incentivar el pas a Premium.", "Rendibilitat": "Permet absorbir els costos de l'API de Gemini (tokens) generats pels usuaris Freemium, fent que el creixement sigui sostenible econòmicament des del dia 1." } 
+  }
 };
 
 // --- COMPONENT PRINCIPAL ---
@@ -118,7 +158,6 @@ const Dashboard = () => {
   const [selectedNode, setSelectedNode] = useState('central');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  // Actualitzar el títol de la pestanya del navegador
   useEffect(() => {
     document.title = "Cursos.cat: la primera plataforma d'integració lingüística de Catalunya impulsada 100% per IA.";
   }, []);
@@ -185,8 +224,7 @@ const Dashboard = () => {
             </div>
             
             <div className="border-l border-zinc-300 pl-4 hidden md:block">
-              {/* Títol Visual Actualitzat per reflectir el demanat */}
-              <h1 className="text-base font-semibold text-zinc-900 tracking-tight leading-tight">La primera plataforma d'integració lingüística de Catalunya impulsada 100% per IA.</h1>
+              <h1 className="text-base font-semibold text-zinc-900 tracking-tight leading-tight">Cursos.cat: la primera plataforma d'integració lingüística de Catalunya impulsada 100% per IA.</h1>
               <p className="text-sm text-zinc-500 mt-0.5">Estratègia i Model de Creixement</p>
             </div>
           </div>
