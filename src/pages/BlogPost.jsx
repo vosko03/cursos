@@ -105,7 +105,7 @@ const BlogPost = () => {
                  <p className="text-zinc-400 mb-8 leading-relaxed">
                    A <strong>cursos.cat</strong> sabem que l'empatia comença per parlar l'idioma del pacient. El nostre Tutor IA et prepara per a aquestes situacions reals amb simulacions interactives.
                  </p>
-                 <a href="/dash" className="inline-flex items-center gap-2 bg-white text-zinc-900 px-6 py-3 rounded-xl font-bold hover:bg-blue-50 transition-colors">
+                 <a href="#" className="inline-flex items-center gap-2 bg-white text-zinc-900 px-6 py-3 rounded-xl font-bold hover:bg-blue-50 transition-colors">
                    Prova el Tutor IA <ChevronRight size={18} />
                  </a>
                </div>
