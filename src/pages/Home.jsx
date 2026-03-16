@@ -144,10 +144,9 @@ const fallbackData = {
   }
 };
 
-// Utilizando la API de FlagCDN para asegurar la visibilidad de todas las banderas en todos los OS
-// Incluyendo la bandera de Cataluña (es-ct)
+// Utilizando imágenes estables, y la bandera de Cataluña extraída directamente de Wikimedia Commons
 const languageConfig = {
-  ca: { name: 'Català', flagUrl: 'https://flagcdn.com/w40/es-ct.png' },
+  ca: { name: 'Català', flagUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Flag_of_Catalonia.svg/80px-Flag_of_Catalonia.svg.png' },
   es: { name: 'Español', flagUrl: 'https://flagcdn.com/w40/es.png' },
   en: { name: 'English', flagUrl: 'https://flagcdn.com/w40/gb.png' },
   fr: { name: 'Français', flagUrl: 'https://flagcdn.com/w40/fr.png' },
@@ -201,7 +200,7 @@ const Home = () => {
               {content.nav_blog} <BookOpen size={16} />
             </a>
             
-            {/* Selector de idiomas con FlagCDN */}
+            {/* Selector de idiomas con FlagCDN / Wikimedia */}
             <div className="relative border-l border-zinc-200 pl-6">
               <button 
                 onClick={() => setIsLangMenuOpen(!isLangMenuOpen)}
