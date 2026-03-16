@@ -1,133 +1,123 @@
 import React, { useEffect } from 'react';
 import { 
   ArrowLeft, 
-  Clock, 
+  ArrowRight, 
+  BookOpen, 
+  GraduationCap, 
   Calendar, 
-  Share2, 
-  Bookmark, 
-  GraduationCap,
-  Sparkles,
-  ChevronRight
+  Clock,
+  Search
 } from 'lucide-react';
 
-const BlogPost = () => {
+const BlogIndex = () => {
   useEffect(() => {
-    document.title = "Vocabulari per a Infermeres a Girona | cursos.cat";
+    // Establecer el título SEO para la página de índice del blog
+    document.title = "Blog - Cursos.cat: la primera plataforma d'integració lingüística de Catalunya impulsada 100% per IA.";
   }, []);
 
-  const handleBack = () => console.log("Back to blog index...");
+  const handleBackHome = () => console.log("Navegando al inicio...");
 
   return (
     <div className="min-h-screen bg-[#FAFAFA] text-zinc-900 font-sans selection:bg-blue-100 selection:text-blue-900">
       
-      {/* Mini Nav / Progress Bar */}
+      {/* Navegación superior - Consistente con el diseño de Home.jsx */}
       <nav className="fixed top-0 w-full z-50 bg-[#FAFAFA]/80 backdrop-blur-md border-b border-zinc-200">
-        <div className="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
-          <a href="/blog" onClick={handleBack} className="flex items-center gap-2 text-zinc-500 hover:text-zinc-900 transition-colors text-sm font-medium group">
-            <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" /> Tornar al Blog
+        <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+          <a href="/" onClick={handleBackHome} className="flex items-center gap-2 bg-zinc-900 text-white px-4 py-2 rounded-xl shadow-lg">
+            <GraduationCap size={20} className="text-blue-400" />
+            <span className="font-bold text-lg tracking-tight">cursos<span className="text-blue-400">.cat</span></span>
           </a>
-          <div className="flex items-center gap-4">
-             <button className="p-2 text-zinc-400 hover:text-zinc-900 transition-colors"><Bookmark size={18}/></button>
-             <button className="p-2 text-zinc-400 hover:text-zinc-900 transition-colors"><Share2 size={18}/></button>
+          
+          <div className="hidden md:flex items-center gap-6">
+            <div className="relative group">
+               <Search size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400 group-focus-within:text-blue-500 transition-colors" />
+               <input 
+                 type="text" 
+                 placeholder="Buscar artículos..." 
+                 className="bg-zinc-100 border-none rounded-xl py-2 pl-10 pr-4 text-sm w-64 focus:ring-2 focus:ring-blue-500/20 transition-all outline-none"
+               />
+            </div>
           </div>
         </div>
       </nav>
 
-      <main className="pt-24 pb-20">
-        <article className="max-w-3xl mx-auto px-6">
+      <main className="pt-32 pb-20 px-6">
+        <div className="max-w-5xl mx-auto">
           
-          {/* Article Header */}
-          <header className="mb-12 text-center">
-            <div className="inline-flex items-center gap-2 bg-blue-50 text-blue-700 px-4 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest mb-6 border border-blue-100">
-              Sector Sanitari • SEO Local
+          {/* Cabecera del Blog */}
+          <header className="mb-16">
+            <div className="flex items-center gap-2 text-blue-600 font-bold text-xs uppercase tracking-[0.2em] mb-4">
+              <BookOpen size={14} /> Nuestro conocimiento
             </div>
-            <h1 className="text-3xl md:text-5xl font-extrabold text-zinc-900 tracking-tight leading-tight mb-8">
-              Vocabulari de Supervivència per a Infermeres a Girona: De "Nena" a "Tirita"
+            <h1 className="text-4xl md:text-5xl font-extrabold text-zinc-900 tracking-tight mb-6">
+              Blog de <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-500">cursos.cat</span>
             </h1>
-            
-            <div className="flex items-center justify-center gap-6 text-zinc-400 text-sm font-medium">
-              <div className="flex items-center gap-1.5"><Calendar size={14} /> 12 Març, 2026</div>
-              <div className="flex items-center gap-1.5"><Clock size={14} /> 4 min de lectura</div>
-            </div>
+            <p className="text-lg text-zinc-500 max-w-2xl leading-relaxed">
+              Consejos prácticos, guías de vocabulario y estrategias de integración impulsadas por IA para tu nueva vida en Cataluña.
+            </p>
           </header>
 
-          {/* Featured Image */}
-          <figure className="mb-12 rounded-[2.5rem] overflow-hidden shadow-2xl shadow-zinc-200 border border-zinc-200">
-            <img 
-              src="https://images.unsplash.com/photo-1599478585030-22b62e038962?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
-              alt="Girona" 
-              className="w-full h-[300px] md:h-[450px] object-cover"
-            />
-          </figure>
-
-          {/* Content Body */}
-          <div className="prose prose-zinc prose-lg mx-auto">
-            <p className="text-xl text-zinc-600 leading-relaxed mb-8 font-medium">
-              Has arribat a l'Hospital Trueta o al Santa Caterina amb tota la il·lusió, el teu títol flamant, i de sobte, un avi et diu: <span className="text-zinc-900 font-bold italic">"Nena, em fa mal el panxell i vull una tirita"</span>. Pànic? Zero.
-            </p>
-            
-            <p className="text-zinc-600 leading-relaxed mb-8">
-              Girona té una màgia especial, i el seu vocabulari als passadissos d'hospital també. No n'hi ha prou amb saber com posar una via o extreure sang; cal entendre què et demana el pacient per curar-lo i connectar-hi humanament.
-            </p>
-
-            <h2 className="text-2xl font-bold text-zinc-900 mt-12 mb-6 flex items-center gap-3">
-              <div className="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center text-white text-sm">1</div>
-              El teu kit d'emergència lingüística
-            </h2>
-
-            <div className="space-y-4 mb-12">
-              {[
-                { term: 'Panxell', desc: 'No és una panxa petita. És el bessó de la cama. Si els fa mal, pensa en problemes de circulació.' },
-                { term: 'Tirita / Tireta', desc: 'Un clàssic. L\'apòsit o tireta de tota la vida que necessites per a qualsevol ferida petita.' },
-                { term: 'Sofraja', desc: 'La part del darrere del genoll. Si sents això i saps què vol dir, ja ets pràcticament gironina d\'adopció.' }
-              ].map((item, idx) => (
-                <div key={idx} className="bg-white p-6 rounded-2xl border border-zinc-200 shadow-sm flex gap-4 items-start group hover:border-blue-200 transition-colors">
-                  <div className="p-2 bg-blue-50 text-blue-600 rounded-lg group-hover:bg-blue-600 group-hover:text-white transition-colors">
-                    <Sparkles size={16} />
-                  </div>
-                  <div>
-                    <h4 className="font-bold text-zinc-900 text-lg">{item.term}</h4>
-                    <p className="text-zinc-500 text-sm leading-relaxed mt-1">{item.desc}</p>
+          {/* Lista de Artículos */}
+          <div className="grid grid-cols-1 gap-12">
+            <article className="group relative bg-white rounded-[2.5rem] overflow-hidden border border-zinc-200 shadow-sm hover:shadow-xl transition-all duration-500 flex flex-col md:flex-row">
+              {/* Imagen del artículo */}
+              <div className="md:w-1/2 overflow-hidden">
+                <img 
+                  src="https://images.unsplash.com/photo-1700299926955-d68c16ba107b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4MTM2MDJ8MHwxfGFsbHx8fHx8fHx8fDE3NzM1MjQ2MTZ8&ixlib=rb-4.1.0&q=80&w=800" 
+                  alt="Vista de Girona" 
+                  className="h-full w-full object-cover min-h-[300px] group-hover:scale-105 transition-transform duration-700"
+                />
+              </div>
+              
+              {/* Contenido del artículo */}
+              <div className="p-8 md:p-12 md:w-1/2 flex flex-col justify-center">
+                <div className="flex items-center gap-4 mb-6">
+                  <span className="bg-blue-50 text-blue-700 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
+                    Sector Sanitario
+                  </span>
+                  <div className="flex items-center gap-1.5 text-zinc-400 text-xs font-medium">
+                    <Calendar size={14} /> 12 Marzo, 2024
                   </div>
                 </div>
-              ))}
-            </div>
 
-            {/* CTA Box (Styled like Dashboard Summary) */}
-            <div className="bg-zinc-900 text-white p-8 rounded-[2rem] shadow-xl relative overflow-hidden group">
-               <div className="absolute top-0 right-0 p-8 opacity-10 group-hover:scale-110 transition-transform duration-700">
-                  <GraduationCap size={120} />
-               </div>
-               <div className="relative z-10">
-                 <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
-                   <Sparkles className="text-blue-400" /> Aprèn català amb context real
-                 </h3>
-                 <p className="text-zinc-400 mb-8 leading-relaxed">
-                   A <strong>cursos.cat</strong> sabem que l'empatia comença per parlar l'idioma del pacient. El nostre Tutor IA et prepara per a aquestes situacions reals amb simulacions interactives.
-                 </p>
-                 <a href="#" className="inline-flex items-center gap-2 bg-white text-zinc-900 px-6 py-3 rounded-xl font-bold hover:bg-blue-50 transition-colors">
-                   Prova el Tutor IA <ChevronRight size={18} />
-                 </a>
-               </div>
-            </div>
+                <h2 className="text-2xl md:text-3xl font-bold text-zinc-900 mb-4 group-hover:text-blue-600 transition-colors leading-tight">
+                  <a href="/blog/vocabulari-catala-infermeres-girona">
+                    Vocabulari de Supervivència per a Infermeres a Girona: De "Nena" a "Tirita"
+                  </a>
+                </h2>
+                
+                <p className="text-zinc-500 mb-8 leading-relaxed line-clamp-3">
+                  ¿Has llegado al Hospital Trueta o al Santa Caterina con toda la ilusión? Descubre cómo el habla local gironina puede ser tu mejor herramienta de cuidado.
+                </p>
+
+                <div className="mt-auto flex items-center justify-between">
+                  <a href="/blog/vocabulari-catala-infermeres-girona" className="inline-flex items-center gap-2 font-bold text-zinc-900 hover:text-blue-600 transition-colors group/link">
+                    Leer artículo <ArrowRight size={18} className="group-hover/link:translate-x-1 transition-transform" />
+                  </a>
+                  <div className="flex items-center gap-1.5 text-zinc-400 text-xs">
+                    <Clock size={14} /> 4 min de lectura
+                  </div>
+                </div>
+              </div>
+            </article>
           </div>
-        </article>
+        </div>
       </main>
 
+      {/* Pie de página */}
       <footer className="py-12 border-t border-zinc-200 bg-white">
-        <div className="max-w-5xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8">
+        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8">
           <div className="flex items-center gap-2 text-zinc-900 font-bold">
             <GraduationCap size={20} className="text-blue-600" />
             <span>cursos.cat</span>
           </div>
-          <div className="flex gap-6 text-sm text-zinc-400 font-medium">
-             <a href="#" className="hover:text-zinc-900 transition-colors">LinkedIn</a>
-             <a href="#" className="hover:text-zinc-900 transition-colors">Instagram</a>
-          </div>
+          <p className="text-sm text-zinc-400">
+            © {new Date().getFullYear()} Cursos.cat. Todos los derechos reservados.
+          </p>
         </div>
       </footer>
     </div>
   );
 };
 
-export default BlogPost;
+export default BlogIndex;
