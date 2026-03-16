@@ -7,8 +7,8 @@ import {
 } from 'lucide-react';
 import { Analytics } from "@vercel/analytics/react";
 
-// Component per a cada node
-const StrategyNode = ({ title, subtitle, icon: Icon, color, active, onClick }) => (
+// Component per a cada node - SIN SUBTÍTULO
+const StrategyNode = ({ title, icon: Icon, color, active, onClick }) => (
   <div 
     onClick={onClick}
     className={`cursor-pointer transition-all duration-200 
@@ -23,7 +23,6 @@ const StrategyNode = ({ title, subtitle, icon: Icon, color, active, onClick }) =
     </div>
     <div className="text-left overflow-hidden">
       <h3 className={`font-bold text-sm leading-tight truncate ${active ? 'text-indigo-900' : 'text-slate-700'}`}>{title}</h3>
-      <p className="text-xs font-medium text-slate-500 truncate mt-0.5">{subtitle}</p>
     </div>
   </div>
 );
@@ -101,7 +100,7 @@ const Dashboard = () => {
             </div>
           </div>
           
-          {/* Título restaurado */}
+          {/* Título */}
           <p className="text-slate-500 text-sm md:text-base mt-1 max-w-2xl whitespace-nowrap">
             La primera plataforma d'integració lingüística i professional de Catalunya impulsada 100% per IA.
           </p>
@@ -110,7 +109,7 @@ const Dashboard = () => {
         {/* Main Layout - SIN SCROLL EN MENÚ IZQUIERDO */}
         <div className="max-w-6xl mx-auto w-full flex-1 flex flex-col lg:flex-row gap-4 lg:gap-5 min-h-0">
           
-          {/* COLUMNA ESQUERRA - Menú de Nodes SIN SCROLL */}
+          {/* COLUMNA ESQUERRA - Menú de Nodes SIN SCROLL y SIN SUBTÍTULOS */}
           <div className="w-full lg:w-80 xl:w-96 flex flex-col sm:flex-row lg:flex-col gap-3 shrink-0">
             
             {/* Adquisición */}
@@ -120,9 +119,9 @@ const Dashboard = () => {
                 <h2 className="text-xs font-bold text-slate-600 uppercase tracking-wider">1. Adquisició</h2>
               </div>
               <div className="flex flex-col gap-2">
-                <StrategyNode {...nodes.seo} active={selectedNode === 'seo'} onClick={() => handleNodeSelect('seo')} />
-                <StrategyNode {...nodes.videos} active={selectedNode === 'videos'} onClick={() => handleNodeSelect('videos')} />
-                <StrategyNode {...nodes.inmigrantes} active={selectedNode === 'inmigrantes'} onClick={() => handleNodeSelect('inmigrantes')} />
+                <StrategyNode {...nodes.seo} active={selectedNode === 'seo'} onClick={() => handleNodeSelect('seo')} icon={nodes.seo.icon} title={nodes.seo.title} color={nodes.seo.color} />
+                <StrategyNode {...nodes.videos} active={selectedNode === 'videos'} onClick={() => handleNodeSelect('videos')} icon={nodes.videos.icon} title={nodes.videos.title} color={nodes.videos.color} />
+                <StrategyNode {...nodes.inmigrantes} active={selectedNode === 'inmigrantes'} onClick={() => handleNodeSelect('inmigrantes')} icon={nodes.inmigrantes.icon} title={nodes.inmigrantes.title} color={nodes.inmigrantes.color} />
               </div>
             </div>
 
@@ -134,9 +133,9 @@ const Dashboard = () => {
                 <h2 className="text-xs font-bold text-indigo-800 uppercase tracking-wider">2. Producte Principal</h2>
               </div>
               <div className="flex flex-col gap-2 relative z-10">
-                <StrategyNode {...nodes.central} active={selectedNode === 'central'} onClick={() => handleNodeSelect('central')} />
-                <StrategyNode {...nodes.tutor} active={selectedNode === 'tutor'} onClick={() => handleNodeSelect('tutor')} />
-                <StrategyNode {...nodes.comunidad} active={selectedNode === 'comunidad'} onClick={() => handleNodeSelect('comunidad')} />
+                <StrategyNode {...nodes.central} active={selectedNode === 'central'} onClick={() => handleNodeSelect('central')} icon={nodes.central.icon} title={nodes.central.title} color={nodes.central.color} />
+                <StrategyNode {...nodes.tutor} active={selectedNode === 'tutor'} onClick={() => handleNodeSelect('tutor')} icon={nodes.tutor.icon} title={nodes.tutor.title} color={nodes.tutor.color} />
+                <StrategyNode {...nodes.comunidad} active={selectedNode === 'comunidad'} onClick={() => handleNodeSelect('comunidad')} icon={nodes.comunidad.icon} title={nodes.comunidad.title} color={nodes.comunidad.color} />
               </div>
             </div>
 
@@ -147,9 +146,9 @@ const Dashboard = () => {
                 <h2 className="text-xs font-bold text-slate-600 uppercase tracking-wider">3. Monetització</h2>
               </div>
               <div className="flex flex-col gap-2">
-                <StrategyNode {...nodes.b2b} active={selectedNode === 'b2b'} onClick={() => handleNodeSelect('b2b')} />
-                <StrategyNode {...nodes.certificacion} active={selectedNode === 'certificacion'} onClick={() => handleNodeSelect('certificacion')} />
-                <StrategyNode {...nodes.afiliacion} active={selectedNode === 'afiliacion'} onClick={() => handleNodeSelect('afiliacion')} />
+                <StrategyNode {...nodes.b2b} active={selectedNode === 'b2b'} onClick={() => handleNodeSelect('b2b')} icon={nodes.b2b.icon} title={nodes.b2b.title} color={nodes.b2b.color} />
+                <StrategyNode {...nodes.certificacion} active={selectedNode === 'certificacion'} onClick={() => handleNodeSelect('certificacion')} icon={nodes.certificacion.icon} title={nodes.certificacion.title} color={nodes.certificacion.color} />
+                <StrategyNode {...nodes.afiliacion} active={selectedNode === 'afiliacion'} onClick={() => handleNodeSelect('afiliacion')} icon={nodes.afiliacion.icon} title={nodes.afiliacion.title} color={nodes.afiliacion.color} />
               </div>
             </div>
 
