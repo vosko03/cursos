@@ -242,15 +242,17 @@ const Dashboard = () => {
   const SidebarContent = () => (
     <div className="flex flex-col h-full min-h-0">
       
-      {/* LOGO CURSOS.CAT (Fixat a dalt del menú) */}
-      <div className="flex items-center gap-2 bg-zinc-900 text-white px-4 py-3.5 rounded-xl shadow-md mb-6 shrink-0 relative">
-        <GraduationCap size={24} className="text-blue-400" />
-        <span className="font-bold text-lg tracking-tight">cursos<span className="text-blue-400">.cat</span></span>
+      {/* LOGO CURSOS.CAT AMB JUSTIFICACIÓ ADAPTADA */}
+      <div className="flex items-center justify-between mb-6 shrink-0">
+        <div className="inline-flex items-center gap-2 bg-zinc-900 text-white px-4 py-3 rounded-xl shadow-md w-fit">
+          <GraduationCap size={20} className="text-blue-400" />
+          <span className="font-bold text-base tracking-tight">cursos<span className="text-blue-400">.cat</span></span>
+        </div>
         
         {/* Botó tancar només visible en mòbil */}
         <button 
           onClick={() => setIsMobileMenuOpen(false)} 
-          className="absolute right-3 top-1/2 -translate-y-1/2 p-1.5 text-zinc-400 hover:text-white rounded-md transition-colors lg:hidden"
+          className="p-1.5 text-zinc-500 hover:bg-zinc-200/50 rounded-md transition-colors lg:hidden"
         >
           <X size={20}/>
         </button>
