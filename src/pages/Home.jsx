@@ -144,14 +144,14 @@ const fallbackData = {
   }
 };
 
-// Utilizando imágenes estables, y la bandera de Cataluña extraída directamente de Wikimedia Commons
+// Utilizando imágenes consistentes y estables desde la API de flagicons.lipis.dev
 const languageConfig = {
-  ca: { name: 'Català', flagUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Flag_of_Catalonia.svg/80px-Flag_of_Catalonia.svg.png' },
-  es: { name: 'Español', flagUrl: 'https://flagcdn.com/w40/es.png' },
-  en: { name: 'English', flagUrl: 'https://flagcdn.com/w40/gb.png' },
-  fr: { name: 'Français', flagUrl: 'https://flagcdn.com/w40/fr.png' },
-  de: { name: 'Deutsch', flagUrl: 'https://flagcdn.com/w40/de.png' },
-  gn: { name: 'Avañeʼẽ', flagUrl: 'https://flagcdn.com/w40/py.png' }
+  ca: { name: 'Català', flagUrl: 'https://flagicons.lipis.dev/flags/4x3/es-ct.svg' },
+  es: { name: 'Español', flagUrl: 'https://flagicons.lipis.dev/flags/4x3/es.svg' },
+  en: { name: 'English', flagUrl: 'https://flagicons.lipis.dev/flags/4x3/gb.svg' },
+  fr: { name: 'Français', flagUrl: 'https://flagicons.lipis.dev/flags/4x3/fr.svg' },
+  de: { name: 'Deutsch', flagUrl: 'https://flagicons.lipis.dev/flags/4x3/de.svg' },
+  gn: { name: 'Avañeʼẽ', flagUrl: 'https://flagicons.lipis.dev/flags/4x3/py.svg' }
 };
 
 const FeatureCard = ({ icon: Icon, title, description, colorClass }) => (
@@ -200,7 +200,7 @@ const Home = () => {
               {content.nav_blog} <BookOpen size={16} />
             </a>
             
-            {/* Selector de idiomas con FlagCDN / Wikimedia */}
+            {/* Selector de idiomas con flagicons.lipis.dev */}
             <div className="relative border-l border-zinc-200 pl-6">
               <button 
                 onClick={() => setIsLangMenuOpen(!isLangMenuOpen)}
