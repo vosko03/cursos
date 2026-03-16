@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { 
   Users, Bot, Search, Video, Briefcase, Award, 
   MessageSquare, TrendingUp, Cpu, Layers, Globe, 
-  ArrowRight, Sparkles, ArrowLeft
+  ArrowRight, Sparkles, ArrowLeft, Home, Map
 } from 'lucide-react';
 import { Analytics } from "@vercel/analytics/react";
 
@@ -82,28 +82,28 @@ const Dashboard = () => {
   return (
     <>
       <div className="h-screen bg-slate-50 p-3 md:p-4 lg:p-5 font-sans selection:bg-indigo-200 flex flex-col overflow-hidden">
-        {/* Header con título integrado - más grande y sin corte */}
+        {/* Header con título integrado */}
         <div className="max-w-6xl mx-auto w-full mb-3">
           <div className="flex items-center justify-between flex-wrap gap-2">
             <div className="flex items-center gap-3 min-w-0 flex-1">
-              <Link to="/" className="inline-flex items-center text-indigo-600 font-semibold hover:text-indigo-800 transition-colors text-sm whitespace-nowrap shrink-0">
-                <ArrowLeft size={16} className="mr-1" /> Tornar
-              </Link>
+              {/* cursos.cat destacado en el lado izquierdo */}
+              <div className="inline-flex items-center space-x-1.5 bg-amber-100 text-amber-800 px-2 py-1 rounded-full text-xs font-bold whitespace-nowrap">
+                <Home size={14} />
+                <span>cursos.cat</span>
+              </div>
               
-              {/* Título más grande y sin truncar */}
+              {/* Título */}
               <span className="text-sm md:text-base font-bold text-slate-700 border-l border-slate-300 pl-3 break-words">
                 La primera plataforma d'integració lingüística i professional de Catalunya impulsada 100% per IA.
               </span>
             </div>
             
             <div className="flex items-center gap-3 shrink-0">
+              {/* Mapa Estratègic destacado con otro color e icono */}
               <div className="inline-flex items-center space-x-1.5 bg-indigo-100 text-indigo-800 px-2 py-1 rounded-full text-xs font-bold whitespace-nowrap">
-                <Sparkles size={14} />
+                <Map size={14} />
                 <span>Mapa Estratègic</span>
               </div>
-              <h1 className="text-lg font-extrabold text-slate-900 whitespace-nowrap">
-                cursos.cat
-              </h1>
             </div>
           </div>
         </div>
@@ -231,7 +231,7 @@ const Dashboard = () => {
         
         {/* Footer más compacto */}
         <footer className="max-w-6xl mx-auto w-full mt-1 text-center text-slate-400 text-[10px] font-medium">
-          Prem qualsevol mòdul | Projecte cursos.cat
+          Prem qualsevol mòdul per aprofundir | Projecte cursos.cat
         </footer>
       </div>
       
