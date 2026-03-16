@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { 
   Users, Bot, Search, Video, Briefcase, Award, 
   MessageSquare, TrendingUp, Cpu, Layers, Globe, 
-  Home, Map, Sparkles, Menu, X, BookOpen, GraduationCap
+  Map, Sparkles, Menu, X, BookOpen, GraduationCap
 } from 'lucide-react';
 import { Analytics } from "@vercel/analytics/react";
 
@@ -35,27 +35,26 @@ const DetailPanel = ({ node }) => {
   if (node.isSummary) {
     return (
       <div key="summary" className="h-full animate-fade-in flex flex-col">
-        {/* Capçalera del Resum Integrada */}
+        {/* Capçalera del Resum */}
         <div className="flex flex-col sm:flex-row justify-between items-start gap-6 mb-8 border-b border-zinc-100 pb-8">
           <div>
             <p className="text-xs font-bold text-blue-600 uppercase tracking-widest mb-2">Resum Executiu</p>
-            <h2 className="text-3xl font-bold text-zinc-900 tracking-tight leading-tight mb-3">
+            <h2 className="text-2xl md:text-3xl font-bold text-zinc-900 tracking-tight leading-tight mb-3">
               Estratègia i Model de Creixement
             </h2>
-            <p className="text-base font-medium text-zinc-500">
+            <p className="text-sm md:text-base font-medium text-zinc-500">
               Cursos.cat: la primera plataforma d'integració lingüística de Catalunya impulsada 100% per IA.
             </p>
           </div>
           
-          {/* LOGO REPRESENTATIU DE CURSOS (Superior Dreta) */}
-          <div className="flex items-center gap-2 bg-zinc-900 text-white px-5 py-3.5 rounded-xl shadow-md shrink-0">
-            <GraduationCap size={24} className="text-blue-400" />
-            <span className="font-bold text-lg tracking-tight">cursos<span className="text-blue-400">.cat</span></span>
+          {/* Icona Resum (Superior Dreta) */}
+          <div className="hidden sm:flex items-center justify-center p-3.5 rounded-xl border shrink-0 shadow-sm bg-slate-50 text-slate-700 border-slate-200">
+            <BookOpen size={28} strokeWidth={1.5} />
           </div>
         </div>
 
         {/* Contingut fàcil de llegir */}
-        <div className="space-y-6 text-zinc-600 text-sm leading-relaxed">
+        <div className="space-y-6 text-zinc-600 text-sm leading-relaxed pb-6">
           <p className="text-base font-medium text-zinc-800">
             Cursos.cat neix amb la missió de democratitzar l'aprenentatge del català, eliminant les barreres d'entrada tradicionals mitjançant tecnologia d'Intel·ligència Artificial avançada i conversacional.
           </p>
@@ -101,7 +100,7 @@ const DetailPanel = ({ node }) => {
 
   // Renderització per defecte dels mòduls
   return (
-    <div key={node.title} className="h-full animate-fade-in">
+    <div key={node.title} className="h-full animate-fade-in flex flex-col pb-6">
       <div className="flex justify-between items-start gap-4 mb-8">
         <div className="pr-4">
           <p className="text-xs font-semibold text-zinc-400 uppercase tracking-widest mb-1.5">Pilar Estratègic</p>
@@ -162,11 +161,14 @@ const DetailPanel = ({ node }) => {
   );
 };
 
-// --- DADES AMB COLORS ASSIGNATS ---
+// --- DADES ---
 
 const nodes = {
   resumen: {
-    isSummary: true
+    isSummary: true,
+    title: "Resum Executiu",
+    subtitle: "Visió general i estructura del projecte",
+    icon: BookOpen
   },
   central: { 
     title: "Plataforma Core", subtitle: "L'ecosistema immersiu", icon: Globe, 
@@ -220,6 +222,7 @@ const nodes = {
 const Dashboard = () => {
   const [selectedNode, setSelectedNode] = useState('resumen');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const detailRef = useRef(null);
 
   useEffect(() => {
     document.title = "Cursos.cat: la primera plataforma d'integració lingüística de Catalunya impulsada 100% per IA.";
@@ -229,87 +232,104 @@ const Dashboard = () => {
     setSelectedNode(key);
     if (window.innerWidth < 1024) {
       setIsMobileMenuOpen(false);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    // Fa scroll amunt del panell de detall en canviar de secció
+    if (detailRef.current) {
+      detailRef.current.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
 
   const SidebarContent = () => (
-    <div className="flex flex-col gap-6">
+    <div className="flex flex-col h-full min-h-0">
       
-      <div className="pb-4 border-b border-zinc-200">
-        <StrategyNode 
-          title="Resum Executiu" 
-          icon={BookOpen} 
-          active={selectedNode === 'resumen'} 
-          onClick={() => handleNodeSelect('resumen')} 
-        />
+      {/* LOGO CURSOS.CAT (Fixat a dalt del menú) */}
+      <div className="flex items-center gap-2 bg-zinc-900 text-white px-4 py-3.5 rounded-xl shadow-md mb-6 shrink-0 relative">
+        <GraduationCap size={24} className="text-blue-400" />
+        <span className="font-bold text-lg tracking-tight">cursos<span className="text-blue-400">.cat</span></span>
+        
+        {/* Botó tancar només visible en mòbil */}
+        <button 
+          onClick={() => setIsMobileMenuOpen(false)} 
+          className="absolute right-3 top-1/2 -translate-y-1/2 p-1.5 text-zinc-400 hover:text-white rounded-md transition-colors lg:hidden"
+        >
+          <X size={20}/>
+        </button>
       </div>
 
-      <section className="space-y-2">
-        <div className="flex items-center gap-2 mb-1.5 text-zinc-400 pl-1">
-          <Cpu size={14}/>
-          <h2 className="text-xs font-semibold uppercase tracking-widest text-zinc-500">1. La Solució Base</h2>
+      {/* Navegació scrollable */}
+      <div className="flex flex-col gap-6 overflow-y-auto custom-scrollbar pr-2 pb-6 flex-1">
+        
+        <div className="pb-4 border-b border-zinc-200">
+          <StrategyNode 
+            title="Resum Executiu" 
+            icon={BookOpen} 
+            active={selectedNode === 'resumen'} 
+            onClick={() => handleNodeSelect('resumen')} 
+          />
         </div>
-        <div className="flex flex-col gap-0.5">
-          {['central', 'tutor', 'comunidad'].map(key => (
-            <StrategyNode key={key} {...nodes[key]} active={selectedNode === key} onClick={() => handleNodeSelect(key)} />
-          ))}
-        </div>
-      </section>
 
-      <section className="space-y-2">
-        <div className="flex items-center gap-2 mb-1.5 text-zinc-400 pl-1">
-          <Layers size={14}/>
-          <h2 className="text-xs font-semibold uppercase tracking-widest text-zinc-500">2. Motor de Creixement</h2>
-        </div>
-        <div className="flex flex-col gap-0.5">
-          {['inmigrantes', 'seo', 'videos'].map(key => (
-            <StrategyNode key={key} {...nodes[key]} active={selectedNode === key} onClick={() => handleNodeSelect(key)} />
-          ))}
-        </div>
-      </section>
+        <section className="space-y-2">
+          <div className="flex items-center gap-2 mb-1.5 text-zinc-400 pl-1">
+            <Cpu size={14}/>
+            <h2 className="text-xs font-semibold uppercase tracking-widest text-zinc-500">1. La Solució Base</h2>
+          </div>
+          <div className="flex flex-col gap-0.5">
+            {['central', 'tutor', 'comunidad'].map(key => (
+              <StrategyNode key={key} {...nodes[key]} active={selectedNode === key} onClick={() => handleNodeSelect(key)} />
+            ))}
+          </div>
+        </section>
 
-      <section className="space-y-2">
-        <div className="flex items-center gap-2 mb-1.5 text-zinc-400 pl-1">
-          <TrendingUp size={14}/>
-          <h2 className="text-xs font-semibold uppercase tracking-widest text-zinc-500">3. Model de Negoci</h2>
-        </div>
-        <div className="flex flex-col gap-0.5">
-          {['b2b', 'certificacion', 'afiliacion'].map(key => (
-            <StrategyNode key={key} {...nodes[key]} active={selectedNode === key} onClick={() => handleNodeSelect(key)} />
-          ))}
-        </div>
-      </section>
+        <section className="space-y-2">
+          <div className="flex items-center gap-2 mb-1.5 text-zinc-400 pl-1">
+            <Layers size={14}/>
+            <h2 className="text-xs font-semibold uppercase tracking-widest text-zinc-500">2. Motor de Creixement</h2>
+          </div>
+          <div className="flex flex-col gap-0.5">
+            {['inmigrantes', 'seo', 'videos'].map(key => (
+              <StrategyNode key={key} {...nodes[key]} active={selectedNode === key} onClick={() => handleNodeSelect(key)} />
+            ))}
+          </div>
+        </section>
+
+        <section className="space-y-2">
+          <div className="flex items-center gap-2 mb-1.5 text-zinc-400 pl-1">
+            <TrendingUp size={14}/>
+            <h2 className="text-xs font-semibold uppercase tracking-widest text-zinc-500">3. Model de Negoci</h2>
+          </div>
+          <div className="flex flex-col gap-0.5">
+            {['b2b', 'certificacion', 'afiliacion'].map(key => (
+              <StrategyNode key={key} {...nodes[key]} active={selectedNode === key} onClick={() => handleNodeSelect(key)} />
+            ))}
+          </div>
+        </section>
+      </div>
     </div>
   );
 
   return (
-    <div className="min-h-screen bg-[#FAFAFA] font-sans text-zinc-900 selection:bg-zinc-200 flex flex-col justify-center py-6 md:py-12">
+    // 100dvh fixa la pantalla sense scroll exterior
+    <div className="h-[100dvh] w-full bg-[#FAFAFA] font-sans text-zinc-900 selection:bg-zinc-200 flex flex-col p-3 md:p-6 lg:p-8 overflow-hidden">
       
-      {/* OVERLAY I MENÚ LATERAL MÒBIL */}
+      {/* OVERLAY MÒBIL */}
       <div 
         className={`fixed inset-0 bg-zinc-900/20 backdrop-blur-sm z-50 lg:hidden transition-opacity duration-300 ${isMobileMenuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`} 
         onClick={() => setIsMobileMenuOpen(false)} 
       />
 
-      <aside className={`fixed inset-y-0 right-0 w-[280px] sm:w-[320px] bg-[#FAFAFA] z-50 p-6 border-l border-zinc-200 shadow-2xl transform transition-transform duration-300 ease-in-out lg:hidden flex flex-col overflow-y-auto ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
-        <div className="flex justify-between items-center mb-8 border-b border-zinc-200 pb-4">
-          <span className="font-semibold text-zinc-900 text-sm uppercase tracking-wider">Navegació</span>
-          <button onClick={() => setIsMobileMenuOpen(false)} className="p-2 -mr-2 text-zinc-500 hover:bg-zinc-200/50 rounded-md transition-colors">
-            <X size={20}/>
-          </button>
-        </div>
+      {/* DRAWER MÒBIL */}
+      <aside className={`fixed inset-y-0 right-0 w-[280px] sm:w-[320px] bg-[#FAFAFA] z-50 p-5 border-l border-zinc-200 shadow-2xl transform transition-transform duration-300 ease-in-out lg:hidden flex flex-col ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
         <SidebarContent />
       </aside>
 
       {/* CONTENIDOR PRINCIPAL */}
-      <main className="w-full max-w-6xl mx-auto px-4 md:px-6 lg:px-8">
+      <div className="w-full max-w-6xl mx-auto flex flex-col h-full min-h-0">
         
-        {/* Barra superior exclusivament per a mòbils (per poder obrir el menú ja que no hi ha header) */}
-        <div className="lg:hidden flex items-center justify-between mb-4 bg-white p-3 rounded-xl border border-zinc-200 shadow-sm">
-          <div className="flex items-center gap-2 bg-zinc-900 text-white px-3 py-1.5 rounded-md text-xs font-medium">
-            <Home size={14} />
-            <span>cursos.cat</span>
+        {/* Barra superior exclusivament per a mòbils */}
+        <div className="lg:hidden flex items-center justify-between mb-3 bg-white p-3 rounded-xl border border-zinc-200 shadow-sm shrink-0">
+          <div className="flex items-center gap-2 bg-zinc-900 text-white px-3 py-1.5 rounded-md text-sm font-medium">
+            <GraduationCap size={16} className="text-blue-400" />
+            <span className="font-bold tracking-tight">cursos<span className="text-blue-400">.cat</span></span>
           </div>
           <button 
             className="p-1.5 text-zinc-600 hover:bg-zinc-100 rounded-md transition-colors"
@@ -319,24 +339,20 @@ const Dashboard = () => {
           </button>
         </div>
 
-        <div className="bg-white border border-zinc-200 shadow-xl shadow-zinc-200/40 rounded-2xl flex flex-col lg:flex-row overflow-hidden min-h-[650px]">
+        {/* Targeta Central (Split View) */}
+        <main className="bg-white border border-zinc-200 shadow-xl shadow-zinc-200/40 rounded-2xl flex flex-col lg:flex-row overflow-hidden flex-1 min-h-0">
           
-          <aside className="hidden lg:block w-[300px] bg-zinc-50/50 border-r border-zinc-200 p-6 shrink-0">
+          <aside className="hidden lg:flex flex-col w-[300px] bg-zinc-50/50 border-r border-zinc-200 p-6 shrink-0 h-full min-h-0">
             <SidebarContent />
           </aside>
 
-          <section className="flex-1 p-6 md:p-8 lg:p-10 bg-white">
+          {/* Panell dret amb scroll independent */}
+          <section ref={detailRef} className="flex-1 p-6 md:p-8 lg:p-10 bg-white overflow-y-auto custom-scrollbar h-full min-h-0 relative">
             <DetailPanel node={nodes[selectedNode]} />
           </section>
 
-        </div>
-      </main>
-      
-      <footer className="max-w-6xl mx-auto mt-8 text-center px-4">
-        <p className="text-zinc-400 text-sm font-medium">
-          cursos.cat &bull; Selecciona un mòdul per explorar l'estratègia
-        </p>
-      </footer>
+        </main>
+      </div>
 
       <style dangerouslySetInnerHTML={{__html: `
         @keyframes fadeInUp {
