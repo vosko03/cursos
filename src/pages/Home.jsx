@@ -5,7 +5,6 @@ import {
 } from 'lucide-react';
 
 // --- CONFIGURACIÓN DE ICONOS Y ESTILOS PARA LAS TARJETAS ---
-// Mantenemos esto en el frontend para no guardar componentes de React en la base de datos
 const servicesConfig = [
   { icon: Bot, colorClass: "bg-blue-50 text-blue-600" },
   { icon: Globe, colorClass: "bg-emerald-50 text-emerald-600" },
@@ -16,7 +15,6 @@ const servicesConfig = [
 ];
 
 // --- TRADUCCIONES LOCALES (Fallback de Supabase) ---
-// Esta es la estructura exacta que devolverá tu tabla de Supabase.
 const fallbackData = {
   ca: {
     nav_methodology: "Metodologia", nav_services: "Serveis", nav_blog: "Blog",
@@ -146,13 +144,15 @@ const fallbackData = {
   }
 };
 
+// Utilizando la API de FlagCDN para asegurar la visibilidad de todas las banderas en todos los OS
+// Incluyendo la bandera de Cataluña (es-ct)
 const languageConfig = {
-  ca: { name: 'Català', flag: '🇦🇩' },
-  es: { name: 'Español', flag: '🇪🇸' },
-  en: { name: 'English', flag: '🇬🇧' },
-  fr: { name: 'Français', flag: '🇫🇷' },
-  de: { name: 'Deutsch', flag: '🇩🇪' },
-  gn: { name: 'Avañeʼẽ', flag: '🇵🇾' }
+  ca: { name: 'Català', flagUrl: 'https://flagcdn.com/w40/es-ct.png' },
+  es: { name: 'Español', flagUrl: 'https://flagcdn.com/w40/es.png' },
+  en: { name: 'English', flagUrl: 'https://flagcdn.com/w40/gb.png' },
+  fr: { name: 'Français', flagUrl: 'https://flagcdn.com/w40/fr.png' },
+  de: { name: 'Deutsch', flagUrl: 'https://flagcdn.com/w40/de.png' },
+  gn: { name: 'Avañeʼẽ', flagUrl: 'https://flagcdn.com/w40/py.png' }
 };
 
 const FeatureCard = ({ icon: Icon, title, description, colorClass }) => (
@@ -174,13 +174,7 @@ const Home = () => {
   const [isLangMenuOpen, setIsLangMenuOpen] = useState(false);
   const [content, setContent] = useState(fallbackData[lang]);
 
-  // Efecto para simular la futura carga desde Supabase
   useEffect(() => {
-    // Aquí es donde realizarías el fetch real a Supabase:
-    // const { data } = await supabase.from('home_content').select('*').eq('language_code', lang).single();
-    // setContent(data);
-    
-    // Por ahora, actualizamos con el fallback local al cambiar de idioma
     setContent(fallbackData[lang]);
     document.title = `Cursos.cat: la primera plataforma d'integració lingüística de Catalunya impulsada 100% per IA.`;
   }, [lang]);
@@ -207,27 +201,36 @@ const Home = () => {
               {content.nav_blog} <BookOpen size={16} />
             </a>
             
-            {/* Selector de idiomas */}
+            {/* Selector de idiomas con FlagCDN */}
             <div className="relative border-l border-zinc-200 pl-6">
               <button 
                 onClick={() => setIsLangMenuOpen(!isLangMenuOpen)}
                 onBlur={() => setTimeout(() => setIsLangMenuOpen(false), 200)}
-                className="flex items-center gap-1.5 hover:text-zinc-900 transition-colors font-bold uppercase"
+                className="flex items-center gap-2 hover:text-zinc-900 transition-colors font-bold uppercase"
               >
-                <span className="text-lg leading-none">{languageConfig[lang].flag}</span>
+                <img 
+                  src={languageConfig[lang].flagUrl} 
+                  alt={`${lang} flag`} 
+                  className="w-5 h-auto rounded-[2px] shadow-sm border border-zinc-200/50" 
+                />
                 {lang}
                 <ChevronDown size={14} className={`transition-transform duration-200 ${isLangMenuOpen ? 'rotate-180' : ''}`} />
               </button>
               
               {isLangMenuOpen && (
-                <div className="absolute right-0 top-full mt-4 w-40 bg-white rounded-xl shadow-xl border border-zinc-100 py-2 animate-fade-in flex flex-col z-50 overflow-hidden">
-                  {Object.entries(languageConfig).map(([code, { name, flag }]) => (
+                <div className="absolute right-0 top-full mt-4 w-44 bg-white rounded-xl shadow-xl border border-zinc-100 py-2 animate-fade-in flex flex-col z-50 overflow-hidden">
+                  {Object.entries(languageConfig).map(([code, { name, flagUrl }]) => (
                     <button 
                       key={code}
                       onClick={() => setLang(code)} 
-                      className={`px-4 py-2 text-left text-sm hover:bg-zinc-50 flex items-center gap-2 ${lang === code ? 'font-bold text-blue-600' : 'text-zinc-600'}`}
+                      className={`px-4 py-2 text-left text-sm hover:bg-zinc-50 flex items-center gap-3 ${lang === code ? 'font-bold text-blue-600' : 'text-zinc-600'}`}
                     >
-                      <span className="text-base">{flag}</span> {name}
+                      <img 
+                        src={flagUrl} 
+                        alt={`${code} flag`} 
+                        className="w-5 h-auto rounded-[2px] shadow-sm border border-zinc-200/50" 
+                      />
+                      {name}
                     </button>
                   ))}
                 </div>
@@ -297,7 +300,6 @@ const Home = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {content.features.map((feature, idx) => {
-              // Combinamos los textos dinámicos con los iconos y colores fijos
               const config = servicesConfig[idx];
               return (
                 <FeatureCard 
