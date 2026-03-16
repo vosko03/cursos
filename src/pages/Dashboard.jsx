@@ -181,4 +181,181 @@ const nodes = {
   comunidad: { 
     title: "Comunitat i Tàndem", subtitle: "La xarxa social humana", icon: MessageSquare, 
     colorTheme: "bg-orange-50 text-orange-600 border-orange-200",
-    content: { "Descripció": "L'aprenentatge aïllat té una taxa d'abandonament alta. Per solucionar-ho, fomentem la cohesió social i l'arrelament a través d'espais digitals segurs on la IA passa a un segon pla i el factor humà pren el relleu. Integrem la comunitat directament en el procés.", "Funcionament": "Sistema de matchmaking per crear
+    content: { "Descripció": "L'aprenentatge aïllat té una taxa d'abandonament alta. Per solucionar-ho, fomentem la cohesió social i l'arrelament a través d'espais digitals segurs on la IA passa a un segon pla i el factor humà pren el relleu. Integrem la comunitat directament en el procés.", "Funcionament": "Sistema de matchmaking per crear tàndems lingüístics entre usuaris de nivells complementaris.", "Dinàmiques": "Implementació de lligues setmanals, 'leaderboards' i reptes col·lectius per mantenir la motivació intrínseca alta.", "Retenció": "La generació de sentit de pertinença és l'eina número u per reduir la taxa de 'churn' (usuaris que es donen de baixa)." } 
+  },
+  inmigrantes: { 
+    title: "Mercat: Nouvinguts", subtitle: "El gruix de l'adquisició B2C", icon: Users, 
+    colorTheme: "bg-indigo-50 text-indigo-600 border-indigo-200",
+    content: { "Descripció": "El nostre segment objectiu de més volum: persones arribades recentment que necessiten el català com a eina urgent d'arrelament i ascensor sociolaboral. Volem oferir una barrera d'entrada gairebé inexistent per democratitzar l'accés a la llengua, atraient-los cap al nostre ecosistema des del primer minut.", "Estratègia de captació": "Product-Led Growth mitjançant un model Freemium molt atractiu (ex: 10 minuts al dia de conversa amb IA gratuïts).", "Fidelització": "Sistema de ratxes ('streaks') inspirat en aplicacions d'hàbits d'èxit com Duolingo per assegurar la recurrència diària.", "Impacte social": "Alineació total amb polítiques de foment del català, cohesió social i integració al mercat laboral local." } 
+  },
+  seo: { 
+    title: "SEO Programàtic IA", subtitle: "Captació orgànica passiva", icon: Search, 
+    colorTheme: "bg-emerald-50 text-emerald-600 border-emerald-200",
+    content: { "Descripció": "El nostre motor d'adquisició més potent i rendible a mitjà termini. Consisteix en la generació i indexació massiva de pàgines web altament específiques dissenyades per interceptar cerques de nínxol (Long Tail) que l'usuari fa a Google abans o poc després d'arribar a Catalunya.", "Procés automatitzat": "Scripts en Python interactuant amb l'API de Gemini per crear milers d'estructures com: 'Vocabulari en català per a [Professió] a [Ciutat]'.", "Conversió": "Cada landing està optimitzada amb Copywriting persuasiu per capturar l'usuari (lead) en els primers 15 segons d'haver aterrat.", "Exemple real": "Si un usuari busca 'Aprender catalán para trabajar de camarero en Girona', som el primer resultat amb un mòdul gratuït exacte preparat per a ell." } 
+  },
+  videos: { 
+    title: "Viralitat 'Faceless'", subtitle: "Trànsit des de xarxes socials", icon: Video, 
+    colorTheme: "bg-rose-50 text-rose-600 border-rose-200",
+    content: { "Descripció": "Una autèntica màquina de contingut. Creació automatitzada i escalable de vídeos educatius de format curt (micro-learning) dissenyats específicament per a l'algoritme de TikTok, Instagram Reels i YouTube Shorts. Tot es genera mitjançant IA, sense dependre d'actors o càmeres.", "Flux de treball": "Extracció de notícies o modismes → Guió amb Gemini → Generació de vídeo → Veu amb Matxa-TTS → Publicació.", "Optimització contínua": "Anàlisi A/B automàtic de la retenció d'audiència (hooks) per iterar i millorar els guions en temps real.", "Call to action": "Tots els vídeos deriven l'audiència mitjançant un 'hook' clar: 'Practica aquesta conversa tu mateix gratis a cursos.cat'." } 
+  },
+  b2b: { 
+    title: "B2B per a Empreses", subtitle: "Alt valor i ingressos recurrents", icon: Briefcase, 
+    colorTheme: "bg-slate-100 text-slate-700 border-slate-300",
+    content: { "Descripció": "L'escala de monetització principal. Una solució 'SaaS (Software as a Service) Educatiu' dissenyada exclusivament per a departaments de Recursos Humans. Està enfocada a sectors on l'atenció al client en català és crucial (sanitat, hostaleria, 'retail') però on hi ha molta rotació de personal castellanoparlant o estranger.", "Model de negoci": "Contractes corporatius de llicències per volum (ex: tarifa plana de 200€/mes per formar fins a 50 empleats simultàniament).", "Proposta de valor": "Garanteix el compliment normatiu de drets lingüístics, millora les ràtios d'atenció al client i potencia la RSC corporativa.", "Onboarding senzill": "Desplegament ràpid mitjançant enllaços d'invitació al correu corporatiu i un panell de control HR per veure el progrés en temps real de la plantilla." } 
+  },
+  certificacion: { 
+    title: "Certificació IA", subtitle: "L'estàndard pràctic del mercat", icon: Award, 
+    colorTheme: "bg-amber-50 text-amber-600 border-amber-200",
+    content: { "Descripció": "Creació d'un nou estàndard d'avaluació al sector. Emissió d'un 'Certificat de Fluïdesa Pràctica' completament examinat i qualificat per models de llenguatge avançats. Supera la burocràcia dels exàmens oficials i ofereix a empreses i usuaris una prova de nivell oral instantània, objectiva i accessible des de qualsevol lloc.", "Avaluació digital": "Examen oral de 15 minuts interactuant amb l'avatar IA, on s'avalua fonètica, fluïdesa, vocabulari i temps de resposta.", "El producte": "Diploma digital verificat (PDF/Blockchain) preparat per integrar-se a un sol clic al perfil de LinkedIn de l'usuari.", "Validesa al mercat": "L'estratègia inclou forjar aliances ràpides amb portals de feina (InfoJobs) i ETTs locals perquè reconeguin aquesta certificació com un filtre vàlid de contractació." } 
+  },
+  afiliacion: { 
+    title: "Afiliació Estratègica", subtitle: "Monetització indirecta", icon: TrendingUp, 
+    colorTheme: "bg-purple-50 text-purple-600 border-purple-200",
+    content: { "Descripció": "No tots els usuaris tindran capacitat per pagar una subscripció (especialment els nouvinguts). Aquest mòdul assegura que el 100% del trànsit generi ingressos passius i no intrusius, oferint serveis de valor afegit just en el moment que l'usuari els necessita per assentar-se al país.", "Escalat contextual": "Si l'usuari demana a la IA vocabulari per llogar un pis, la plataforma mostrarà anuncis o links d'afiliats de portals immobiliaris de forma dinàmica i natural.", "Publicitat": "Integració d'anuncis d'alta qualitat (Google AdSense / programàtica) únicament a la versió gratuïta per incentivar el pas a Premium.", "Rendibilitat": "Permet absorbir els costos de l'API de Gemini (tokens) generats pels usuaris Freemium, fent que el creixement sigui sostenible econòmicament des del dia 1." } 
+  }
+};
+
+// --- COMPONENT PRINCIPAL ---
+
+const Dashboard = () => {
+  const [selectedNode, setSelectedNode] = useState('resumen');
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  useEffect(() => {
+    document.title = "Cursos.cat: la primera plataforma d'integració lingüística de Catalunya impulsada 100% per IA.";
+  }, []);
+
+  const handleNodeSelect = (key) => {
+    setSelectedNode(key);
+    if (window.innerWidth < 1024) {
+      setIsMobileMenuOpen(false);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
+  const SidebarContent = () => (
+    <div className="flex flex-col gap-6">
+      
+      <div className="pb-4 border-b border-zinc-200">
+        <StrategyNode 
+          title="Resum Executiu" 
+          icon={BookOpen} 
+          active={selectedNode === 'resumen'} 
+          onClick={() => handleNodeSelect('resumen')} 
+        />
+      </div>
+
+      <section className="space-y-2">
+        <div className="flex items-center gap-2 mb-1.5 text-zinc-400 pl-1">
+          <Cpu size={14}/>
+          <h2 className="text-xs font-semibold uppercase tracking-widest text-zinc-500">1. La Solució Base</h2>
+        </div>
+        <div className="flex flex-col gap-0.5">
+          {['central', 'tutor', 'comunidad'].map(key => (
+            <StrategyNode key={key} {...nodes[key]} active={selectedNode === key} onClick={() => handleNodeSelect(key)} />
+          ))}
+        </div>
+      </section>
+
+      <section className="space-y-2">
+        <div className="flex items-center gap-2 mb-1.5 text-zinc-400 pl-1">
+          <Layers size={14}/>
+          <h2 className="text-xs font-semibold uppercase tracking-widest text-zinc-500">2. Motor de Creixement</h2>
+        </div>
+        <div className="flex flex-col gap-0.5">
+          {['inmigrantes', 'seo', 'videos'].map(key => (
+            <StrategyNode key={key} {...nodes[key]} active={selectedNode === key} onClick={() => handleNodeSelect(key)} />
+          ))}
+        </div>
+      </section>
+
+      <section className="space-y-2">
+        <div className="flex items-center gap-2 mb-1.5 text-zinc-400 pl-1">
+          <TrendingUp size={14}/>
+          <h2 className="text-xs font-semibold uppercase tracking-widest text-zinc-500">3. Model de Negoci</h2>
+        </div>
+        <div className="flex flex-col gap-0.5">
+          {['b2b', 'certificacion', 'afiliacion'].map(key => (
+            <StrategyNode key={key} {...nodes[key]} active={selectedNode === key} onClick={() => handleNodeSelect(key)} />
+          ))}
+        </div>
+      </section>
+    </div>
+  );
+
+  return (
+    <div className="min-h-screen bg-[#FAFAFA] font-sans text-zinc-900 selection:bg-zinc-200 flex flex-col justify-center py-6 md:py-12">
+      
+      {/* OVERLAY I MENÚ LATERAL MÒBIL */}
+      <div 
+        className={`fixed inset-0 bg-zinc-900/20 backdrop-blur-sm z-50 lg:hidden transition-opacity duration-300 ${isMobileMenuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`} 
+        onClick={() => setIsMobileMenuOpen(false)} 
+      />
+
+      <aside className={`fixed inset-y-0 right-0 w-[280px] sm:w-[320px] bg-[#FAFAFA] z-50 p-6 border-l border-zinc-200 shadow-2xl transform transition-transform duration-300 ease-in-out lg:hidden flex flex-col overflow-y-auto ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+        <div className="flex justify-between items-center mb-8 border-b border-zinc-200 pb-4">
+          <span className="font-semibold text-zinc-900 text-sm uppercase tracking-wider">Navegació</span>
+          <button onClick={() => setIsMobileMenuOpen(false)} className="p-2 -mr-2 text-zinc-500 hover:bg-zinc-200/50 rounded-md transition-colors">
+            <X size={20}/>
+          </button>
+        </div>
+        <SidebarContent />
+      </aside>
+
+      {/* CONTENIDOR PRINCIPAL */}
+      <main className="w-full max-w-6xl mx-auto px-4 md:px-6 lg:px-8">
+        
+        {/* Barra superior exclusivament per a mòbils (per poder obrir el menú ja que no hi ha header) */}
+        <div className="lg:hidden flex items-center justify-between mb-4 bg-white p-3 rounded-xl border border-zinc-200 shadow-sm">
+          <div className="flex items-center gap-2 bg-zinc-900 text-white px-3 py-1.5 rounded-md text-xs font-medium">
+            <Home size={14} />
+            <span>cursos.cat</span>
+          </div>
+          <button 
+            className="p-1.5 text-zinc-600 hover:bg-zinc-100 rounded-md transition-colors"
+            onClick={() => setIsMobileMenuOpen(true)}
+          >
+            <Menu size={20} />
+          </button>
+        </div>
+
+        <div className="bg-white border border-zinc-200 shadow-xl shadow-zinc-200/40 rounded-2xl flex flex-col lg:flex-row overflow-hidden min-h-[650px]">
+          
+          <aside className="hidden lg:block w-[300px] bg-zinc-50/50 border-r border-zinc-200 p-6 shrink-0">
+            <SidebarContent />
+          </aside>
+
+          <section className="flex-1 p-6 md:p-8 lg:p-10 bg-white">
+            <DetailPanel node={nodes[selectedNode]} />
+          </section>
+
+        </div>
+      </main>
+      
+      <footer className="max-w-6xl mx-auto mt-8 text-center px-4">
+        <p className="text-zinc-400 text-sm font-medium">
+          cursos.cat &bull; Selecciona un mòdul per explorar l'estratègia
+        </p>
+      </footer>
+
+      <style dangerouslySetInnerHTML={{__html: `
+        @keyframes fadeInUp {
+          from { opacity: 0; transform: translateY(8px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in {
+          animation: fadeInUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background-color: #e4e4e7; border-radius: 20px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background-color: #d4d4d8; }
+      `}} />
+
+      <Analytics />
+    </div>
+  );
+};
+
+export default Dashboard;
