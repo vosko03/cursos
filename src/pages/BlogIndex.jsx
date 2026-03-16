@@ -1,57 +1,147 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { ArrowLeft, ArrowRight } from 'lucide-react';
-import { Analytics } from "@vercel/analytics/react";
+import { 
+  ArrowLeft, 
+  ArrowRight, 
+  BookOpen, 
+  GraduationCap, 
+  Calendar, 
+  Clock,
+  Search
+} from 'lucide-react';
 
 const BlogIndex = () => {
-  return (
-    <>
-      <div className="min-h-screen bg-slate-50 p-4 md:p-8 font-sans selection:bg-indigo-200">
-        <div className="max-w-4xl mx-auto">
-          <Link to="/" className="inline-flex items-center text-indigo-600 font-semibold hover:text-indigo-800 transition-colors mb-8">
-            <ArrowLeft size={16} className="mr-2" /> Tornar a l'inici
-          </Link>
+  // Simulación de navegación (en un entorno real usarías react-router)
+  const handleBackHome = () => console.log("Navigating to home...");
 
-          <header className="mb-12 text-center">
-            <h1 className="text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight mb-4">
-              El Blog de <span className="text-indigo-600">cursos.cat</span>
+  return (
+    <div className="min-h-screen bg-[#FAFAFA] text-zinc-900 font-sans selection:bg-blue-100 selection:text-blue-900">
+      
+      {/* Header / Nav (Consistent with Home.jsx) */}
+      <nav className="fixed top-0 w-full z-50 bg-[#FAFAFA]/80 backdrop-blur-md border-b border-zinc-200">
+        <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+          <a href="/" onClick={handleBackHome} className="flex items-center gap-2 bg-zinc-900 text-white px-4 py-2 rounded-xl shadow-lg">
+            <GraduationCap size={20} className="text-blue-400" />
+            <span className="font-bold text-lg tracking-tight">cursos<span className="text-blue-400">.cat</span></span>
+          </a>
+          
+          <div className="hidden md:flex items-center gap-6">
+            <div className="relative group">
+               <Search size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400 group-focus-within:text-blue-500 transition-colors" />
+               <input 
+                 type="text" 
+                 placeholder="Cerca articles..." 
+                 className="bg-zinc-100 border-none rounded-xl py-2 pl-10 pr-4 text-sm w-64 focus:ring-2 focus:ring-blue-500/20 transition-all outline-none"
+               />
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      <main className="pt-32 pb-20 px-6">
+        <div className="max-w-5xl mx-auto">
+          
+          {/* Blog Hero Header */}
+          <header className="mb-16">
+            <div className="flex items-center gap-2 text-blue-600 font-bold text-xs uppercase tracking-[0.2em] mb-4">
+              <BookOpen size={14} /> El nostre coneixement
+            </div>
+            <h1 className="text-4xl md:text-5xl font-extrabold text-zinc-900 tracking-tight mb-6">
+              Blog de <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-500">cursos.cat</span>
             </h1>
-            <p className="text-xl text-slate-600">
-              Consells, vocabulari i notícies per a la teva integració a Catalunya.
+            <p className="text-lg text-zinc-500 max-w-2xl leading-relaxed">
+              Consells pràctics, guies de vocabulari i estratègies d'integració impulsades per IA per a la teva nova vida a Catalunya.
             </p>
           </header>
 
-          <div className="grid grid-cols-1 gap-8">
-            <article className="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-shadow duration-300 border border-slate-100 flex flex-col md:flex-row">
-              <div className="md:w-2/5">
+          {/* Featured Post / Article List */}
+          <div className="grid grid-cols-1 gap-12">
+            <article className="group relative bg-white rounded-[2.5rem] overflow-hidden border border-zinc-200 shadow-sm hover:shadow-xl transition-all duration-500 flex flex-col md:flex-row">
+              {/* Image side */}
+              <div className="md:w-1/2 overflow-hidden">
                 <img 
-                  src="https://images.unsplash.com/photo-1700299926955-d68c16ba107b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4MTM2MDJ8MHwxfGFsbHx8fHx8fHx8fDE3NzM1MjQ2MTZ8&ixlib=rb-4.1.0&q=80&w=600" 
+                  src="https://images.unsplash.com/photo-1700299926955-d68c16ba107b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4MTM2MDJ8MHwxfGFsbHx8fHx8fHx8fDE3NzM1MjQ2MTZ8&ixlib=rb-4.1.0&q=80&w=800" 
                   alt="Vista de Girona" 
-                  className="h-full w-full object-cover min-h-[250px]"
+                  className="h-full w-full object-cover min-h-[300px] group-hover:scale-105 transition-transform duration-700"
                 />
               </div>
-              <div className="p-8 md:w-3/5 flex flex-col justify-center">
-                <div className="inline-block bg-rose-100 text-rose-700 px-3 py-1 rounded-full text-xs font-bold tracking-wide mb-4 uppercase w-max">
-                  Sector Sanitari • SEO Local
+              
+              {/* Content side */}
+              <div className="p-8 md:p-12 md:w-1/2 flex flex-col justify-center">
+                <div className="flex items-center gap-4 mb-6">
+                  <span className="bg-blue-50 text-blue-700 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
+                    Sector Sanitari
+                  </span>
+                  <div className="flex items-center gap-1.5 text-zinc-400 text-xs font-medium">
+                    <Calendar size={14} /> 12 Març, 2024
+                  </div>
                 </div>
-                <h2 className="text-2xl font-bold text-slate-900 mb-4 hover:text-indigo-600 transition-colors">
-                  <Link to="/blog/vocabulari-catala-infermeres-girona">
+
+                <h2 className="text-2xl md:text-3xl font-bold text-zinc-900 mb-4 group-hover:text-blue-600 transition-colors leading-tight">
+                  <a href="/blog/vocabulari-catala-infermeres-girona">
                     Vocabulari de Supervivència per a Infermeres a Girona: De "Nena" a "Tirita"
-                  </Link>
+                  </a>
                 </h2>
-                <p className="text-slate-600 mb-6 line-clamp-3">
-                  Has arribat a l'Hospital Trueta o al Santa Caterina amb tota la il·lusió, el teu títol flamant, i de sobte, un avi et diu: "Nena, em fa mal el panxell i vull una tirita". Pànic? Zero. Descobreix el teu kit d'emergència lingüística.
+                
+                <p className="text-zinc-500 mb-8 leading-relaxed line-clamp-3">
+                  Has arribat a l'Hospital Trueta o al Santa Caterina amb tota la il·lusió? Descobreix com la parla local gironina pot ser la teva millor eina de cura.
                 </p>
-                <Link to="/blog/vocabulari-catala-infermeres-girona" className="inline-flex items-center font-bold text-indigo-600 hover:text-indigo-800 transition-colors mt-auto">
-                  Llegir l'article <ArrowRight size={16} className="ml-2" />
-                </Link>
+
+                <div className="mt-auto flex items-center justify-between">
+                  <a href="/blog/vocabulari-catala-infermeres-girona" className="inline-flex items-center gap-2 font-bold text-zinc-900 hover:text-blue-600 transition-colors group/link">
+                    Llegir l'article <ArrowRight size={18} className="group-hover/link:translate-x-1 transition-transform" />
+                  </a>
+                  <div className="flex items-center gap-1.5 text-zinc-400 text-xs">
+                    <Clock size={14} /> 4 min de lectura
+                  </div>
+                </div>
               </div>
             </article>
+
+            {/* Placeholder for more articles */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+               {[1, 2].map(i => (
+                 <div key={i} className="p-8 rounded-[2rem] border border-zinc-100 bg-zinc-50/50 flex flex-col items-center justify-center text-center py-20 border-dashed">
+                    <div className="w-12 h-12 rounded-full bg-zinc-100 flex items-center justify-center text-zinc-300 mb-4">
+                      <BookOpen size={24} />
+                    </div>
+                    <p className="text-zinc-400 font-medium text-sm tracking-wide uppercase">Pròximament</p>
+                 </div>
+               ))}
+            </div>
           </div>
         </div>
-      </div>
-      <Analytics />
-    </>
+      </main>
+
+      {/* Newsletter simple */}
+      <section className="bg-zinc-900 py-20 px-6">
+        <div className="max-w-3xl mx-auto text-center">
+          <h2 className="text-2xl md:text-3xl font-bold text-white mb-4 tracking-tight">Vols rebre nous vocabularis?</h2>
+          <p className="text-zinc-400 mb-8">T'enviem un resum setmanal amb els millors consells d'integració.</p>
+          <div className="flex flex-col sm:flex-row gap-3">
+            <input 
+              type="email" 
+              placeholder="El teu correu electrònic" 
+              className="flex-1 bg-white/5 border-none rounded-2xl px-6 py-4 text-white focus:ring-2 focus:ring-blue-500/50 outline-none"
+            />
+            <button className="px-8 py-4 bg-blue-600 text-white font-bold rounded-2xl hover:bg-blue-500 transition-all">
+              Subscriure'm
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <footer className="py-12 border-t border-zinc-200 bg-white">
+        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8">
+          <div className="flex items-center gap-2 text-zinc-900 font-bold">
+            <GraduationCap size={20} className="text-blue-600" />
+            <span>cursos.cat</span>
+          </div>
+          <p className="text-sm text-zinc-400">
+            © {new Date().getFullYear()} Cursos.cat. Contingut generat per experts i revisat per IA.
+          </p>
+        </div>
+      </footer>
+    </div>
   );
 };
 
