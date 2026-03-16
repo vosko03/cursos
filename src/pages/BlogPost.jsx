@@ -46,7 +46,7 @@ const BlogPost = () => {
             </h1>
             
             <div className="flex items-center justify-center gap-6 text-zinc-400 text-sm font-medium">
-              <div className="flex items-center gap-1.5"><Calendar size={14} /> 12 Març, 2024</div>
+              <div className="flex items-center gap-1.5"><Calendar size={14} /> 12 Març, 2026</div>
               <div className="flex items-center gap-1.5"><Clock size={14} /> 4 min de lectura</div>
             </div>
           </header>
@@ -54,8 +54,8 @@ const BlogPost = () => {
           {/* Featured Image */}
           <figure className="mb-12 rounded-[2.5rem] overflow-hidden shadow-2xl shadow-zinc-200 border border-zinc-200">
             <img 
-              src="https://images.unsplash.com/photo-1700299926955-d68c16ba107b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4MTM2MDJ8MHwxfGFsbHx8fHx8fHx8fDE3NzM1MjQ2MTZ8&ixlib=rb-4.1.0&q=80&w=1200" 
-              alt="Girona Onyar Houses" 
+              src="https://images.unsplash.com/photo-1599478585030-22b62e038962?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
+              alt="Girona" 
               className="w-full h-[300px] md:h-[450px] object-cover"
             />
           </figure>
