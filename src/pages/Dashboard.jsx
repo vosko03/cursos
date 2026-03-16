@@ -29,7 +29,7 @@ const StrategyNode = ({ title, subtitle, icon: Icon, color, active, onClick }) =
 );
 
 const Dashboard = () => {
-  const [selectedNode, setSelectedNode] = useState('central');
+  const [selectedNode, setSelectedNode] = useState('seo');
   const detailRef = useRef(null);
 
   const nodes = {
