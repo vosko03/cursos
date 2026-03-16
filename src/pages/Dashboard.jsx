@@ -1,8 +1,8 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import { 
   Users, Bot, Search, Video, Briefcase, Award, 
   MessageSquare, TrendingUp, Cpu, Layers, Globe, 
-  Home, Map, Sparkles
+  Home, Map, Sparkles, Menu, X
 } from 'lucide-react';
 import { Analytics } from "@vercel/analytics/react";
 
@@ -11,17 +11,17 @@ import { Analytics } from "@vercel/analytics/react";
 const StrategyNode = ({ title, icon: Icon, active, onClick }) => (
   <button 
     onClick={onClick}
-    className={`w-full text-left transition-all duration-300 ease-out group rounded-xl p-2 flex items-center gap-3 border
+    className={`w-full text-left transition-all duration-200 ease-out group rounded-lg p-2 flex items-center gap-3
       ${active 
-        ? `bg-white border-zinc-200 shadow-[0_2px_8px_rgba(0,0,0,0.04)] z-10` 
-        : 'border-transparent hover:bg-zinc-100/50 opacity-70 hover:opacity-100'
+        ? `bg-zinc-100 text-zinc-900 font-medium shadow-sm` 
+        : 'text-zinc-600 hover:bg-zinc-50 hover:text-zinc-900'
       }`}
   >
-    <div className={`p-1.5 rounded-lg transition-colors duration-300 ${active ? 'bg-zinc-900 text-white' : 'bg-zinc-100 text-zinc-500 group-hover:text-zinc-800 group-hover:bg-zinc-200/50'}`}>
-      <Icon size={16} strokeWidth={2} />
+    <div className={`p-1.5 rounded-md transition-colors duration-200 ${active ? 'bg-white shadow-sm text-zinc-900' : 'bg-transparent text-zinc-400 group-hover:text-zinc-700'}`}>
+      <Icon size={18} strokeWidth={2} />
     </div>
     <div className="overflow-hidden">
-      <h3 className={`font-semibold text-sm leading-tight truncate transition-colors ${active ? 'text-zinc-900' : 'text-zinc-600 group-hover:text-zinc-900'}`}>
+      <h3 className="text-sm truncate">
         {title}
       </h3>
     </div>
@@ -32,17 +32,15 @@ const DetailPanel = ({ node }) => {
   if (!node) return null;
 
   return (
-    // Afegim una clau (key) perquè React desmunti i remunti el component en canviar, activant l'animació CSS
-    <div key={node.title} className="bg-white p-6 md:p-8 rounded-2xl border border-zinc-200 shadow-sm h-full overflow-y-auto custom-scrollbar animate-fade-in">
-      
+    <div key={node.title} className="h-full animate-fade-in">
       {/* Header del Panell */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-8">
-        <div className="p-3.5 rounded-xl bg-zinc-50 border border-zinc-100 text-zinc-900 shrink-0">
+        <div className="p-3.5 rounded-xl bg-zinc-50 border border-zinc-200 text-zinc-900 shrink-0">
           {React.createElement(node.icon, { size: 24, strokeWidth: 1.5 })}
         </div>
         <div>
-          <p className="text-[10px] font-semibold text-zinc-400 uppercase tracking-widest mb-1.5">Pilar Estratègic</p>
-          <h2 className="text-xl md:text-2xl font-semibold text-zinc-900 tracking-tight leading-tight">
+          <p className="text-xs font-semibold text-zinc-400 uppercase tracking-widest mb-1.5">Pilar Estratègic</p>
+          <h2 className="text-2xl font-semibold text-zinc-900 tracking-tight leading-tight">
             {node.title}
           </h2>
           <p className="text-sm text-zinc-500 mt-1">
@@ -55,7 +53,7 @@ const DetailPanel = ({ node }) => {
       <div className="space-y-8">
         <div>
           <h4 className="font-semibold text-zinc-900 text-sm flex items-center gap-2 mb-3">
-            <Sparkles size={14} className="text-zinc-400" />
+            <Sparkles size={16} className="text-zinc-400" />
             Visió i Justificació del Mòdul
           </h4>
           <p className="text-zinc-600 leading-relaxed text-sm">
@@ -63,25 +61,25 @@ const DetailPanel = ({ node }) => {
           </p>
         </div>
         
-        {/* Llista Minimalista (Sense fons gris, només línies netes) */}
+        {/* Llista Minimalista */}
         <div>
-          <h4 className="font-semibold text-zinc-900 text-sm mb-4 pb-2 border-b border-zinc-100">
+          <h4 className="font-semibold text-zinc-900 text-sm mb-4 pb-3 border-b border-zinc-100">
             Claus d'Execució i Dades
           </h4>
-          <ul className="space-y-4">
+          <ul className="space-y-5">
             {Object.entries(node.content).map(([key, value]) => {
               if (key.toLowerCase() === 'descripció') return null;
               
               return (
-                <li key={key} className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-6 group">
-                  <span className="capitalize font-medium text-zinc-800 text-sm sm:w-36 shrink-0">
+                <li key={key} className="flex flex-col sm:flex-row sm:items-baseline gap-1.5 sm:gap-6 group">
+                  <span className="capitalize font-medium text-zinc-800 text-sm sm:w-40 shrink-0">
                     {key.replace(/_/g, ' ')}
                   </span> 
-                  <span className="text-zinc-500 text-sm">
+                  <span className="text-zinc-600 text-sm">
                     {Array.isArray(value) 
                       ? <div className="flex flex-wrap gap-2 mt-1 sm:mt-0">
                           {value.map(tag => (
-                            <span key={tag} className="bg-zinc-50 border border-zinc-200 px-2.5 py-1 rounded-md text-xs text-zinc-600">
+                            <span key={tag} className="bg-white border border-zinc-200 px-2.5 py-1 rounded-md text-xs text-zinc-600 shadow-sm">
                               {tag}
                             </span>
                           ))}
@@ -99,7 +97,6 @@ const DetailPanel = ({ node }) => {
 };
 
 // --- DADES ---
-// Els temes de colors s'han eliminat. Ara tots els nodes comparteixen el mateix disseny minimalista.
 
 const nodes = {
   central: { title: "Plataforma Core", subtitle: "L'ecosistema immersiu", icon: Globe, content: { descripció: "El nucli tecnològic de cursos.cat. Consisteix en un entorn d'immersió sota demanda impulsat al 100% per Intel·ligència Artificial, dissenyat per superar les limitacions de l'ensenyament estàtic tradicional. Ofereix una experiència fluida, totalment gamificada i adaptada de forma dinàmica al ritme d'absorció i interessos de cada alumne.", innovació: "Motor d'aprenentatge hiperpersonalitzat que s'allunya de la rigidesa dels clàssics LMS com Moodle, generant contingut on-the-fly.", tecnologia_Base: ["Next.js", "Gemini Pro", "Matxa-TTS (Aina)", "Supabase", "Stripe"], escalabilitat: "Arquitectura 'serverless' i de microserveis preparada per suportar desenes de milers d'usuaris concurrents sense degradació de latència ni costos d'infraestructura innecessaris." } },
@@ -119,99 +116,128 @@ const nodes = {
 
 const Dashboard = () => {
   const [selectedNode, setSelectedNode] = useState('central');
-  const detailRef = useRef(null);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const handleNodeSelect = (key) => {
     setSelectedNode(key);
-    
-    // Desplaçament per a mòbils
-    if (window.innerWidth < 1024 && detailRef.current) {
-      setTimeout(() => {
-        const yPosition = detailRef.current.getBoundingClientRect().top + window.scrollY - 140;
-        window.scrollTo({ top: yPosition, behavior: 'smooth' });
-      }, 50);
+    // Tancar el menú automàticament en mòbil
+    if (window.innerWidth < 1024) {
+      setIsMobileMenuOpen(false);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
 
+  // Contingut del menú lateral (reutilitzable per a Desktop i Mòbil)
+  const SidebarContent = () => (
+    <div className="flex flex-col gap-8">
+      <section className="space-y-3">
+        <div className="flex items-center gap-2 mb-2 text-zinc-400 pl-1">
+          <Cpu size={16}/>
+          <h2 className="text-xs font-semibold uppercase tracking-widest text-zinc-500">1. La Solució Base</h2>
+        </div>
+        <div className="flex flex-col gap-1">
+          {['central', 'tutor', 'comunidad'].map(key => (
+            <StrategyNode key={key} {...nodes[key]} active={selectedNode === key} onClick={() => handleNodeSelect(key)} />
+          ))}
+        </div>
+      </section>
+
+      <section className="space-y-3">
+        <div className="flex items-center gap-2 mb-2 text-zinc-400 pl-1">
+          <Layers size={16}/>
+          <h2 className="text-xs font-semibold uppercase tracking-widest text-zinc-500">2. Motor de Creixement</h2>
+        </div>
+        <div className="flex flex-col gap-1">
+          {['inmigrantes', 'seo', 'videos'].map(key => (
+            <StrategyNode key={key} {...nodes[key]} active={selectedNode === key} onClick={() => handleNodeSelect(key)} />
+          ))}
+        </div>
+      </section>
+
+      <section className="space-y-3">
+        <div className="flex items-center gap-2 mb-2 text-zinc-400 pl-1">
+          <TrendingUp size={16}/>
+          <h2 className="text-xs font-semibold uppercase tracking-widest text-zinc-500">3. Model de Negoci</h2>
+        </div>
+        <div className="flex flex-col gap-1">
+          {['b2b', 'certificacion', 'afiliacion'].map(key => (
+            <StrategyNode key={key} {...nodes[key]} active={selectedNode === key} onClick={() => handleNodeSelect(key)} />
+          ))}
+        </div>
+      </section>
+    </div>
+  );
+
   return (
-    <div className="min-h-screen bg-[#FAFAFA] font-sans text-zinc-900 selection:bg-zinc-200 relative">
+    <div className="min-h-screen bg-[#FAFAFA] font-sans text-zinc-900 selection:bg-zinc-200">
       
-      {/* Capçalera STICKY Minimalista */}
-      <div className="sticky top-0 z-50 bg-[#FAFAFA]/80 backdrop-blur-lg pt-4 pb-4 px-4 md:px-6 lg:px-8 border-b border-zinc-200/50">
-        <header className="max-w-6xl mx-auto flex flex-col md:flex-row md:items-center justify-between gap-4">
-          <div className="flex flex-col md:flex-row md:items-center gap-3 md:gap-4">
-            <div className="inline-flex items-center gap-2 bg-zinc-900 text-white px-3.5 py-2 rounded-md text-sm font-medium shrink-0 self-start md:self-auto">
+      {/* Capçalera STICKY amb botó hamburguesa per a mòbil */}
+      <div className="sticky top-0 z-40 bg-[#FAFAFA]/80 backdrop-blur-lg pt-4 pb-4 px-4 md:px-6 lg:px-8 border-b border-zinc-200/60">
+        <header className="max-w-6xl mx-auto flex items-center justify-between gap-4">
+          <div className="flex items-center gap-3 md:gap-4">
+            {/* Botó Menú Mòbil */}
+            <button 
+              className="lg:hidden p-2 -ml-2 text-zinc-600 hover:bg-zinc-200/50 rounded-md transition-colors"
+              onClick={() => setIsMobileMenuOpen(true)}
+            >
+              <Menu size={22} />
+            </button>
+            
+            <div className="inline-flex items-center gap-2 bg-zinc-900 text-white px-3.5 py-2 rounded-md text-sm font-medium shrink-0">
               <Home size={16} />
-              <span>cursos.cat</span>
+              <span className="hidden sm:inline">cursos.cat</span>
             </div>
-            <div className="border-l border-transparent md:border-zinc-300 md:pl-4">
+            
+            <div className="border-l border-zinc-300 pl-4 hidden md:block">
               <h1 className="text-base font-semibold text-zinc-900 tracking-tight leading-tight">Estratègia i Model de Creixement</h1>
-              <p className="text-sm text-zinc-500 mt-0.5">La primera plataforma d'integració lingüística i professional de Catalunya impulsada 100% per IA.</p>
+              <p className="text-sm text-zinc-500 mt-0.5">La primera plataforma d'integració lingüística de Catalunya impulsada 100% per IA.</p>
             </div>
           </div>
-          <div className="hidden md:inline-flex items-center gap-2 bg-zinc-100 text-zinc-600 px-3 py-1.5 rounded-md text-xs font-semibold uppercase tracking-wider border border-zinc-200 shrink-0">
+          
+          <div className="inline-flex items-center gap-2 bg-zinc-100 text-zinc-600 px-3 py-1.5 rounded-md text-xs font-semibold uppercase tracking-wider border border-zinc-200 shrink-0">
             <Map size={14} />
-            Mapa Estratègic
+            <span className="hidden sm:inline">Mapa Estratègic</span>
           </div>
         </header>
       </div>
 
-      {/* Main Layout */}
-      <main className="max-w-6xl mx-auto flex flex-col lg:flex-row gap-8 px-4 md:px-6 lg:px-8 pt-8 pb-12">
-        
-        {/* Navegació Lateral Minimalista */}
-        <aside className="w-full lg:w-[300px] flex flex-col gap-8 shrink-0">
+      {/* Overlay fosc per al menú mòbil */}
+      <div 
+        className={`fixed inset-0 bg-zinc-900/20 backdrop-blur-sm z-50 lg:hidden transition-opacity duration-300 ${isMobileMenuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`} 
+        onClick={() => setIsMobileMenuOpen(false)} 
+      />
+
+      {/* Menú Lateral Mòbil (Drawer) */}
+      <aside className={`fixed inset-y-0 left-0 w-[280px] sm:w-[320px] bg-[#FAFAFA] z-50 p-6 border-r border-zinc-200 shadow-2xl transform transition-transform duration-300 ease-in-out lg:hidden flex flex-col overflow-y-auto ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}`}>
+        <div className="flex justify-between items-center mb-8 border-b border-zinc-200 pb-4">
+          <span className="font-semibold text-zinc-900 text-sm uppercase tracking-wider">Navegació</span>
+          <button onClick={() => setIsMobileMenuOpen(false)} className="p-2 -mr-2 text-zinc-500 hover:bg-zinc-200/50 rounded-md transition-colors">
+            <X size={20}/>
+          </button>
+        </div>
+        <SidebarContent />
+      </aside>
+
+      {/* Main Layout: Unified Card per eliminar espais */}
+      <main className="max-w-6xl mx-auto px-4 md:px-6 lg:px-8 py-6 md:py-8">
+        <div className="bg-white border border-zinc-200 shadow-sm rounded-2xl flex flex-col lg:flex-row overflow-hidden min-h-[600px]">
           
-          <section className="space-y-3">
-            <div className="flex items-center gap-2 mb-2 text-zinc-400">
-              <Cpu size={16}/>
-              <h2 className="text-[11px] font-semibold uppercase tracking-widest text-zinc-500">1. La Solució Base</h2>
-            </div>
-            <div className="flex flex-col gap-1.5">
-              {['central', 'tutor', 'comunidad'].map(key => (
-                <StrategyNode key={key} {...nodes[key]} active={selectedNode === key} onClick={() => handleNodeSelect(key)} />
-              ))}
-            </div>
-          </section>
+          {/* Navegació Lateral Desktop (Integrada sense espais) */}
+          <aside className="hidden lg:block w-[300px] bg-zinc-50/50 border-r border-zinc-200 p-6 shrink-0">
+            <SidebarContent />
+          </aside>
 
-          <section className="space-y-3">
-            <div className="flex items-center gap-2 mb-2 text-zinc-400">
-              <Layers size={16}/>
-              <h2 className="text-[11px] font-semibold uppercase tracking-widest text-zinc-500">2. Motor de Creixement</h2>
-            </div>
-            <div className="flex flex-col gap-1.5">
-              {['inmigrantes', 'seo', 'videos'].map(key => (
-                <StrategyNode key={key} {...nodes[key]} active={selectedNode === key} onClick={() => handleNodeSelect(key)} />
-              ))}
-            </div>
-          </section>
-
-          <section className="space-y-3">
-            <div className="flex items-center gap-2 mb-2 text-zinc-400">
-              <TrendingUp size={16}/>
-              <h2 className="text-[11px] font-semibold uppercase tracking-widest text-zinc-500">3. Model de Negoci</h2>
-            </div>
-            <div className="flex flex-col gap-1.5">
-              {['b2b', 'certificacion', 'afiliacion'].map(key => (
-                <StrategyNode key={key} {...nodes[key]} active={selectedNode === key} onClick={() => handleNodeSelect(key)} />
-              ))}
-            </div>
-          </section>
-
-        </aside>
-
-        {/* Panell de Detall Central */}
-        <section className="w-full lg:flex-1" ref={detailRef}>
-          <div className="sticky top-[140px] h-[calc(100vh-160px)] min-h-[500px]">
+          {/* Panell de Detall Central */}
+          <section className="flex-1 p-6 md:p-8 lg:p-10 bg-white">
             <DetailPanel node={nodes[selectedNode]} />
-          </div>
-        </section>
+          </section>
 
+        </div>
       </main>
       
       {/* Footer Minimalista */}
-      <footer className="max-w-6xl mx-auto mb-8 text-center px-4 border-t border-zinc-200 pt-6">
-        <p className="text-zinc-400 text-xs font-medium tracking-wider">
+      <footer className="max-w-6xl mx-auto mb-8 text-center px-4">
+        <p className="text-zinc-400 text-sm font-medium">
           cursos.cat &bull; Selecciona un mòdul per explorar l'estratègia
         </p>
       </footer>
@@ -219,20 +245,14 @@ const Dashboard = () => {
       {/* CSS per a Transicions i Scrollbar */}
       <style dangerouslySetInnerHTML={{__html: `
         @keyframes fadeInUp {
-          from {
-            opacity: 0;
-            transform: translateY(10px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
+          from { opacity: 0; transform: translateY(8px); }
+          to { opacity: 1; transform: translateY(0); }
         }
         .animate-fade-in {
           animation: fadeInUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
-        .custom-scrollbar::-webkit-scrollbar { width: 5px; }
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
         .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
         .custom-scrollbar::-webkit-scrollbar-thumb { background-color: #e4e4e7; border-radius: 20px; }
         .custom-scrollbar::-webkit-scrollbar-thumb:hover { background-color: #d4d4d8; }
