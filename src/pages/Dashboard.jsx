@@ -100,7 +100,7 @@ const Dashboard = () => {
           <h1 className="text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight">
             Visió <span className="text-indigo-600">cursos.cat</span>
           </h1>
-          <p className="text-slate-500 text-sm md:text-base mt-2 max-w-2xl">
+          <p className="text-slate-500 text-sm md:text-base mt-2 max-w-2xl whitespace-nowrap">
             La primera plataforma d'integració lingüística i professional de Catalunya impulsada 100% per IA.
           </p>
         </header>
