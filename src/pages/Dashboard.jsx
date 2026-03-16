@@ -171,21 +171,15 @@ const Dashboard = () => {
   return (
     <div className="min-h-screen bg-[#FAFAFA] font-sans text-zinc-900 selection:bg-zinc-200">
       
-      {/* Capçalera STICKY amb botó hamburguesa per a mòbil */}
+      {/* Capçalera STICKY */}
       <div className="sticky top-0 z-40 bg-[#FAFAFA]/80 backdrop-blur-lg pt-4 pb-4 px-4 md:px-6 lg:px-8 border-b border-zinc-200/60">
         <header className="max-w-6xl mx-auto flex items-center justify-between gap-4">
+          
+          {/* Esquerra: Logo i Títols Desktop */}
           <div className="flex items-center gap-3 md:gap-4">
-            {/* Botó Menú Mòbil */}
-            <button 
-              className="lg:hidden p-2 -ml-2 text-zinc-600 hover:bg-zinc-200/50 rounded-md transition-colors"
-              onClick={() => setIsMobileMenuOpen(true)}
-            >
-              <Menu size={22} />
-            </button>
-            
             <div className="inline-flex items-center gap-2 bg-zinc-900 text-white px-3.5 py-2 rounded-md text-sm font-medium shrink-0">
               <Home size={16} />
-              <span className="hidden sm:inline">cursos.cat</span>
+              <span>cursos.cat</span>
             </div>
             
             <div className="border-l border-zinc-300 pl-4 hidden md:block">
@@ -194,10 +188,22 @@ const Dashboard = () => {
             </div>
           </div>
           
-          <div className="inline-flex items-center gap-2 bg-zinc-100 text-zinc-600 px-3 py-1.5 rounded-md text-xs font-semibold uppercase tracking-wider border border-zinc-200 shrink-0">
-            <Map size={14} />
-            <span className="hidden sm:inline">Mapa Estratègic</span>
+          {/* Dreta: Botó Mòbil i Badge Desktop */}
+          <div className="flex items-center gap-3">
+            <div className="hidden md:inline-flex items-center gap-2 bg-zinc-100 text-zinc-600 px-3 py-1.5 rounded-md text-xs font-semibold uppercase tracking-wider border border-zinc-200 shrink-0">
+              <Map size={14} />
+              <span>Mapa Estratègic</span>
+            </div>
+
+            {/* Botó Menú Mòbil (Dreta) */}
+            <button 
+              className="lg:hidden p-2 -mr-2 text-zinc-600 hover:bg-zinc-200/50 rounded-md transition-colors"
+              onClick={() => setIsMobileMenuOpen(true)}
+            >
+              <Menu size={22} />
+            </button>
           </div>
+
         </header>
       </div>
 
@@ -207,8 +213,8 @@ const Dashboard = () => {
         onClick={() => setIsMobileMenuOpen(false)} 
       />
 
-      {/* Menú Lateral Mòbil (Drawer) */}
-      <aside className={`fixed inset-y-0 left-0 w-[280px] sm:w-[320px] bg-[#FAFAFA] z-50 p-6 border-r border-zinc-200 shadow-2xl transform transition-transform duration-300 ease-in-out lg:hidden flex flex-col overflow-y-auto ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}`}>
+      {/* Menú Lateral Mòbil (Drawer) - Ara llisca des de la dreta */}
+      <aside className={`fixed inset-y-0 right-0 w-[280px] sm:w-[320px] bg-[#FAFAFA] z-50 p-6 border-l border-zinc-200 shadow-2xl transform transition-transform duration-300 ease-in-out lg:hidden flex flex-col overflow-y-auto ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
         <div className="flex justify-between items-center mb-8 border-b border-zinc-200 pb-4">
           <span className="font-semibold text-zinc-900 text-sm uppercase tracking-wider">Navegació</span>
           <button onClick={() => setIsMobileMenuOpen(false)} className="p-2 -mr-2 text-zinc-500 hover:bg-zinc-200/50 rounded-md transition-colors">
@@ -218,12 +224,11 @@ const Dashboard = () => {
         <SidebarContent />
       </aside>
 
-      {/* Main Layout: Ajustado el padding superior a pt-4 md:pt-5 para pegarlo más a la cabecera */}
+      {/* Main Layout */}
       <main className="w-full px-4 md:px-6 lg:px-8 pt-4 md:pt-5 pb-8">
-        {/* Aquí es donde max-w-6xl mx-auto se aplica a la tarjeta para que coincida 100% con el header */}
         <div className="max-w-6xl mx-auto bg-white border border-zinc-200 shadow-sm rounded-2xl flex flex-col lg:flex-row overflow-hidden min-h-[600px]">
           
-          {/* Navegació Lateral Desktop (Integrada sense espais) */}
+          {/* Navegació Lateral Desktop */}
           <aside className="hidden lg:block w-[300px] bg-zinc-50/50 border-r border-zinc-200 p-6 shrink-0">
             <SidebarContent />
           </aside>
