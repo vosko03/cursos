@@ -80,7 +80,79 @@ const fallbackData = {
     cta_title: "The accelerator of your integration",
     cta_subtitle: "Join the waitlist and be the first to try the technology that is changing the future of Catalan.",
     cta_btn: "Register now", footer_rights: "All rights reserved."
+  },
+  fr: {
+    nav_methodology: "Méthodologie", nav_services: "Services", nav_blog: "Blog",
+    hero_badge: "La révolution du catalan est là",
+    hero_title_main: "Maîtrisez le catalan avec la", hero_title_highlight: "puissance de l'IA",
+    hero_subtitle: "La première plateforme d'immersion linguistique en Catalogne propulsée à 100 % par l'Intelligence Artificielle. Apprenez, pratiquez et certifiez votre fluidité sans barrières.",
+    hero_btn_start: "Commencez gratuitement", hero_btn_blog: "Lire le blog",
+    trust_title: "Technologie de pointe",
+    services_title: "Conçu pour une intégration réelle",
+    services_subtitle: "Nous avons éliminé les méthodes ennuyeuses pour créer un écosystème où la langue est vécue, pas seulement étudiée.",
+    features: [
+      { title: "Tuteur IA 24/7", description: "Un compagnon patient qui simule des situations réelles : d'aller chez le médecin à un entretien d'embauche. Parlez sans crainte." },
+      { title: "Plateforme Immersive", description: "Un contenu qui s'adapte à votre rythme. Génération de leçons personnalisées selon vos intérêts professionnels." },
+      { title: "Solutions B2B", description: "Formation d'entreprise évolutive pour les entreprises qui souhaitent garantir un excellent service client en catalan." },
+      { title: "Certification Numérique", description: "Obtenez un certificat de fluidité évalué par l'IA, prêt à être partagé sur LinkedIn et reconnu par les entreprises locales." },
+      { title: "SEO Programmatique", description: "Nous trouvons exactement ce dont vous avez besoin quand vous le cherchez. Contenu d'apprentissage de niche pour chaque profession." },
+      { title: "Communauté & Tandem", description: "Connectez-vous avec d'autres apprenants et des natifs pour pratiquer ce que vous avez appris avec l'IA dans un environnement humain et sûr." }
+    ],
+    cta_title: "L'accélérateur de votre intégration",
+    cta_subtitle: "Rejoignez la liste d'attente et soyez le premier à essayer la technologie qui change l'avenir du catalan.",
+    cta_btn: "Inscrivez-vous maintenant", footer_rights: "Tous droits réservés."
+  },
+  de: {
+    nav_methodology: "Methodik", nav_services: "Dienstleistungen", nav_blog: "Blog",
+    hero_badge: "Die katalanische Revolution ist da",
+    hero_title_main: "Meistere Katalanisch mit der", hero_title_highlight: "Kraft der KI",
+    hero_subtitle: "Die erste Sprachimmersionsplattform in Katalonien, die zu 100 % von Künstlicher Intelligenz angetrieben wird. Lerne, übe und zertifiziere deine Sprachkenntnisse ohne Barrieren.",
+    hero_btn_start: "Kostenlos starten", hero_btn_blog: "Blog lesen",
+    trust_title: "Technologie der nächsten Generation",
+    services_title: "Entwickelt für echte Integration",
+    services_subtitle: "Wir haben langweilige Methoden abgeschafft, um ein Ökosystem zu schaffen, in dem die Sprache gelebt und nicht nur studiert wird.",
+    features: [
+      { title: "KI-Tutor 24/7", description: "Ein geduldiger Begleiter, der reale Situationen simuliert: vom Arztbesuch bis zum Vorstellungsgespräch. Sprich ohne Angst." },
+      { title: "Immersive Plattform", description: "Inhalte, die sich deinem Tempo anpassen. Generierung personalisierter Lektionen basierend auf deinen beruflichen Interessen." },
+      { title: "B2B-Lösungen", description: "Skalierbare Unternehmensschulungen für Unternehmen, die einen hervorragenden Kundenservice auf Katalanisch garantieren wollen." },
+      { title: "Digitale Zertifizierung", description: "Erhalte ein von KI bewertetes Sprachzertifikat, bereit zum Teilen auf LinkedIn und anerkannt von lokalen Unternehmen." },
+      { title: "Programmatic SEO", description: "Wir finden genau das, was du brauchst, wenn du danach suchst. Nischen-Lerninhalte für jeden Beruf." },
+      { title: "Community & Tandem", description: "Vernetze dich mit anderen Lernenden und Muttersprachlern, um das mit der KI Gelernte in einer sicheren, menschlichen Umgebung zu üben." }
+    ],
+    cta_title: "Der Beschleuniger deiner Integration",
+    cta_subtitle: "Tritt der Warteliste bei und sei der Erste, der die Technologie ausprobiert, die die Zukunft des Katalanischen verändert.",
+    cta_btn: "Jetzt registrieren", footer_rights: "Alle Rechte vorbehalten."
+  },
+  gn: {
+    nav_methodology: "Tapereko", nav_services: "Mba'epy", nav_blog: "Blog",
+    hero_badge: "Catalán ñemoambue oĩma ko'ápe",
+    hero_title_main: "Eikuaa porã Catalán", hero_title_highlight: "IA pu'aka reheve",
+    hero_subtitle: "Peteĩha tenda ñe'ẽmbo'e rehegua Cataluña-pe oipurúva 100% Inteligencia Artificial. Eñembo'e, eñembokatupyry ha eñemoañete ne ñe'ẽ syryry ambue mba'e'ỹre.",
+    hero_btn_start: "Eñepyrũ reiete", hero_btn_blog: "Emoñe'ẽ Blog",
+    trust_title: "Teknolojia ipyahuvéva",
+    services_title: "Ojejapo eñemoĩ porã hag̃ua",
+    services_subtitle: "Roheja tapereko kaigue ikatu hag̃uáicha pe ñe'ẽ ojeikove, ndojehesa'ỹijo reíri.",
+    features: [
+      { title: "Mbo'ehára IA 24/7", description: "Ipy'aguapýva oipytyvõva oha'ãva tekove añete: taha'e tasyópe térã tembiapo jehekarãme. Eñe'ẽ kyhyje'ỹre." },
+      { title: "Tenda ñe'ẽmbo'erã", description: "Mba'epy oñemohendáva nde pype. Ojejapo mbo'epy ne rembiapo rehegua." },
+      { title: "B2B Pytyvõ", description: "Mbo'epy empresas-pe g̃uarã oipotáva oñeipytyvõ porã iñemuhápe catalán-pe." },
+      { title: "Certificación Digital", description: "Eguereko kuatia IA omoañetéva, eñemoherakuã hag̃ua LinkedIn-pe ha empresas oikuaa hag̃ua." },
+      { title: "SEO Programático", description: "Rojuhu upe reikotevẽva rehekávo. Mbo'epy apoha opavave tembiapópe g̃uarã." },
+      { title: "Aty ha Tandem", description: "Ejoaju ambue oñembo'éva ha ygua ndive eñembokatupyry hag̃ua upe IA nembo'eva'ekue peteĩ tenda porãme." }
+    ],
+    cta_title: "Nemongyhy'ĩva eike hag̃ua",
+    cta_subtitle: "Eike lista-pe ha eñepyrũ eipuru ko teknolojia omoambuéva catalán raperã.",
+    cta_btn: "Eñembokuatia ko'ág̃a", footer_rights: "Opavave derecho oñeñangareko."
   }
+};
+
+const languageConfig = {
+  ca: { name: 'Català', flag: '🇦🇩' },
+  es: { name: 'Español', flag: '🇪🇸' },
+  en: { name: 'English', flag: '🇬🇧' },
+  fr: { name: 'Français', flag: '🇫🇷' },
+  de: { name: 'Deutsch', flag: '🇩🇪' },
+  gn: { name: 'Avañeʼẽ', flag: '🇵🇾' }
 };
 
 const FeatureCard = ({ icon: Icon, title, description, colorClass }) => (
@@ -142,16 +214,22 @@ const Home = () => {
                 onBlur={() => setTimeout(() => setIsLangMenuOpen(false), 200)}
                 className="flex items-center gap-1.5 hover:text-zinc-900 transition-colors font-bold uppercase"
               >
-                <Globe size={16} className="text-zinc-400" />
+                <span className="text-lg leading-none">{languageConfig[lang].flag}</span>
                 {lang}
                 <ChevronDown size={14} className={`transition-transform duration-200 ${isLangMenuOpen ? 'rotate-180' : ''}`} />
               </button>
               
               {isLangMenuOpen && (
-                <div className="absolute right-0 top-full mt-4 w-32 bg-white rounded-xl shadow-xl border border-zinc-100 py-2 animate-fade-in flex flex-col">
-                  <button onClick={() => setLang('ca')} className={`px-4 py-2 text-left text-sm hover:bg-zinc-50 ${lang === 'ca' ? 'font-bold text-blue-600' : 'text-zinc-600'}`}>Català</button>
-                  <button onClick={() => setLang('es')} className={`px-4 py-2 text-left text-sm hover:bg-zinc-50 ${lang === 'es' ? 'font-bold text-blue-600' : 'text-zinc-600'}`}>Español</button>
-                  <button onClick={() => setLang('en')} className={`px-4 py-2 text-left text-sm hover:bg-zinc-50 ${lang === 'en' ? 'font-bold text-blue-600' : 'text-zinc-600'}`}>English</button>
+                <div className="absolute right-0 top-full mt-4 w-40 bg-white rounded-xl shadow-xl border border-zinc-100 py-2 animate-fade-in flex flex-col z-50 overflow-hidden">
+                  {Object.entries(languageConfig).map(([code, { name, flag }]) => (
+                    <button 
+                      key={code}
+                      onClick={() => setLang(code)} 
+                      className={`px-4 py-2 text-left text-sm hover:bg-zinc-50 flex items-center gap-2 ${lang === code ? 'font-bold text-blue-600' : 'text-zinc-600'}`}
+                    >
+                      <span className="text-base">{flag}</span> {name}
+                    </button>
+                  ))}
                 </div>
               )}
             </div>
