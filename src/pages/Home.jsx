@@ -196,20 +196,32 @@ const Home = () => {
             <span className="font-bold text-lg tracking-tight">cursos<span className="text-blue-400">.cat</span></span>
           </div>
           
-          {/* Navegación Desktop */}
-          <div className="hidden md:flex items-center gap-8 text-sm font-medium text-zinc-600">
-            <a href="#metodologia" className="hover:text-zinc-900 transition-colors">{content.nav_methodology}</a>
-            <a href="#serveis" className="hover:text-zinc-900 transition-colors">{content.nav_services}</a>
-            <a href="/blog" onClick={handleBlogClick} className="flex items-center gap-2 text-blue-600 hover:text-blue-700 transition-colors">
-              {content.nav_blog} <BookOpen size={16} />
-            </a>
+          <div className="flex items-center h-full">
+            {/* Navegación Desktop */}
+            <div className="hidden md:flex items-center gap-8 text-sm font-medium text-zinc-600 pr-6 border-r border-zinc-200 h-8">
+              <a href="#metodologia" className="hover:text-zinc-900 transition-colors">{content.nav_methodology}</a>
+              <a href="#serveis" className="hover:text-zinc-900 transition-colors">{content.nav_services}</a>
+              <a href="/blog" onClick={handleBlogClick} className="flex items-center gap-2 text-blue-600 hover:text-blue-700 transition-colors">
+                {content.nav_blog} <BookOpen size={16} />
+              </a>
+            </div>
+
+            {/* Botón menú hamburguesa (Móvil) */}
+            <div className="md:hidden pr-4 border-r border-zinc-200 h-8 flex items-center">
+              <button 
+                className="p-1 text-zinc-600 hover:text-zinc-900 transition-colors"
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              >
+                {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+              </button>
+            </div>
             
-            {/* Selector de idiomas con flagicons.lipis.dev (Desktop) */}
-            <div className="relative border-l border-zinc-200 pl-6">
+            {/* Selector de idiomas con flagicons.lipis.dev (Desktop y Móvil) siempre visible a la derecha */}
+            <div className="relative pl-4 md:pl-6 flex items-center">
               <button 
                 onClick={() => setIsLangMenuOpen(!isLangMenuOpen)}
                 onBlur={() => setTimeout(() => setIsLangMenuOpen(false), 200)}
-                className="flex items-center gap-2 hover:text-zinc-900 transition-colors font-bold uppercase"
+                className="flex items-center gap-2 hover:text-zinc-900 transition-colors font-bold uppercase text-sm"
               >
                 <img 
                   src={languageConfig[lang].flagUrl} 
@@ -221,7 +233,7 @@ const Home = () => {
               </button>
               
               {isLangMenuOpen && (
-                <div className="absolute right-0 top-full mt-4 w-44 bg-white rounded-xl shadow-xl border border-zinc-100 py-2 animate-fade-in flex flex-col z-50 overflow-hidden">
+                <div className="absolute right-0 top-full mt-6 w-44 bg-white rounded-xl shadow-xl border border-zinc-100 py-2 animate-fade-in flex flex-col z-50 overflow-hidden">
                   {Object.entries(languageConfig).map(([code, { name, flagUrl }]) => (
                     <button 
                       key={code}
@@ -240,17 +252,9 @@ const Home = () => {
               )}
             </div>
           </div>
-
-          {/* Botón menú hamburguesa (Móvil) */}
-          <button 
-            className="md:hidden p-2 text-zinc-600 hover:text-zinc-900 transition-colors"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          >
-            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
         </div>
 
-        {/* Menú Móvil Desplegable */}
+        {/* Menú Móvil Desplegable (Solo Enlaces) */}
         {isMobileMenuOpen && (
           <div className="md:hidden absolute top-20 left-0 w-full bg-white border-b border-zinc-200 shadow-xl flex flex-col p-6 gap-6 animate-fade-in z-40">
             <div className="flex flex-col gap-4">
@@ -263,29 +267,6 @@ const Home = () => {
               <a href="/blog" onClick={(e) => { handleBlogClick(e); setIsMobileMenuOpen(false); }} className="text-lg font-bold text-blue-600 hover:text-blue-700 transition-colors flex items-center gap-2">
                 {content.nav_blog} <BookOpen size={18} />
               </a>
-            </div>
-            
-            <div className="h-px bg-zinc-100 w-full my-2"></div>
-            
-            {/* Selector de idiomas para Móvil (Grid táctil) */}
-            <div className="flex flex-col gap-4">
-              <p className="text-xs font-bold text-zinc-400 uppercase tracking-widest">Idioma / Language</p>
-              <div className="grid grid-cols-2 gap-3">
-                {Object.entries(languageConfig).map(([code, { name, flagUrl }]) => (
-                  <button 
-                    key={code}
-                    onClick={() => { setLang(code); setIsMobileMenuOpen(false); }} 
-                    className={`flex items-center gap-3 p-3 rounded-xl border transition-all ${lang === code ? 'border-blue-200 bg-blue-50 text-blue-700 font-bold shadow-sm' : 'border-zinc-200 bg-white hover:bg-zinc-50 text-zinc-600 font-medium'}`}
-                  >
-                    <img 
-                      src={flagUrl} 
-                      alt={`${code} flag`} 
-                      className="w-5 h-auto rounded-[2px] shadow-sm border border-zinc-200/50" 
-                    />
-                    <span className="truncate">{name}</span>
-                  </button>
-                ))}
-              </div>
             </div>
           </div>
         )}
