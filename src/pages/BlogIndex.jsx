@@ -59,7 +59,7 @@ const BlogIndex = () => {
               {/* Image side */}
               <div className="md:w-1/2 overflow-hidden">
                 <img 
-                  src="https://images.unsplash.com/photo-1700299926955-d68c16ba107b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4MTM2MDJ8MHwxfGFsbHx8fHx8fHx8fDE3NzM1MjQ2MTZ8&ixlib=rb-4.1.0&q=80&w=800" 
+                  src="https://images.unsplash.com/photo-1599478585030-22b62e038962?q=80&w=8000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
                   alt="Vista de Girona" 
                   className="h-full w-full object-cover min-h-[300px] group-hover:scale-105 transition-transform duration-700"
                 />
