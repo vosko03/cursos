@@ -82,26 +82,26 @@ const Dashboard = () => {
   return (
     <>
       <div className="h-screen bg-slate-50 p-3 md:p-4 lg:p-5 font-sans selection:bg-indigo-200 flex flex-col overflow-hidden">
-        {/* Header con título integrado - más compacto */}
+        {/* Header con título integrado - más grande y sin corte */}
         <div className="max-w-6xl mx-auto w-full mb-3">
-          <div className="flex items-center justify-between flex-wrap gap-1">
-            <div className="flex items-center gap-2">
-              <Link to="/" className="inline-flex items-center text-indigo-600 font-semibold hover:text-indigo-800 transition-colors text-xs">
-                <ArrowLeft size={14} className="mr-0.5" /> Tornar
+          <div className="flex items-center justify-between flex-wrap gap-2">
+            <div className="flex items-center gap-3 min-w-0 flex-1">
+              <Link to="/" className="inline-flex items-center text-indigo-600 font-semibold hover:text-indigo-800 transition-colors text-sm whitespace-nowrap shrink-0">
+                <ArrowLeft size={16} className="mr-1" /> Tornar
               </Link>
               
-              {/* Título en negrita y pequeño */}
-              <span className="text-[10px] md:text-xs font-bold text-slate-700 border-l border-slate-300 pl-2 truncate max-w-[250px] md:max-w-[400px]">
+              {/* Título más grande y sin truncar */}
+              <span className="text-sm md:text-base font-bold text-slate-700 border-l border-slate-300 pl-3 break-words">
                 La primera plataforma d'integració lingüística i professional de Catalunya impulsada 100% per IA.
               </span>
             </div>
             
-            <div className="flex items-center gap-2">
-              <div className="inline-flex items-center space-x-1 bg-indigo-100 text-indigo-800 px-1.5 py-0.5 rounded-full text-[10px] font-bold">
-                <Sparkles size={12} />
+            <div className="flex items-center gap-3 shrink-0">
+              <div className="inline-flex items-center space-x-1.5 bg-indigo-100 text-indigo-800 px-2 py-1 rounded-full text-xs font-bold whitespace-nowrap">
+                <Sparkles size={14} />
                 <span>Mapa Estratègic</span>
               </div>
-              <h1 className="text-base font-extrabold text-slate-900">
+              <h1 className="text-lg font-extrabold text-slate-900 whitespace-nowrap">
                 cursos.cat
               </h1>
             </div>
