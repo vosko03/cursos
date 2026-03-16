@@ -7,7 +7,7 @@ import {
 } from 'lucide-react';
 import { Analytics } from "@vercel/analytics/react";
 
-// Component per a cada node (disseny molt més petit i compacte)
+// Component per a cada node
 const StrategyNode = ({ title, subtitle, icon: Icon, color, active, onClick }) => (
   <div 
     onClick={onClick}
@@ -16,14 +16,14 @@ const StrategyNode = ({ title, subtitle, icon: Icon, color, active, onClick }) =
         ? 'ring-1 ring-indigo-500 bg-indigo-50/40 shadow-sm scale-[1.02] z-10 border-indigo-200' 
         : 'hover:bg-slate-100 border-transparent opacity-80 hover:opacity-100'
       } 
-      border rounded-lg p-1.5 flex items-center gap-2 w-full`}
+      border rounded-lg p-2 flex items-center gap-2.5 w-full`}
   >
-    <div className={`p-1 rounded-md ${color.replace('text-', 'bg-')} text-white shrink-0`}>
-      <Icon size={14} strokeWidth={2.5} />
+    <div className={`p-1.5 rounded-md ${color.replace('text-', 'bg-')} text-white shrink-0`}>
+      <Icon size={16} strokeWidth={2.5} />
     </div>
     <div className="text-left overflow-hidden">
-      <h3 className={`font-bold text-[10px] leading-none truncate ${active ? 'text-indigo-900' : 'text-slate-700'}`}>{title}</h3>
-      <p className="text-[8px] font-medium text-slate-500 truncate mt-0.5">{subtitle}</p>
+      <h3 className={`font-bold text-sm leading-tight truncate ${active ? 'text-indigo-900' : 'text-slate-700'}`}>{title}</h3>
+      <p className="text-xs font-medium text-slate-500 truncate mt-0.5">{subtitle}</p>
     </div>
   </div>
 );
@@ -82,37 +82,37 @@ const Dashboard = () => {
 
   return (
     <>
-      <div className="h-screen bg-slate-50 p-3 md:p-4 lg:p-5 font-sans selection:bg-indigo-200 flex flex-col overflow-hidden">
-        {/* Header ultra compacto */}
-        <div className="max-w-6xl mx-auto w-full mb-2 flex items-center justify-between">
-          <Link to="/" className="inline-flex items-center text-indigo-600 font-semibold hover:text-indigo-800 transition-colors text-xs">
-            <ArrowLeft size={14} className="mr-1" /> Tornar
+      <div className="h-screen bg-slate-50 p-4 md:p-5 lg:p-6 font-sans selection:bg-indigo-200 flex flex-col overflow-hidden">
+        {/* Header */}
+        <div className="max-w-6xl mx-auto w-full mb-3 flex items-center justify-between">
+          <Link to="/" className="inline-flex items-center text-indigo-600 font-semibold hover:text-indigo-800 transition-colors text-sm">
+            <ArrowLeft size={16} className="mr-1" /> Tornar
           </Link>
           
-          <div className="flex items-center gap-2">
-            <div className="inline-flex items-center space-x-1 bg-indigo-100 text-indigo-800 px-1.5 py-0.5 rounded-full text-[8px] font-bold">
-              <Sparkles size={10} />
+          <div className="flex items-center gap-3">
+            <div className="inline-flex items-center space-x-1.5 bg-indigo-100 text-indigo-800 px-2 py-1 rounded-full text-xs font-bold">
+              <Sparkles size={14} />
               <span>Mapa Estratègic</span>
             </div>
-            <h1 className="text-base font-extrabold text-slate-900">
+            <h1 className="text-lg font-extrabold text-slate-900">
               cursos.cat
             </h1>
           </div>
         </div>
 
         {/* Main Layout - SIN SCROLL EN MENÚ IZQUIERDO */}
-        <div className="max-w-6xl mx-auto w-full flex-1 flex flex-col lg:flex-row gap-3 lg:gap-4 min-h-0">
+        <div className="max-w-6xl mx-auto w-full flex-1 flex flex-col lg:flex-row gap-4 lg:gap-5 min-h-0">
           
           {/* COLUMNA ESQUERRA - Menú de Nodes SIN SCROLL */}
-          <div className="w-full lg:w-72 xl:w-80 flex flex-col sm:flex-row lg:flex-col gap-2 shrink-0">
+          <div className="w-full lg:w-80 xl:w-96 flex flex-col sm:flex-row lg:flex-col gap-3 shrink-0">
             
-            {/* Adquisición - Altura fija calculada */}
-            <div className="bg-white p-2 rounded-xl shadow-sm border border-slate-200">
-              <div className="flex items-center gap-1 mb-1">
-                <Layers size={10} className="text-slate-400"/>
-                <h2 className="text-[9px] font-bold text-slate-600 uppercase tracking-wider">1. Adquisició</h2>
+            {/* Adquisición */}
+            <div className="bg-white p-3 rounded-xl shadow-sm border border-slate-200">
+              <div className="flex items-center gap-1.5 mb-2">
+                <Layers size={14} className="text-slate-400"/>
+                <h2 className="text-xs font-bold text-slate-600 uppercase tracking-wider">1. Adquisició</h2>
               </div>
-              <div className="flex flex-col gap-1">
+              <div className="flex flex-col gap-2">
                 <StrategyNode {...nodes.seo} active={selectedNode === 'seo'} onClick={() => handleNodeSelect('seo')} />
                 <StrategyNode {...nodes.videos} active={selectedNode === 'videos'} onClick={() => handleNodeSelect('videos')} />
                 <StrategyNode {...nodes.inmigrantes} active={selectedNode === 'inmigrantes'} onClick={() => handleNodeSelect('inmigrantes')} />
@@ -120,13 +120,13 @@ const Dashboard = () => {
             </div>
 
             {/* Producte Principal */}
-            <div className="bg-gradient-to-br from-indigo-50/50 to-white p-2 rounded-xl shadow-sm border border-indigo-100 relative">
+            <div className="bg-gradient-to-br from-indigo-50/50 to-white p-3 rounded-xl shadow-sm border border-indigo-100 relative">
               <div className="absolute -right-8 -top-8 w-24 h-24 bg-indigo-100 rounded-full blur-2xl opacity-60 pointer-events-none"></div>
-              <div className="flex items-center gap-1 mb-1 relative z-10">
-                <Cpu size={10} className="text-indigo-500"/>
-                <h2 className="text-[9px] font-bold text-indigo-800 uppercase tracking-wider">2. Producte Principal</h2>
+              <div className="flex items-center gap-1.5 mb-2 relative z-10">
+                <Cpu size={14} className="text-indigo-500"/>
+                <h2 className="text-xs font-bold text-indigo-800 uppercase tracking-wider">2. Producte Principal</h2>
               </div>
-              <div className="flex flex-col gap-1 relative z-10">
+              <div className="flex flex-col gap-2 relative z-10">
                 <StrategyNode {...nodes.central} active={selectedNode === 'central'} onClick={() => handleNodeSelect('central')} />
                 <StrategyNode {...nodes.tutor} active={selectedNode === 'tutor'} onClick={() => handleNodeSelect('tutor')} />
                 <StrategyNode {...nodes.comunidad} active={selectedNode === 'comunidad'} onClick={() => handleNodeSelect('comunidad')} />
@@ -134,12 +134,12 @@ const Dashboard = () => {
             </div>
 
             {/* Monetització */}
-            <div className="bg-white p-2 rounded-xl shadow-sm border border-slate-200">
-              <div className="flex items-center gap-1 mb-1">
-                <TrendingUp size={10} className="text-slate-400"/>
-                <h2 className="text-[9px] font-bold text-slate-600 uppercase tracking-wider">3. Monetització</h2>
+            <div className="bg-white p-3 rounded-xl shadow-sm border border-slate-200">
+              <div className="flex items-center gap-1.5 mb-2">
+                <TrendingUp size={14} className="text-slate-400"/>
+                <h2 className="text-xs font-bold text-slate-600 uppercase tracking-wider">3. Monetització</h2>
               </div>
-              <div className="flex flex-col gap-1">
+              <div className="flex flex-col gap-2">
                 <StrategyNode {...nodes.b2b} active={selectedNode === 'b2b'} onClick={() => handleNodeSelect('b2b')} />
                 <StrategyNode {...nodes.certificacion} active={selectedNode === 'certificacion'} onClick={() => handleNodeSelect('certificacion')} />
                 <StrategyNode {...nodes.afiliacion} active={selectedNode === 'afiliacion'} onClick={() => handleNodeSelect('afiliacion')} />
@@ -148,10 +148,10 @@ const Dashboard = () => {
 
           </div>
 
-          {/* COLUMNA DRETA - Panell de Detall con scroll interno si es necesario */}
+          {/* COLUMNA DRETA - Panell de Detall con scroll interno */}
           <div className="w-full lg:flex-1 min-h-0" ref={detailRef}>
             <div className="h-full">
-              <div className={`bg-white p-4 rounded-2xl shadow-xl border-t-4 h-full overflow-y-auto custom-scrollbar transition-colors duration-500 ${
+              <div className={`bg-white p-5 md:p-6 rounded-2xl shadow-xl border-t-4 h-full overflow-y-auto custom-scrollbar transition-colors duration-500 ${
                 nodes[selectedNode].color.includes('indigo') ? 'border-t-indigo-500' :
                 nodes[selectedNode].color.includes('blue') ? 'border-t-blue-500' :
                 nodes[selectedNode].color.includes('amber') ? 'border-t-amber-500' :
@@ -162,48 +162,48 @@ const Dashboard = () => {
                 'border-t-orange-500'
               }`}>
                 
-                <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 mb-2 border-b pb-2">
-                  <div className={`p-2 rounded-xl ${nodes[selectedNode].color.replace('text-', 'bg-')} text-white shadow-md shrink-0`}>
-                    {React.createElement(nodes[selectedNode].icon, { size: 20, strokeWidth: 1.5 })}
+                <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 mb-3 border-b pb-3">
+                  <div className={`p-3 rounded-xl ${nodes[selectedNode].color.replace('text-', 'bg-')} text-white shadow-md shrink-0`}>
+                    {React.createElement(nodes[selectedNode].icon, { size: 24, strokeWidth: 1.5 })}
                   </div>
                   <div>
-                    <p className="text-[8px] font-bold text-slate-400 uppercase tracking-wider mb-0.5">Anàlisi del Mòdul</p>
-                    <h2 className="text-base font-extrabold text-slate-800 tracking-tight leading-tight">
+                    <p className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">Anàlisi del Mòdul</p>
+                    <h2 className="text-xl md:text-2xl font-extrabold text-slate-800 tracking-tight leading-tight">
                       {nodes[selectedNode].title}
                     </h2>
-                    <p className={`text-[10px] font-semibold mt-0.5 ${nodes[selectedNode].color.replace('bg-', 'text-').replace('-500', '-600')}`}>
+                    <p className={`text-sm font-semibold mt-1 ${nodes[selectedNode].color.replace('bg-', 'text-').replace('-500', '-600')}`}>
                       {nodes[selectedNode].subtitle}
                     </p>
                   </div>
                 </div>
                 
-                <div className="space-y-3">
+                <div className="space-y-4">
                   <div>
-                    <h4 className="font-bold text-slate-800 text-[10px] flex items-center gap-1 mb-1">
-                      <Sparkles size={10} className="text-amber-500" />
+                    <h4 className="font-bold text-slate-800 text-sm flex items-center gap-1.5 mb-2">
+                      <Sparkles size={14} className="text-amber-500" />
                       Visió del Mòdul
                     </h4>
-                    <p className="text-slate-600 leading-relaxed text-[10px] md:text-xs">
+                    <p className="text-slate-600 leading-relaxed text-sm md:text-base">
                       {nodes[selectedNode].content.descripció}
                     </p>
                   </div>
                   
-                  <div className="bg-slate-50 p-3 rounded-xl border border-slate-100">
-                    <h4 className="font-bold text-slate-800 text-[10px] mb-1 border-b border-slate-200 pb-1">Claus d'Execució</h4>
-                    <ul className="space-y-1.5">
+                  <div className="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                    <h4 className="font-bold text-slate-800 text-sm mb-2 border-b border-slate-200 pb-2">Claus d'Execució</h4>
+                    <ul className="space-y-2">
                       {Object.entries(nodes[selectedNode].content).map(([key, value]) => {
                         if (key.toLowerCase() === 'descripció') return null;
                         
                         return (
-                          <li key={key} className="flex flex-col sm:flex-row sm:items-baseline gap-0.5 sm:gap-2">
-                            <span className="capitalize font-bold text-slate-700 text-[9px] sm:w-28 shrink-0">
+                          <li key={key} className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-3">
+                            <span className="capitalize font-bold text-slate-700 text-xs sm:w-28 shrink-0">
                               {key.replace(/_/g, ' ')}:
                             </span> 
-                            <span className="text-slate-600 font-medium text-[9px] md:text-[10px]">
+                            <span className="text-slate-600 font-medium text-sm">
                               {Array.isArray(value) 
-                                ? <div className="flex flex-wrap gap-1">
+                                ? <div className="flex flex-wrap gap-1.5">
                                     {value.map(tag => (
-                                      <span key={tag} className="bg-white border border-slate-200 px-1 py-0.5 rounded text-[8px] font-bold text-slate-700 shadow-sm">{tag}</span>
+                                      <span key={tag} className="bg-white border border-slate-200 px-2 py-0.5 rounded text-xs font-bold text-slate-700 shadow-sm">{tag}</span>
                                     ))}
                                   </div>
                                 : value}
@@ -221,16 +221,16 @@ const Dashboard = () => {
 
         </div>
         
-        {/* Footer ultra minimal */}
-        <footer className="max-w-6xl mx-auto w-full mt-1 text-center text-slate-400 text-[8px] font-medium">
-          Prem qualsevol mòdul | Projecte cursos.cat
+        {/* Footer */}
+        <footer className="max-w-6xl mx-auto w-full mt-2 text-center text-slate-400 text-xs font-medium">
+          Prem qualsevol mòdul per aprofundir | Projecte cursos.cat
         </footer>
       </div>
       
       {/* Estilos para scrollbar personalizada solo en panel derecho */}
       <style jsx>{`
         .custom-scrollbar::-webkit-scrollbar {
-          width: 4px;
+          width: 6px;
         }
         .custom-scrollbar::-webkit-scrollbar-track {
           background: transparent;
