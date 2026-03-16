@@ -14,9 +14,6 @@ const Home = () => (
           La primera plataforma d'immersió lingüística impulsada 100% per IA.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center mt-8">
-          <Link to="/dash" className="px-8 py-4 text-lg font-bold text-white bg-indigo-600 hover:bg-indigo-700 rounded-full transition-all shadow-lg hover:shadow-xl flex items-center justify-center gap-2">
-            <Sparkles size={20} /> Mapa Estratègic
-          </Link>
           <Link to="/blog" className="px-8 py-4 text-lg font-bold text-indigo-600 bg-white border-2 border-indigo-100 hover:border-indigo-300 rounded-full transition-all shadow-sm hover:shadow-md flex items-center justify-center gap-2">
             <BookOpen size={20} /> Llegir el Blog
           </Link>
