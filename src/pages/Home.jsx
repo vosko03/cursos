@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { 
   Sparkles, BookOpen, Bot, Globe, Briefcase, Award, 
-  GraduationCap, ChevronRight, ShieldCheck, Zap, ChevronDown 
+  GraduationCap, ChevronRight, ShieldCheck, Zap, ChevronDown, Menu, X 
 } from 'lucide-react';
 
 // --- CONFIGURACIÓN DE ICONOS Y ESTILOS PARA LAS TARJETAS ---
@@ -156,12 +156,14 @@ const languageConfig = {
 
 const FeatureCard = ({ icon: Icon, title, description, colorClass }) => (
   <div className="bg-white p-8 rounded-2xl border border-zinc-200 shadow-sm hover:shadow-md transition-all duration-300 group">
-    <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-6 transition-colors duration-300 ${colorClass}`}>
-      <Icon size={24} strokeWidth={1.5} />
+    <div className="flex items-center gap-4 mb-4">
+      <div className={`w-12 h-12 shrink-0 rounded-xl flex items-center justify-center transition-colors duration-300 ${colorClass}`}>
+        <Icon size={24} strokeWidth={1.5} />
+      </div>
+      <h3 className="text-xl font-bold text-zinc-900 group-hover:text-blue-600 transition-colors">
+        {title}
+      </h3>
     </div>
-    <h3 className="text-xl font-bold text-zinc-900 mb-3 group-hover:text-blue-600 transition-colors">
-      {title}
-    </h3>
     <p className="text-zinc-600 leading-relaxed text-sm">
       {description}
     </p>
@@ -171,6 +173,7 @@ const FeatureCard = ({ icon: Icon, title, description, colorClass }) => (
 const Home = () => {
   const [lang, setLang] = useState('ca');
   const [isLangMenuOpen, setIsLangMenuOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [content, setContent] = useState(fallbackData[lang]);
 
   useEffect(() => {
@@ -193,6 +196,7 @@ const Home = () => {
             <span className="font-bold text-lg tracking-tight">cursos<span className="text-blue-400">.cat</span></span>
           </div>
           
+          {/* Navegación Desktop */}
           <div className="hidden md:flex items-center gap-8 text-sm font-medium text-zinc-600">
             <a href="#metodologia" className="hover:text-zinc-900 transition-colors">{content.nav_methodology}</a>
             <a href="#serveis" className="hover:text-zinc-900 transition-colors">{content.nav_services}</a>
@@ -200,7 +204,7 @@ const Home = () => {
               {content.nav_blog} <BookOpen size={16} />
             </a>
             
-            {/* Selector de idiomas con flagicons.lipis.dev */}
+            {/* Selector de idiomas con flagicons.lipis.dev (Desktop) */}
             <div className="relative border-l border-zinc-200 pl-6">
               <button 
                 onClick={() => setIsLangMenuOpen(!isLangMenuOpen)}
@@ -236,7 +240,55 @@ const Home = () => {
               )}
             </div>
           </div>
+
+          {/* Botón menú hamburguesa (Móvil) */}
+          <button 
+            className="md:hidden p-2 text-zinc-600 hover:text-zinc-900 transition-colors"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          >
+            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
         </div>
+
+        {/* Menú Móvil Desplegable */}
+        {isMobileMenuOpen && (
+          <div className="md:hidden absolute top-20 left-0 w-full bg-white border-b border-zinc-200 shadow-xl flex flex-col p-6 gap-6 animate-fade-in z-40">
+            <div className="flex flex-col gap-4">
+              <a href="#metodologia" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-medium text-zinc-600 hover:text-zinc-900 transition-colors">
+                {content.nav_methodology}
+              </a>
+              <a href="#serveis" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-medium text-zinc-600 hover:text-zinc-900 transition-colors">
+                {content.nav_services}
+              </a>
+              <a href="/blog" onClick={(e) => { handleBlogClick(e); setIsMobileMenuOpen(false); }} className="text-lg font-bold text-blue-600 hover:text-blue-700 transition-colors flex items-center gap-2">
+                {content.nav_blog} <BookOpen size={18} />
+              </a>
+            </div>
+            
+            <div className="h-px bg-zinc-100 w-full my-2"></div>
+            
+            {/* Selector de idiomas para Móvil (Grid táctil) */}
+            <div className="flex flex-col gap-4">
+              <p className="text-xs font-bold text-zinc-400 uppercase tracking-widest">Idioma / Language</p>
+              <div className="grid grid-cols-2 gap-3">
+                {Object.entries(languageConfig).map(([code, { name, flagUrl }]) => (
+                  <button 
+                    key={code}
+                    onClick={() => { setLang(code); setIsMobileMenuOpen(false); }} 
+                    className={`flex items-center gap-3 p-3 rounded-xl border transition-all ${lang === code ? 'border-blue-200 bg-blue-50 text-blue-700 font-bold shadow-sm' : 'border-zinc-200 bg-white hover:bg-zinc-50 text-zinc-600 font-medium'}`}
+                  >
+                    <img 
+                      src={flagUrl} 
+                      alt={`${code} flag`} 
+                      className="w-5 h-auto rounded-[2px] shadow-sm border border-zinc-200/50" 
+                    />
+                    <span className="truncate">{name}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
       </nav>
 
       {/* Hero Section */}
