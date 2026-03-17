@@ -158,8 +158,10 @@ const fallbackData = {
 const languageConfig = {
   ca: { name: 'Català', flagUrl: 'https://flagicons.lipis.dev/flags/4x3/es-ct.svg' },
   es: { name: 'Español', flagUrl: 'https://flagicons.lipis.dev/flags/4x3/es.svg' },
+  eu: { name: 'Español', flagUrl: 'https://flagicons.lipis.dev/flags/4x3/es-pv.svg' },
   en: { name: 'English', flagUrl: 'https://flagicons.lipis.dev/flags/4x3/gb.svg' },
   fr: { name: 'Français', flagUrl: 'https://flagicons.lipis.dev/flags/4x3/fr.svg' },
+  gl: { name: 'Español', flagUrl: 'https://flagicons.lipis.dev/flags/4x3/es-ga.svg' },
   de: { name: 'Deutsch', flagUrl: 'https://flagicons.lipis.dev/flags/4x3/de.svg' },
   gn: { name: 'Avañeʼẽ', flagUrl: 'https://flagicons.lipis.dev/flags/4x3/py.svg' }
 };
