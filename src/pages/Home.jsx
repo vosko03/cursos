@@ -6,12 +6,13 @@ import {
 
 import { createClient } from '@supabase/supabase-js';
 
-// Si usas Vite:
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-const supabaseKey = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY;
+// Obtenemos las variables. Añadimos un fallback vacío ('') por si fallan en Vercel.
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || '';
+const supabaseKey = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY || '';
 
-// Inicializa el cliente real:
-const supabase = createClient(supabaseUrl, supabaseKey);
+// Inicializa el cliente real SOLO si ambas variables existen. 
+// Esto evita el error fatal que deja la pantalla en blanco.
+const supabase = (supabaseUrl && supabaseKey) ? createClient(supabaseUrl, supabaseKey) : null;
 
 // --- CONFIGURACIÓN DE ICONOS Y ESTILOS PARA LAS TARJETAS ---
 const servicesConfig = [
