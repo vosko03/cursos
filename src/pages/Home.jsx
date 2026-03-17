@@ -4,8 +4,13 @@ import {
   GraduationCap, ChevronRight, ShieldCheck, Zap, ChevronDown, Menu, X,
   Network, Mic, RefreshCw
 } from 'lucide-react';
-import { supabase } from '../lib/supabase'; // Ajusta esta ruta según la estructura de tus carpetas
 import { Analytics } from "@vercel/analytics/react";
+import { createClient } from '@supabase/supabase-js';
+
+// --- CONFIGURACIÓN DE SUPABASE DIRECTA ---
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || '';
+const supabaseKey = import.meta.env.VITE_SUPABASE_PUBLISHABLE_DEFAULT || '';
+const supabase = (supabaseUrl && supabaseKey) ? createClient(supabaseUrl, supabaseKey) : null;
 
 // --- CONFIGURACIÓN DE ICONOS Y ESTILOS PARA LAS TARJETAS ---
 const servicesConfig = [
@@ -57,14 +62,14 @@ const fallbackData = {
 };
 
 const languageConfig = {
-  ca: { name: 'Català', flagUrl: '[https://flagicons.lipis.dev/flags/4x3/es-ct.svg](https://flagicons.lipis.dev/flags/4x3/es-ct.svg)' },
-  es: { name: 'Español', flagUrl: '[https://flagicons.lipis.dev/flags/4x3/es.svg](https://flagicons.lipis.dev/flags/4x3/es.svg)' },
-  en: { name: 'English', flagUrl: '[https://flagicons.lipis.dev/flags/4x3/gb.svg](https://flagicons.lipis.dev/flags/4x3/gb.svg)' },
-  fr: { name: 'Français', flagUrl: '[https://flagicons.lipis.dev/flags/4x3/fr.svg](https://flagicons.lipis.dev/flags/4x3/fr.svg)' },
-  de: { name: 'Deutsch', flagUrl: '[https://flagicons.lipis.dev/flags/4x3/de.svg](https://flagicons.lipis.dev/flags/4x3/de.svg)' },
-  gn: { name: 'Avañeʼẽ', flagUrl: '[https://flagicons.lipis.dev/flags/4x3/py.svg](https://flagicons.lipis.dev/flags/4x3/py.svg)' },
-  eu: { name: 'Euskera', flagUrl: '[https://flagicons.lipis.dev/flags/4x3/es-pv.svg](https://flagicons.lipis.dev/flags/4x3/es-pv.svg)' },
-  gl: { name: 'Galego', flagUrl: '[https://flagicons.lipis.dev/flags/4x3/es-ga.svg](https://flagicons.lipis.dev/flags/4x3/es-ga.svg)' }
+  ca: { name: 'Català', flagUrl: 'https://flagicons.lipis.dev/flags/4x3/es-ct.svg' },
+  es: { name: 'Español', flagUrl: 'https://flagicons.lipis.dev/flags/4x3/es.svg' },
+  en: { name: 'English', flagUrl: 'https://flagicons.lipis.dev/flags/4x3/gb.svg' },
+  fr: { name: 'Français', flagUrl: 'https://flagicons.lipis.dev/flags/4x3/fr.svg' },
+  de: { name: 'Deutsch', flagUrl: 'https://flagicons.lipis.dev/flags/4x3/de.svg' },
+  gn: { name: 'Avañeʼẽ', flagUrl: 'https://flagicons.lipis.dev/flags/4x3/py.svg' },
+  eu: { name: 'Euskera', flagUrl: 'https://flagicons.lipis.dev/flags/4x3/es-pv.svg' },
+  gl: { name: 'Galego', flagUrl: 'https://flagicons.lipis.dev/flags/4x3/es-ga.svg' }
 };
 
 const FeatureCard = ({ icon: Icon, title, description, colorClass }) => (
@@ -120,7 +125,7 @@ const Home = () => {
         if (error) throw error;
         if (data) setContent(data);
       } catch (error) {
-        console.error("Error cargando idioma desde Supabase:", error.message);
+        console.error("Error cargando idioma des de Supabase:", error.message);
         setContent(fallbackData[lang] || fallbackData['ca']);
       } finally {
         setIsLoading(false);
@@ -301,7 +306,7 @@ const Home = () => {
                 <h2 className="text-3xl md:text-4xl font-bold text-zinc-900 mb-4 tracking-tight">
                   {content.services_title}
                 </h2>
-                <p className="text-zinc-500 text-lg">
+                <p className="text-zinc-500 text-lg truncate">
                   {content.services_subtitle}
                 </p>
               </div>
