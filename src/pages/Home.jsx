@@ -3,7 +3,13 @@ import {
   Sparkles, BookOpen, Bot, Globe, Briefcase, Award, 
   GraduationCap, ChevronRight, ShieldCheck, Zap, ChevronDown, Menu, X 
 } from 'lucide-react';
+import { createClient } from '@supabase/supabase-js';
 
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+const supabaseKey = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY;
+
+// Creamos el cliente de Supabase
+const supabase = createClient(supabaseUrl, supabaseKey);
 // --- CONFIGURACIÓN DE ICONOS Y ESTILOS PARA LAS TARJETAS ---
 const servicesConfig = [
   { icon: Bot, colorClass: "bg-blue-50 text-blue-600" },
