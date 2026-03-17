@@ -4,8 +4,13 @@ import {
   GraduationCap, ChevronRight, ShieldCheck, Zap, ChevronDown, Menu, X,
   Network, Mic, RefreshCw
 } from 'lucide-react';
-import { supabase } from '../lib/supabase'; // Ajusta esta ruta según la estructura de tus carpetas
 import { Analytics } from "@vercel/analytics/react";
+import { createClient } from '@supabase/supabase-js';
+
+// --- CONFIGURACIÓN DE SUPABASE DIRECTA ---
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || '';
+const supabaseKey = import.meta.env.VITE_SUPABASE_PUBLISHABLE_DEFAULT || '';
+const supabase = (supabaseUrl && supabaseKey) ? createClient(supabaseUrl, supabaseKey) : null;
 
 // --- CONFIGURACIÓN DE ICONOS Y ESTILOS PARA LAS TARJETAS ---
 const servicesConfig = [
@@ -120,7 +125,7 @@ const Home = () => {
         if (error) throw error;
         if (data) setContent(data);
       } catch (error) {
-        console.error("Error cargando idioma desde Supabase:", error.message);
+        console.error("Error cargando idioma des de Supabase:", error.message);
         setContent(fallbackData[lang] || fallbackData['ca']);
       } finally {
         setIsLoading(false);
