@@ -34,6 +34,7 @@ const methodologyConfig = [
 // --- TRADUCCIONES LOCALES (Fallback de Supabase - SOLO CATALÁN) ---
 const fallbackData = {
   ca: {
+    page_title: "Cursos.cat: la primera plataforma d'integració lingüística de Catalunya impulsada 100% per IA.",
     nav_methodology: "Metodologia", nav_services: "Serveis", nav_blog: "Blog",
     hero_badge: "La revolució del català ja és aquí",
     hero_title_main: "Domina el català amb la", hero_title_highlight: "potència de la IA",
@@ -97,6 +98,13 @@ const Home = () => {
   const [content, setContent] = useState(fallbackData['ca']);
   const [isLoading, setIsLoading] = useState(false);
 
+  // Efecto para actualizar el título de la página dinámicamente cuando el contenido cambia
+  useEffect(() => {
+    if (content?.page_title) {
+      document.title = content.page_title;
+    }
+  }, [content]);
+  
   // --- LÓGICA DE CONEXIÓN A SUPABASE ---
   useEffect(() => {
     const fetchContent = async () => {
@@ -130,7 +138,6 @@ const Home = () => {
     };
 
     fetchContent();
-    document.title = `Cursos.cat: la primera plataforma d'integració lingüística de Catalunya impulsada 100% per IA.`;
   }, [lang]);
 
   const handleBlogClick = (e) => {
