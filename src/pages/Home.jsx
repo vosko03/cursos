@@ -62,14 +62,14 @@ const fallbackData = {
 };
 
 const languageConfig = {
-  ca: { name: 'Català', flagUrl: '[https://flagicons.lipis.dev/flags/4x3/es-ct.svg](https://flagicons.lipis.dev/flags/4x3/es-ct.svg)' },
-  es: { name: 'Español', flagUrl: '[https://flagicons.lipis.dev/flags/4x3/es.svg](https://flagicons.lipis.dev/flags/4x3/es.svg)' },
-  en: { name: 'English', flagUrl: '[https://flagicons.lipis.dev/flags/4x3/gb.svg](https://flagicons.lipis.dev/flags/4x3/gb.svg)' },
-  fr: { name: 'Français', flagUrl: '[https://flagicons.lipis.dev/flags/4x3/fr.svg](https://flagicons.lipis.dev/flags/4x3/fr.svg)' },
-  de: { name: 'Deutsch', flagUrl: '[https://flagicons.lipis.dev/flags/4x3/de.svg](https://flagicons.lipis.dev/flags/4x3/de.svg)' },
-  gn: { name: 'Avañeʼẽ', flagUrl: '[https://flagicons.lipis.dev/flags/4x3/py.svg](https://flagicons.lipis.dev/flags/4x3/py.svg)' },
-  eu: { name: 'Euskera', flagUrl: '[https://flagicons.lipis.dev/flags/4x3/es-pv.svg](https://flagicons.lipis.dev/flags/4x3/es-pv.svg)' },
-  gl: { name: 'Galego', flagUrl: '[https://flagicons.lipis.dev/flags/4x3/es-ga.svg](https://flagicons.lipis.dev/flags/4x3/es-ga.svg)' }
+  ca: { name: 'Català', flagUrl: 'https://flagicons.lipis.dev/flags/4x3/es-ct.svg' },
+  es: { name: 'Español', flagUrl: 'https://flagicons.lipis.dev/flags/4x3/es.svg' },
+  en: { name: 'English', flagUrl: 'https://flagicons.lipis.dev/flags/4x3/gb.svg' },
+  fr: { name: 'Français', flagUrl: 'https://flagicons.lipis.dev/flags/4x3/fr.svg' },
+  de: { name: 'Deutsch', flagUrl: 'https://flagicons.lipis.dev/flags/4x3/de.svg' },
+  gn: { name: 'Avañeʼẽ', flagUrl: 'https://flagicons.lipis.dev/flags/4x3/py.svg' },
+  eu: { name: 'Euskera', flagUrl: 'https://flagicons.lipis.dev/flags/4x3/es-pv.svg' },
+  gl: { name: 'Galego', flagUrl: 'https://flagicons.lipis.dev/flags/4x3/es-ga.svg' }
 };
 
 const FeatureCard = ({ icon: Icon, title, description, colorClass }) => (
