@@ -2,10 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { 
   Sparkles, BookOpen, Bot, Globe, Briefcase, Award, 
   GraduationCap, ChevronRight, ShieldCheck, Zap, ChevronDown, Menu, X,
-  Network, Mic, RefreshCw
+  Network, Mic, RefreshCw, LogOut
 } from 'lucide-react';
 import { Analytics } from "@vercel/analytics/react";
 import { createClient } from '@supabase/supabase-js';
+import { useAuth0 } from '@auth0/auth0-react'; // <-- NUEVA IMPORTACIÓN DE AUTH0
 
 // --- CONFIGURACIÓN DE SUPABASE DIRECTA ---
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || '';
@@ -95,7 +96,10 @@ const Home = () => {
   const [content, setContent] = useState(fallbackData['ca']);
   const [isLoading, setIsLoading] = useState(false);
 
-  // Efecto para actualizar el título de la página dinámicamente cuando el contenido cambia
+  // --- HOOKS DE AUTH0 ---
+  const { loginWithRedirect, logout, user, isAuthenticated, isLoading: authLoading } = useAuth0();
+
+  // Efecto para actualizar el título de la página dinámicamente
   useEffect(() => {
     if (content?.page_title) {
       document.title = content.page_title;
@@ -204,9 +208,39 @@ const Home = () => {
                   </div>
                 )}
               </div>
+
+              {/* Controles de Auth0 en Navbar (Desktop) */}
+              <div className="hidden md:flex items-center ml-4 pl-4 border-l border-zinc-200">
+                {!authLoading && !isAuthenticated && (
+                  <button 
+                    onClick={() => loginWithRedirect()}
+                    className="text-sm font-bold text-blue-600 hover:text-blue-700 transition-colors"
+                  >
+                    Entrar
+                  </button>
+                )}
+                {!authLoading && isAuthenticated && (
+                  <div className="flex items-center gap-3">
+                    <img 
+                      src={user?.picture} 
+                      alt={user?.name} 
+                      className="w-8 h-8 rounded-full border border-zinc-200 shadow-sm"
+                      referrerPolicy="no-referrer"
+                    />
+                    <button 
+                      onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}
+                      className="p-1.5 text-zinc-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors"
+                      title="Tancar sessió"
+                    >
+                      <LogOut size={18} />
+                    </button>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
 
+          {/* Menú Móvil */}
           {isMobileMenuOpen && (
             <div className="md:hidden absolute top-20 left-0 w-full bg-white border-b border-zinc-200 shadow-xl flex flex-col p-6 gap-6 animate-fade-in z-40">
               <div className="flex flex-col gap-4">
@@ -219,6 +253,30 @@ const Home = () => {
                 <a href="/blog" onClick={(e) => { handleBlogClick(e); setIsMobileMenuOpen(false); }} className="text-lg font-bold text-blue-600 hover:text-blue-700 transition-colors flex items-center gap-2">
                   {content.nav_blog} <BookOpen size={18} />
                 </a>
+                
+                <div className="border-t border-zinc-100 pt-4 mt-2">
+                  {!isAuthenticated ? (
+                    <button 
+                      onClick={() => loginWithRedirect()}
+                      className="w-full text-center py-3 bg-zinc-900 text-white rounded-xl font-bold"
+                    >
+                      Entrar / Registre
+                    </button>
+                  ) : (
+                    <div className="flex items-center justify-between bg-zinc-50 p-3 rounded-xl">
+                      <div className="flex items-center gap-3">
+                        <img src={user?.picture} alt={user?.name} className="w-10 h-10 rounded-full" referrerPolicy="no-referrer" />
+                        <span className="font-medium text-zinc-900 truncate max-w-[150px]">{user?.name}</span>
+                      </div>
+                      <button 
+                        onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}
+                        className="p-2 text-zinc-500 hover:text-red-500 transition-colors"
+                      >
+                        <LogOut size={20} />
+                      </button>
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
           )}
@@ -241,9 +299,16 @@ const Home = () => {
             </p>
             
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in" style={{ animationDelay: '0.3s' }}>
-              <button className="w-full sm:w-auto px-8 py-4 bg-zinc-900 text-white font-bold rounded-2xl hover:bg-zinc-800 transition-all shadow-xl shadow-zinc-200 flex items-center justify-center gap-2 group">
-                {content.hero_btn_start} <ChevronRight size={20} className="group-hover:translate-x-1 transition-transform" />
+              
+              {/* Botón dinámico de Auth0 */}
+              <button 
+                onClick={() => isAuthenticated ? console.log("Redirigir al dashboard") : loginWithRedirect()}
+                className="w-full sm:w-auto px-8 py-4 bg-zinc-900 text-white font-bold rounded-2xl hover:bg-zinc-800 transition-all shadow-xl shadow-zinc-200 flex items-center justify-center gap-2 group"
+              >
+                {isAuthenticated ? "Accedir al teu panell" : content.hero_btn_start} 
+                <ChevronRight size={20} className="group-hover:translate-x-1 transition-transform" />
               </button>
+
               <a 
                 href="/blog" 
                 onClick={handleBlogClick}
@@ -306,7 +371,7 @@ const Home = () => {
                 <h2 className="text-3xl md:text-4xl font-bold text-zinc-900 mb-4 tracking-tight">
                   {content.services_title}
                 </h2>
-                <p className="text-zinc-500 text-lg truncate">
+                <p className="text-zinc-500 text-lg whitespace-nowrap">
                   {content.services_subtitle}
                 </p>
               </div>
@@ -342,7 +407,10 @@ const Home = () => {
               {content.cta_subtitle}
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4 relative z-10">
-              <button className="px-10 py-4 bg-blue-600 text-white font-bold rounded-2xl hover:bg-blue-500 transition-all shadow-lg shadow-blue-900/20">
+              <button 
+                onClick={() => isAuthenticated ? console.log("Redirigir...") : loginWithRedirect()}
+                className="px-10 py-4 bg-blue-600 text-white font-bold rounded-2xl hover:bg-blue-500 transition-all shadow-lg shadow-blue-900/20"
+              >
                 {content.cta_btn}
               </button>
             </div>
