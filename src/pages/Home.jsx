@@ -4,8 +4,6 @@ import {
   GraduationCap, ChevronRight, ShieldCheck, Zap, ChevronDown, Menu, X 
 } from 'lucide-react';
 
-import { createClient } from '@supabase/supabase-js';
-
 // Obtenemos las variables. Añadimos un fallback vacío ('') por si fallan en Vercel.
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || '';
 const supabaseKey = import.meta.env.VITE_SUPABASE_PUBLISHABLE_DEFAULT || '';
