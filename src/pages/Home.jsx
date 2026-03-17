@@ -3,13 +3,16 @@ import {
   Sparkles, BookOpen, Bot, Globe, Briefcase, Award, 
   GraduationCap, ChevronRight, ShieldCheck, Zap, ChevronDown, Menu, X 
 } from 'lucide-react';
+
 import { createClient } from '@supabase/supabase-js';
 
+// Si usas Vite:
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
 const supabaseKey = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY;
 
-// Creamos el cliente de Supabase
+// Inicializa el cliente real:
 const supabase = createClient(supabaseUrl, supabaseKey);
+
 // --- CONFIGURACIÓN DE ICONOS Y ESTILOS PARA LAS TARJETAS ---
 const servicesConfig = [
   { icon: Bot, colorClass: "bg-blue-50 text-blue-600" },
@@ -181,9 +184,42 @@ const Home = () => {
   const [isLangMenuOpen, setIsLangMenuOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [content, setContent] = useState(fallbackData[lang]);
+  const [isLoading, setIsLoading] = useState(false);
 
+  // --- LÓGICA DE CONEXIÓN A SUPABASE ---
   useEffect(() => {
-    setContent(fallbackData[lang]);
+    const fetchContent = async () => {
+      // Como estamos en un entorno de previsualización (sin credenciales),
+      // cargamos directamente la información local
+      if (!supabase) {
+        setIsLoading(true);
+        // Simulamos una pequeña demora de red para el efecto visual
+        setTimeout(() => {
+          setContent(fallbackData[lang]);
+          setIsLoading(false);
+        }, 300);
+        return;
+      }
+
+      setIsLoading(true);
+      try {
+        const { data, error } = await supabase
+          .from('home_content')
+          .select('*')
+          .eq('language_code', lang)
+          .single();
+
+        if (error) throw error;
+        if (data) setContent(data);
+      } catch (error) {
+        console.error("Error cargando idioma desde Supabase:", error.message);
+        setContent(fallbackData[lang]);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchContent();
     document.title = `Cursos.cat: la primera plataforma d'integració lingüística de Catalunya impulsada 100% per IA.`;
   }, [lang]);
 
@@ -227,7 +263,8 @@ const Home = () => {
               <button 
                 onClick={() => setIsLangMenuOpen(!isLangMenuOpen)}
                 onBlur={() => setTimeout(() => setIsLangMenuOpen(false), 200)}
-                className="flex items-center gap-2 hover:text-zinc-900 transition-colors font-bold uppercase text-sm"
+                className={`flex items-center gap-2 hover:text-zinc-900 transition-all font-bold uppercase text-sm ${isLoading ? 'opacity-50' : 'opacity-100'}`}
+                disabled={isLoading}
               >
                 <img 
                   src={languageConfig[lang].flagUrl} 
@@ -279,7 +316,7 @@ const Home = () => {
       </nav>
 
       {/* Hero Section */}
-      <section className="pt-40 pb-20 px-6">
+      <section className="pt-40 pb-20 px-6 transition-opacity duration-300" style={{ opacity: isLoading ? 0.7 : 1 }}>
         <div className="max-w-5xl mx-auto text-center">
           <div className="inline-flex items-center gap-2 bg-blue-50 text-blue-700 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest mb-8 border border-blue-100 animate-fade-in">
             <Sparkles size={14} /> {content.hero_badge}
@@ -323,7 +360,7 @@ const Home = () => {
       </section>
 
       {/* Services Grid */}
-      <section id="serveis" className="py-24 px-6 bg-white">
+      <section id="serveis" className="py-24 px-6 bg-white transition-opacity duration-300" style={{ opacity: isLoading ? 0.7 : 1 }}>
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
             <div className="max-w-2xl">
@@ -354,7 +391,7 @@ const Home = () => {
       </section>
 
       {/* Final CTA */}
-      <section className="py-24 px-6">
+      <section className="py-24 px-6 transition-opacity duration-300" style={{ opacity: isLoading ? 0.7 : 1 }}>
         <div className="max-w-5xl mx-auto bg-zinc-900 rounded-[2.5rem] p-8 md:p-16 text-center relative overflow-hidden shadow-2xl">
           <div className="absolute top-0 left-0 w-64 h-64 bg-blue-600/20 blur-[100px] rounded-full -translate-x-1/2 -translate-y-1/2"></div>
           <div className="absolute bottom-0 right-0 w-64 h-64 bg-indigo-600/20 blur-[100px] rounded-full translate-x-1/2 translate-y-1/2"></div>
