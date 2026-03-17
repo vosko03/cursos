@@ -306,7 +306,7 @@ const Home = () => {
                 <h2 className="text-3xl md:text-4xl font-bold text-zinc-900 mb-4 tracking-tight">
                   {content.services_title}
                 </h2>
-                <p className="text-zinc-500 text-lg">
+                <p className="text-zinc-500 text-lg truncate">
                   {content.services_subtitle}
                 </p>
               </div>
