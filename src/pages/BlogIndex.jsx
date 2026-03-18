@@ -76,7 +76,7 @@ const BlogIndex = () => {
                     Sector Sanitario
                   </span>
                   <div className="flex items-center gap-1.5 text-zinc-400 text-xs font-medium">
-                    <Calendar size={14} /> 12 Marzo, 2024
+                    <Calendar size={14} /> 12 Març de 2026
                   </div>
                 </div>
 
