@@ -48,7 +48,7 @@ const BlogPost = () => {
             </h1>
             
             <div className="flex items-center justify-center gap-6 text-zinc-400 text-sm font-medium">
-              <div className="flex items-center gap-1.5"><Calendar size={14} /> 12 Març, 2024</div>
+              <div className="flex items-center gap-1.5"><Calendar size={14} /> 12 Març de 2026</div>
               <div className="flex items-center gap-1.5"><Clock size={14} /> 4 min de lectura</div>
             </div>
           </header>
